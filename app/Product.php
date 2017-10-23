@@ -16,8 +16,8 @@ class Product extends Model
     	'description_text',
         'description_image_url',
         'description_video_url',
-    	'is_featured',
-    	'status'
+        'is_featured',
+        'status'
     ];
 
     public function category() {

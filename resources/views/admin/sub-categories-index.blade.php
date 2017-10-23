@@ -5,7 +5,7 @@
 	Sub Categories
 </h1>
 <ol class="breadcrumb">
-	<li><a href="#">Home</a></li>
+	<li><a href="/admin">Home</a></li>
 	<li class="active">Sub Categories</li>
 </ol>
 @endsection
@@ -31,7 +31,7 @@
 						</tr>
 						<tr>
 							<form action="/admin/sub-categories" method="GET">
-								<th></th>
+								<th>{{ csrf_field() }}</th>
 								<th>
 									<div class="form-group">
 										<input type="text" name="display_name" class="form-control" placeholder="" @if(app('request')->has('display_name')) value="{{ app('request')->get('display_name') }}" @endif>

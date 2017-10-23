@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Route;
+use Session;
 use App\Category;
 use App\SubCategory;
 
@@ -58,8 +59,53 @@ class SubCategoryController extends Controller
 	}
 
 	public function postCreate(Request $request) {
-		return view('admin.sub-categories-create', [
-			'categories' => $categories
+		$category_id = 0;
+		$display_name = "";
+
+		if ($request->has('category_id')) {
+			$category_id = $request->get('category_id');
+		}
+
+		if ($request->has('display_name')) {
+			$display_name = $request->get('display_name');
+		}
+
+		$name = strtolower(trim(preg_replace('/[\s-]+/', '-', preg_replace('/[^A-Za-z0-9-]+/', '-', preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $display_name))))), '-'));
+
+		$status = 'ACTIVE';
+
+		$category = Category::find($category_id);
+
+		if (is_null($category)) {
+			Session::flash('error', 'Category selected is invalid.');
+			return redirect()->back()->withInput();
+		}
+
+		if (strlen($display_name) < 3) {
+			Session::flash('error', 'Name is too small.');
+			return redirect()->back()->withInput();
+		}
+
+		if (strlen($name) < 3) {
+			Session::flash('error', 'Slug name created too small.');
+			return redirect()->back()->withInput();
+		}
+
+		$existingSubCategory = SubCategory::where('name', $name)->first();
+
+		if(!is_null($existingSubCategory)) {
+			Session::flash('error', 'Slug name created already exists. Try to change the name.');
+			return redirect()->back()->withInput();
+		}
+
+		SubCategory::create([
+			'category_id' => $category->id,
+			'name' => $name,
+			'display_name' => $display_name,
+			'status' => '$status'
 		]);
+
+		Session::flash('success', 'Sub category successfully created.');
+		return redirect()->back();
 	}
 }

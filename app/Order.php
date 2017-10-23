@@ -14,6 +14,7 @@ class Order extends Model
     	'price',
     	'delivery_charge',
     	'total_amount',
+        'payment_method',
     	'status'
     ];
 

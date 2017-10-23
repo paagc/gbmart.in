@@ -148,6 +148,7 @@ class CreateTables extends Migration
             $table->integer('price');
             $table->integer('delivery_charge');
             $table->integer('total_amount');
+            $table->string('payment_method');
             $table->string('status');
             $table->timestamps();
         });

@@ -64,10 +64,18 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::post('login', 'AuthController@postLogin');
     Route::get('logout', 'AuthController@logout');
     Route::middleware('admin.auth')->get('', 'DashboardController@getDashboard');
-    Route::middleware('admin.auth')->get('/sub-categories', 'SubCategoryController@index');
-    Route::middleware('admin.auth')->get('/sub-categories/create', 'SubCategoryController@getCreate');
-    Route::middleware('admin.auth')->post('/sub-categories/create', 'SubCategoryController@postCreate');
-    Route::middleware('admin.auth')->patch('/sub-categories/{sub_category_id}/status/{status}', 'SubCategoryController@changeStatus');
+    Route::middleware('admin.auth')->get('sub-categories', 'SubCategoryController@index');
+    Route::middleware('admin.auth')->get('sub-categories/create', 'SubCategoryController@getCreate');
+    Route::middleware('admin.auth')->post('sub-categories/create', 'SubCategoryController@postCreate');
+    Route::middleware('admin.auth')->patch('sub-categories/{sub_category_id}/status/{status}', 'SubCategoryController@changeStatus');
+
+    Route::middleware('admin.auth')->get('products', function () {
+        return;
+    });
+
+    Route::middleware('admin.auth')->get('sellers', function () {
+        return;
+    });
 });
 
 Route::prefix('seller')->namespace('Seller')->group(function() {

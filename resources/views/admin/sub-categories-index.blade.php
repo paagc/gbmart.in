@@ -79,9 +79,23 @@
 							<td>{{ $sub_category->category->display_name }}</td>
 							<td>{{ $sub_category->status }}</td>
 							<td>
-								<a class="btn btn-danger"><i class="fa fa-window-close"></i></a>
-								<a class="btn btn-success"><i class="fa fa-check-square"></i></a>
-								<a class="btn btn-primary"><i class="fa fa-pencil-square"></i></a>
+								@if($sub_category->status == 'ACTIVE')
+								<form action="/admin/sub-categories/{{ $sub_category->id }}/status/INACTIVE" action="POST">
+									{{ csrf_field() }}
+									{{ method_field('PATCH') }}
+									<button type="submit" class="btn btn-danger"><i class="fa fa-window-close"></i></button>
+								</form>
+								<!-- <a class="btn btn-danger"><i class="fa fa-window-close"></i></a> -->
+								@endif
+								@if($sub_category->status == 'INACTIVE')
+								<form action="/admin/sub-categories/{{ $sub_category->id }}/status/ACTIVE" action="POST">
+									{{ csrf_field() }}
+									{{ method_field('PATCH') }}
+									<button type="submit" class="btn btn-success"><i class="fa fa-check-square"></i></button>
+								</form>
+								<!-- <a class="btn btn-success"><i class="fa fa-check-square"></i></a> -->
+								@endif
+								<!-- <a class="btn btn-primary"><i class="fa fa-pencil-square"></i></a> -->
 							</td>
 						</tr>
 						@endforeach

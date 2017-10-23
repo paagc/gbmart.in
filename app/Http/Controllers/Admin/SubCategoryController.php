@@ -108,4 +108,13 @@ class SubCategoryController extends Controller
 		Session::flash('success', 'Sub category successfully created.');
 		return redirect()->back();
 	}
+
+	public function changeStatus(Request $request, $sub_category_id, $status) {
+		$sub_category = SubCategory::find($sub_category_id);
+		// $status = $request->get('status');
+		if (!is_null($sub-category) && ($status == 'ACTIVE' || $status == 'INACTIVE')) {
+			$sub_category->status = $status;
+		}
+		return redirect()->back();
+	}
 }

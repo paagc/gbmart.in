@@ -67,6 +67,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::middleware('admin.auth')->get('/sub-categories', 'SubCategoryController@index');
     Route::middleware('admin.auth')->get('/sub-categories/create', 'SubCategoryController@getCreate');
     Route::middleware('admin.auth')->post('/sub-categories/create', 'SubCategoryController@postCreate');
+    Route::middleware('admin.auth')->patch('/sub-categories/{sub_category_id}/status/{status}', 'SubCategoryController@changeStatus');
 });
 
 Route::prefix('seller')->namespace('Seller')->group(function() {

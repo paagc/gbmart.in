@@ -83,8 +83,8 @@
           <li @if(Route::current()->uri == "admin/sub-categories" || Route::current()->uri == "admin/sub-categories/create") class="active" @endif>
             <a href="/admin/sub-categories"><i class="fa fa-outdent"></i> <span>Sub Categories</span></a>
           </li>
-          <li><a href="/admin/products">Products</a></li>
-          <li><a href="/admin/sellers">Sellers</a></li>
+          <li><a href="/admin/products"><i class="fa fa-tags"></i> <span>Products</span></a></li>
+          <li><a href="/admin/sellers"><i class="fa fa-users"></i> <span>Sellers</span></a></li>
         </ul>
       </section>
     </aside>

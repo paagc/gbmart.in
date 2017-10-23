@@ -70,11 +70,11 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::middleware('admin.auth')->patch('sub-categories/{sub_category_id}/status/{status}', 'SubCategoryController@changeStatus');
 
     Route::middleware('admin.auth')->get('products', function () {
-        return;
+        return view('');
     });
 
     Route::middleware('admin.auth')->get('sellers', function () {
-        return;
+        return view('');
     });
 });
 

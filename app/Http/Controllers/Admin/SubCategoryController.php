@@ -21,7 +21,9 @@ class SubCategoryController extends Controller
 		}
 
 		$categories = Category::where('status', 'ACTIVE')->get();
-		$sub_categories = SubCategory::orderBy('id', 'asc');
+		$sub_categories = SubCategory::whereHas('category', function ($query) {
+			$query->where('status', 'ACTIVE');
+		})->orderBy('id', 'asc');
 
 		if($request->has('display_name')) {
 			$sub_categories = $sub_categories->where('display_name', 'like', '%' . $request->get('display_name') . '%');
@@ -102,7 +104,7 @@ class SubCategoryController extends Controller
 			'category_id' => $category->id,
 			'name' => $name,
 			'display_name' => $display_name,
-			'status' => '$status'
+			'status' => $status
 		]);
 
 		Session::flash('success', 'Sub category successfully created.');

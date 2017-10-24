@@ -24,29 +24,13 @@ class ProductController extends Controller
 		}
 
 		$categories = Category::where('status', 'ACTIVE')->get();
-		$sub_categories = SubCategory::orderBy('id', 'asc');
-
-		if($request->has('display_name')) {
-			$sub_categories = $sub_categories->where('display_name', 'like', '%' . $request->get('display_name') . '%');
-		}
-
-		if($request->has('name')) {
-			$sub_categories = $sub_categories->where('name', 'like', '%' . $request->get('name') . '%');
-		}
-
-		if($request->has('category_name')) {
-			$sub_categories = $sub_categories->whereHas('category', function ($query) use ($request) {
-				$query->where('name', $request->get('category_name'));
-			});
-		}
-
-		if($request->has('status')) {
-			$sub_categories = $sub_categories->where('status', $request->get('status'));
-		}
+		$sub_categories = SubCategory::whereHas('category', function ($query) {
+			$query->where('status', 'ACTIVE');
+		})->where('status', 'ACTIVE')->orderBy('id', 'asc');
 
 		$sub_categories = $sub_categories->paginate($page_size);
 
-		return view('admin.sub-categories-index', [
+		return view('admin.products-index', [
 			'page' => $page,
 			'page_size' => $page_size,
 			'categories' => $categories,
@@ -55,10 +39,13 @@ class ProductController extends Controller
 	}
 
 	public function getCreate(Request $request) {
-
+		$sub_categories = SubCategory::whereHas('category', function ($query) {
+			$query->where('status', 'ACTIVE');
+		})->where('status', 'ACTIVE')->orderBy('id', 'asc')->get();
+		return view('admin.products-create', [ 'sub_categories' => $sub_categories ]);
 	}
 
 	public function postCreate(Request $request) {
-
+		dd($request);
 	}
 }

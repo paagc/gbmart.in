@@ -114,9 +114,10 @@ class SubCategoryController extends Controller
 	public function changeStatus(Request $request, $sub_category_id, $status) {
 		$sub_category = SubCategory::find($sub_category_id);
 		// $status = $request->get('status');
-		if (!is_null($sub-category) && ($status == 'ACTIVE' || $status == 'INACTIVE')) {
+		if (!is_null($sub_category) && ($status == 'ACTIVE' || $status == 'INACTIVE')) {
 			$sub_category->status = $status;
+			$sub_category->save();
 		}
-		return redirect()->back();
+		return redirect('/admin/sub-categories');
 	}
 }

@@ -67,7 +67,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::middleware('admin.auth')->get('sub-categories', 'SubCategoryController@index');
     Route::middleware('admin.auth')->get('sub-categories/create', 'SubCategoryController@getCreate');
     Route::middleware('admin.auth')->post('sub-categories/create', 'SubCategoryController@postCreate');
-    Route::middleware('admin.auth')->patch('sub-categories/{sub_category_id}/status/{status}', 'SubCategoryController@changeStatus');
+    Route::middleware('admin.auth')->get('sub-categories/{sub_category_id}/status/{status}', 'SubCategoryController@changeStatus');
     Route::middleware('admin.auth')->get('products', 'ProductController@index');
     Route::middleware('admin.auth')->get('products/create', 'ProductController@getCreate');
     Route::middleware('admin.auth')->post('products/create', 'ProductController@postCreate');

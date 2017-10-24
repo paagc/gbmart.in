@@ -31,7 +31,7 @@
 						</tr>
 						<tr>
 							<form action="/admin/sub-categories" method="GET">
-								<th>{{ csrf_field() }}</th>
+								<th></th>
 								<th>
 									<div class="form-group">
 										<input type="text" name="display_name" class="form-control" placeholder="" @if(app('request')->has('display_name')) value="{{ app('request')->get('display_name') }}" @endif>
@@ -80,20 +80,10 @@
 							<td>{{ $sub_category->status }}</td>
 							<td>
 								@if($sub_category->status == 'ACTIVE')
-								<form action="/admin/sub-categories/{{ $sub_category->id }}/status/INACTIVE" action="POST">
-									{{ csrf_field() }}
-									{{ method_field('PATCH') }}
-									<button type="submit" class="btn btn-danger"><i class="fa fa-window-close"></i></button>
-								</form>
-								<!-- <a class="btn btn-danger"><i class="fa fa-window-close"></i></a> -->
+								<a class="btn btn-danger" href="/admin/sub-categories/{{ $sub_category->id }}/status/INACTIVE"><i class="fa fa-window-close"></i></a>
 								@endif
 								@if($sub_category->status == 'INACTIVE')
-								<form action="/admin/sub-categories/{{ $sub_category->id }}/status/ACTIVE" action="POST">
-									{{ csrf_field() }}
-									{{ method_field('PATCH') }}
-									<button type="submit" class="btn btn-success"><i class="fa fa-check-square"></i></button>
-								</form>
-								<!-- <a class="btn btn-success"><i class="fa fa-check-square"></i></a> -->
+								<a class="btn btn-success" href="/admin/sub-categories/{{ $sub_category->id }}/status/ACTIVE"><i class="fa fa-check-square"></i></a>
 								@endif
 								<!-- <a class="btn btn-primary"><i class="fa fa-pencil-square"></i></a> -->
 							</td>

@@ -86,6 +86,26 @@
 							</div>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<h4>Product Attributes</h4>
+						</div>
+						<div class="col-md-12">
+							<a class="btn btn-info add-product-attribute"><i class="fa fa-plus"></i> Add</a>
+							<a class="btn btn-danger clear-product-attributes"><i class="fa fa-close"></i> Reset</a>
+						</div>
+						<div class="col-md-12">
+						</div>
+						<div class="col-md-12">
+							<div class="row product-attributes">
+								<div class="col-md-3 product-attribute">
+									<div class="form-group">
+										<input name="attributes[]" class="form-control" placeholder="Size, colour, or any other variation">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="box-footer">
 					<button type="submit" class="btn btn-primary">Submit</button>
@@ -94,4 +114,18 @@
 		</div>
 	</div>
 </div>
+@endsection
+
+@section('footer')
+<script>
+	$(document).ready(function () {
+		$('.add-product-attribute').click(function() {
+			$('.product-attributes').append('<div class="col-md-3 product-attribute"><div class="form-group"><input name="attributes[]" class="form-control" placeholder="Size, colour, or any other variation"></div></div>');
+		});
+
+		$('.clear-product-attributes').click(function() {
+			$('.product-attributes').html('<div class="col-md-3 product-attribute"><div class="form-group"><input name="attributes[]" class="form-control" placeholder="Size, colour, or any other variation"></div></div>');
+		});
+	});
+</script>
 @endsection

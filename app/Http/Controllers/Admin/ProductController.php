@@ -203,6 +203,19 @@ class ProductController extends Controller
 			}
 		}
 
+		if ($request->has('attributes') && is_array($request->get('attributes'))) {
+			foreach($request->get('attributes') as $attribute) {
+				if (strlen($attribute) > 0) {
+					Attribute::create([
+						'product_id' => $product->id,
+						'name' => $attribute,
+						'description' => '',
+						'status' => 'ACTIVE'
+					]);
+				}
+			}
+		}
+
 		Session::flash('success', 'Product successfully created.');
 		return redirect()->back();
 	}
@@ -213,6 +226,6 @@ class ProductController extends Controller
 			$product->status = $status;
 			$product->save();
 		}
-		return redirect()->back();
+		return redirect('/admin/products');
 	}
 }

@@ -212,7 +212,6 @@ class ProductController extends Controller
 		if (!is_null($product) && ($status == 'ACTIVE' || $status == 'INACTIVE')) {
 			$product->status = $status;
 			$product->save();
-			dd($request);
 		}
 		return redirect()->back();
 	}

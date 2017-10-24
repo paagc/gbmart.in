@@ -79,4 +79,8 @@ Route::prefix('seller')->namespace('Seller')->group(function() {
     Route::post('login', 'AuthController@postLogin');
     Route::get('logout', 'AuthController@logout');
     Route::middleware('seller.auth')->get('', 'DashboardController@getDashboard');
+    Route::middleware('seller.auth')->get('seller-products', 'SellerProductController@index');
+    Route::middleware('seller.auth')->get('seller-products/create', 'SellerProductController@getCreate');
+    Route::middleware('seller.auth')->post('seller-products/create', 'SellerProductController@postCreate');
+    Route::middleware('seller.auth')->get('seller-products/{seller_product_id}/status/{status}', 'SellerProductController@changeStatus');
 });

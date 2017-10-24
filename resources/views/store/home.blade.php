@@ -47,15 +47,16 @@
                                                                 </ul>
                                                     </div>
                                                 </div>
-                                                
                                             </li>
-                                            
                                         </ul>
-                                        
                                      </li>
                                 
                                     
-                                    <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-wrench" aria-hidden="true"></i>APPLIANCES</a> 
+                                    <li class="dropdown menu-item">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="icon fa fa-wrench" aria-hidden="true"></i>
+                                            APPLIANCES
+                                        </a> 
                                         
                                         <ul class="dropdown-menu mega-menu">
                                             <li class="yamm-content">

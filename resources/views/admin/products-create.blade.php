@@ -45,7 +45,7 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="inputBrand">Brand</label>
-								<input type="text" name="brand" class="form-control" id="inputBrand" placeholder="Enter brand" value="{{ old('brand') }}">
+								<input type="text" name="brand" class="form-control" id="inputBrand" value="{{ old('brand') }}">
 							</div>
 						</div>
 						<div class="col-md-4">

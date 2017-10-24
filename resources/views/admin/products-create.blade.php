@@ -16,10 +16,10 @@
 	<div class="col-md-12">
 		<div class="box box-primary">
 			@if(Session::has('error'))
-			<p class="text-red text-center">{{ Session::get('error') }}</p>
+			<p class="text-red">{{ Session::get('error') }}</p>
 			@endif
 			@if(Session::has('success'))
-			<p class="text-green text-center">{{ Session::get('success') }}</p>
+			<p class="text-green">{{ Session::get('success') }}</p>
 			@endif
 			<form role="form" action="/admin/products/create" method="POST" enctype="multipart/form-data">
 				{{ csrf_field() }}
@@ -28,10 +28,10 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="inputSubCategory">Sub Category</label>
-								<select name="sub_categories_id" class="form-control" id="inputSubCategory">
+								<select name="sub_category_id" class="form-control" id="inputSubCategory">
 									<option></option>
 									@foreach($sub_categories as $sub_category)
-									<option value="{{ $sub_category->id }}" @if(old('sub_categories_id') == $sub_category->id) selected @endif>{{ $sub_category->display_name }}</option>
+									<option value="{{ $sub_category->id }}" @if(old('sub_category_id') == $sub_category->id) selected @endif>{{ $sub_category->display_name }}</option>
 									@endforeach
 								</select>
 							</div>
@@ -78,7 +78,7 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="imageDescriptionImage">Decription Image</label>
-								<input type="file" accept=".jpeg,.jpg,.png" name="decription_image" class="form-control" id="imageDescriptionImage" placeholder="Upload images" value="{{ old('decription_image') }}">
+								<input type="file" accept=".jpeg,.jpg,.png" name="description_image" class="form-control" id="imageDescriptionImage" placeholder="Upload images" value="{{ old('description_image') }}">
 							</div>
 							<div class="form-group">
 								<label for="inputDescriptionVideo">Description video</label>

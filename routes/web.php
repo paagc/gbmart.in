@@ -71,6 +71,7 @@ Route::prefix('admin')->namespace('Admin')->group(function() {
     Route::middleware('admin.auth')->get('products', 'ProductController@index');
     Route::middleware('admin.auth')->get('products/create', 'ProductController@getCreate');
     Route::middleware('admin.auth')->post('products/create', 'ProductController@postCreate');
+    Route::middleware('admin.auth')->get('products/{product_id}/status/{status}', 'ProductController@changeStatus');
 });
 
 Route::prefix('seller')->namespace('Seller')->group(function() {

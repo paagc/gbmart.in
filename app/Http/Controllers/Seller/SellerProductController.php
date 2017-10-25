@@ -86,17 +86,25 @@ class SellerProductController extends Controller
 	}
 
 	public function getCreate(Request $request) {
+		$seller_product_ids = SellerProduct::where('seller_id', Auth::user()->id)->pluck('product_id');
+
 		$products = Product::whereHas('category', function ($query) {
 			$query->where('status', 'ACTIVE');
 		})->whereHas('sub_category', function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
-		})->orderBy('id', 'asc')->get();
+		})->whereNotIn('id', $seller_product_ids)->orderBy('id', 'asc')->get();
 
-		return view('seller.seller-products-create', [ 'products' => $products ]);
+		$product = null;
+
+		if ($request->has('product_id')) {
+			$product = Product::find($request->get('product_id'));
+		}
+
+		return view('seller.seller-products-create', [ 'products' => $products, 'product' => $product ]);
 	}
 
 	public function postCreate(Request $request) {
-		// dd($request);
+		dd($request);
 		$product_id = 0;
 		$seller_id = Auth::user()->id;
 		$seller_price = 0;

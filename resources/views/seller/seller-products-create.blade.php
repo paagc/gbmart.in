@@ -21,7 +21,8 @@
 			@if(Session::has('success'))
 			<p class="text-green text-center">{{ Session::get('success') }}</p>
 			@endif
-			<form role="form" action="/seller/seller-products/create" method="POST">
+			@if(is_null($product))
+			<form role="form" action="/seller/seller-products/create" method="GET">
 				{{ csrf_field() }}
 				<div class="box-body">
 					<div class="row">
@@ -34,6 +35,30 @@
 									<option value="{{ $product->id }}" @if(old('product_id') == $product->id) selected @endif>{{ $product->display_name }}</option>
 									@endforeach
 								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="box-footer">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</form>
+			@else
+			<form role="form" action="/seller/seller-products/create" method="POST">
+				{{ csrf_field() }}
+				<div class="box-body">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="inputProduct">Product</label>
+								<!-- <select name="product_id" class="form-control" id="inputProduct">
+									<option></option>
+									@foreach($products as $product)
+									<option value="{{ $product->id }}" @if(old('product_id') == $product->id) selected @endif>{{ $product->display_name }}</option>
+									@endforeach
+								</select> -->
+								<input type="hidden" name="product_id" value="$product->id">
+								<h4>{{ $product->display_name }}</h4>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -71,17 +96,36 @@
 							</div>
 						</div>
 					</div>
+					@if(count($product->attributes) > 0)
 					<div class="row">
 						<div class="col-md-12">
-							
+							<h4>Attributes</h4>
+							@foreach($product->attributes as $attribute)
+							<h5>{{ $attribute->name }}</h5>
+							<div class="row">
+								<div class="col-md-3">
+									<div class="form-group">
+										<input type="text" name="attributes['{{ $attribute->name }}'][]" class="form-control">
+									</div>
+								</div>
+							</div>
+							@endforeach
 						</div>
 					</div>
+					@endif
 				</div>
 				<div class="box-footer">
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</div>
 			</form>
+			@endif
 		</div>
 	</div>
 </div>
+@endsection
+
+@section('footer')
+<script>
+	
+</script>
 @endsection

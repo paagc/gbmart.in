@@ -28,7 +28,7 @@ class ProductController extends Controller
 			$query->where('status', 'ACTIVE');
 		})->whereHas('sub_category', function ($query) {
 			$query->where('status', 'ACTIVE');
-		})->order('id', 'asc');
+		})->orderBy('id', 'asc');
 
 		if($request->has('display_name') && strlen($request->get('display_name')) > 0) {
 			$products = $products->where('display_name', 'like', '%' . $request->get('display_name') . '%');

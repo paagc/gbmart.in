@@ -38,4 +38,10 @@ Route::group(['middleware'=>['role:admin', 'auth'], 'prefix' => 'admin', 'namesp
     Route::get('sellers/activate/{id}', 'SellerController@activate');
     Route::get('sellers/enable/{id}', 'SellerController@enable');
     Route::get('sellers/disable/{id}', 'SellerController@disable');
+
+    Route::get('offers', 'OffersController@index');
+    Route::get('offers/create', 'OffersController@create');
+    Route::post('offers/create', 'OffersController@store');
+    Route::get('offers/{id}/destroy', 'OffersController@destroy');
+    Route::get('offers/{id}/edit', 'OffersController@edit');
 });

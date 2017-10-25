@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
     	$admin = User::create([
+            'type' => 'admin',
     		'name' => 'Administrator',
     		'email' => 'admin@gbmart.in',
     		'password' => bcrypt('admin@123'),
@@ -40,6 +41,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $seller = User::create([
+            'type' => 'seller',
             'name' => 'GBMart Seller',
             'email' => 'seller@gbmart.in',
             'password' => bcrypt('seller@123'),

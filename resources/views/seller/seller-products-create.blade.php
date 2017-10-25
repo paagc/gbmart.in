@@ -57,7 +57,7 @@
 									<option value="{{ $product->id }}" @if(old('product_id') == $product->id) selected @endif>{{ $product->display_name }}</option>
 									@endforeach
 								</select> -->
-								<input type="hidden" name="product_id" value="$product->id">
+								<input type="hidden" name="product_id" value="{{ $product->id }}">
 								<h4>{{ $product->display_name }}</h4>
 							</div>
 						</div>
@@ -102,13 +102,14 @@
 							<h4>Attributes</h4>
 							@foreach($product->attributes as $attribute)
 							<h5>{{ $attribute->name }}</h5>
-							<div class="row">
+							<div class="row add_more_attributes" data="{{ $attribute->id }}">
 								<div class="col-md-3">
 									<div class="form-group">
-										<input type="text" name="attributes['{{ $attribute->name }}'][]" class="form-control">
+										<input type="text" name="attributes[{{ $attribute->id }}][]" class="form-control">
 									</div>
 								</div>
 							</div>
+							<a href="javascript:void(0)" class="click_to_add">+ add more</a>
 							@endforeach
 						</div>
 					</div>
@@ -126,6 +127,12 @@
 
 @section('footer')
 <script>
-	
+	$(document).ready(function() {
+		$('.click_to_add').click(function() {
+			var sibling = $(this).siblings('.add_more_attributes');
+			var attr_id = sibling.attr('data');
+			sibling.append('<div class="col-md-3"><div class="form-group"><input type="text" name="attributes['+attr_id+'][]" class="form-control"></div></div>');
+		})
+	})
 </script>
 @endsection

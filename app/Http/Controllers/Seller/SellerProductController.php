@@ -13,9 +13,15 @@ use App\Product;
 use App\ProductImage;
 use App\Attribute;
 use App\SellerProduct;
+use App\AttributeValue;
 
 class SellerProductController extends Controller
 {
+	/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 	public function index(Request $request) {
 		$page = 1;
 		$page_size = 15;
@@ -85,7 +91,12 @@ class SellerProductController extends Controller
 		]);	
 	}
 
-	public function getCreate(Request $request) {
+	/**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+	public function create(Request $request) {
 		$seller_product_ids = SellerProduct::where('seller_id', Auth::user()->id)->pluck('product_id');
 
 		$products = Product::whereHas('category', function ($query) {
@@ -103,8 +114,13 @@ class SellerProductController extends Controller
 		return view('seller.seller-products-create', [ 'products' => $products, 'product' => $product ]);
 	}
 
-	public function postCreate(Request $request) {
-		dd($request);
+	/**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+	public function store(Request $request) {
 		$product_id = 0;
 		$seller_id = Auth::user()->id;
 		$seller_price = 0;
@@ -158,21 +174,25 @@ class SellerProductController extends Controller
 			'status' => $status
 		]);
 
-		// if ($request->has('attributes') && is_array($request->get('attributes'))) {
-		// 	foreach($request->get('attributes') as $attribute) {
-		// 		if (strlen($attribute) > 0) {
-		// 			Attribute::create([
-		// 				'product_id' => $product->id,
-		// 				'name' => $attribute,
-		// 				'description' => '',
-		// 				'status' => 'ACTIVE'
-		// 			]);
-		// 		}
-		// 	}
-		// }
+
+		if ($request->has('attributes') && is_array($request->get('attributes'))) {
+			
+			foreach($request->get('attributes') as $attribute => $values) {
+
+				foreach ($values as $value) {
+					print_r($attribute);
+					AttributeValue::create([
+						'seller_product_id' => $seller_product->id,
+						'attribute_id' => $attribute,
+						'value' => $value,
+						'status' => 'ACTIVE'
+					]);
+				}
+			}
+		}
 
 		Session::flash('success', 'Product successfully created.');
-		return redirect()->back();
+		return redirect('/seller/seller-products');
 	}
 
 	public function changeStatus($seller_product_id, $status, Request $request) {

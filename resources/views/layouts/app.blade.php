@@ -18,19 +18,19 @@
     <title>GB Mart|Best Online Shopping Mart|Best In Maharashtra</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
 
 
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/blue.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.css">
-    <link rel="stylesheet" href="assets/css/owl.transitions.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/rateit.css">
-    <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/blue.css">
+    <link rel="stylesheet" href="/assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="/assets/css/owl.transitions.css">
+    <link rel="stylesheet" href="/assets/css/animate.min.css">
+    <link rel="stylesheet" href="/assets/css/rateit.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-select.min.css">
 
 
-    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.css">
 
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
@@ -49,7 +49,7 @@
                             <ul class="list-unstyled">
                                 <li><a><i class="fa fa-phone"></i>(+91)8467-896-789</a></li>
                                 <li><a><i class="fa fa-envelope"></i>support@gbmart.in</a></li>
-                                <li><a href="rlogin"><i class="fa fa-users"></i>Be a seller</a></li>
+                                <li><a href="/seller/register"><i class="fa fa-users"></i>Be a seller</a></li>
                                 <li><a href="account"><i class="icon fa fa-user"></i>My Account</a></li>
                                 <li><a href="wishlist"><i class="icon fa fa-heart"></i>Wishlist</a></li>
                                 
@@ -76,7 +76,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-3 logo-holder"> 
                         
-                            <div class="logo"> <a href="/"> <img src="assets/images/logo.png" alt="logo"> </a> </div>
+                            <div class="logo"> <a href="/"> <img src="/assets/images/logo.png" alt="logo"> </a> </div>
                     </div>
                         
                         
@@ -108,7 +108,7 @@
                                     <div class="cart-item product-summary">
                                         <div class="row">
                                             <div class="col-xs-4">
-                                                <div class="image"> <a href="detail"><img src="assets/images/cart.jpg" alt=""></a> </div>
+                                                <div class="image"> <a href="detail"><img src="/assets/images/cart.jpg" alt=""></a> </div>
                                             </div>
                                             <div class="col-xs-7">
                                                 <h3 class="name"><a href="detail">Product Name</a></h3>
@@ -319,7 +319,7 @@
                     
                         <div class="col-xs-12 col-sm-6 col-md-3">
                             <div>
-                                <img src="assets/images/logo.png" alt="logo">
+                                <img src="/assets/images/logo.png" alt="logo">
                                 
                                 <br><br>
                                 <p style="font-size:14px;color:grey">Gbmart.in is India's startup growing multi-category online shopping store, 
@@ -407,7 +407,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 no-padding">
                         <div class="clearfix payment-methods">
-                                <img src="assets/images/payment.png" alt="logo">
+                                <img src="/assets/images/payment.png" alt="logo">
                         </div>
                         
                     </div>
@@ -415,18 +415,18 @@
             </div>
         </footer>
         
-        <script src="assets/js/jquery-1.11.1.min.js"></script> 
-        <script src="assets/js/bootstrap.min.js"></script> 
-        <script src="assets/js/bootstrap-hover-dropdown.min.js"></script> 
-        <script src="assets/js/owl.carousel.min.js"></script> 
-        <script src="assets/js/echo.min.js"></script> 
-        <script src="assets/js/jquery.easing-1.3.min.js"></script> 
-        <script src="assets/js/bootstrap-slider.min.js"></script> 
-        <script src="assets/js/jquery.rateit.min.js"></script> 
-        <script type="text/javascript" src="assets/js/lightbox.min.js"></script> 
-        <script src="assets/js/bootstrap-select.min.js"></script> 
-        <script src="assets/js/wow.min.js"></script> 
-        <script src="assets/js/scripts.js"></script>
+        <script src="/assets/js/jquery-1.11.1.min.js"></script> 
+        <script src="/assets/js/bootstrap.min.js"></script> 
+        <script src="/assets/js/bootstrap-hover-dropdown.min.js"></script> 
+        <script src="/assets/js/owl.carousel.min.js"></script> 
+        <script src="/assets/js/echo.min.js"></script> 
+        <script src="/assets/js/jquery.easing-1.3.min.js"></script> 
+        <script src="/assets/js/bootstrap-slider.min.js"></script> 
+        <script src="/assets/js/jquery.rateit.min.js"></script> 
+        <script type="text/javascript" src="/assets/js/lightbox.min.js"></script> 
+        <script src="/assets/js/bootstrap-select.min.js"></script> 
+        <script src="/assets/js/wow.min.js"></script> 
+        <script src="/assets/js/scripts.js"></script>
     </body>
     
     

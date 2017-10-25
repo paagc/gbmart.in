@@ -15,6 +15,11 @@ use App\Attribute;
 
 class ProductController extends Controller
 {
+	/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 	public function index(Request $request) {
 		$page = 1;
 		$page_size = 15;
@@ -73,14 +78,25 @@ class ProductController extends Controller
 		]);	
 	}
 
-	public function getCreate(Request $request) {
+	/**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+	public function create(Request $request) {
 		$sub_categories = SubCategory::whereHas('category', function ($query) {
 			$query->where('status', 'ACTIVE');
 		})->where('status', 'ACTIVE')->orderBy('id', 'asc')->get();
 		return view('admin.products-create', [ 'sub_categories' => $sub_categories ]);
 	}
 
-	public function postCreate(Request $request) {
+	/**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+	public function store(Request $request) {
 		$sub_category_id = 0;
 		$display_name = "";
 		$brand = "";
@@ -228,4 +244,132 @@ class ProductController extends Controller
 		}
 		return redirect('/admin/products');
 	}
+
+
+	/**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $product = Product::find($id);
+        $sub_categories = SubCategory::whereHas('category', function ($query) {
+            $query->where('status', 'ACTIVE');
+        })->where('status', 'ACTIVE')->orderBy('id', 'asc')->get();
+        return view('admin.products-edit', [
+            'product' => $product,
+            'sub_categories' => $sub_categories
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+    	$request->validate([
+		    'sub_category_id' => 'required|integer',
+		    'display_name' => 'required|min:3',
+		    'brand' => 'required|min:3',
+		    'original_price' => 'required',
+		    'description_text' => 'required|min:10',
+
+		]);
+
+    	$input = $request->all();
+    	$is_featured = false;
+    	$images = [];
+    	$description_image = null;
+        $description_video_url = "";
+
+    	if ($request->has('is_featured') && $request->get('is_featured') == "true") {
+            $is_featured = true;
+        }
+
+        if ($request->hasFile('images') && count($request->file('images') > 0)) {
+            $images = $request->file('images');
+        }
+
+        if ($request->hasFile('description_image')) {
+            $description_image = $request->file('description_image');
+        }
+
+        if ($request->has('description_video_url') && strlen($request->get('description_video_url')) > 3) {
+            $description_video_url = $request->get('description_video_url');
+        }
+
+        $name = "";
+
+        $name = strtolower(trim(preg_replace('/[\s-]+/', '-', preg_replace('/[^A-Za-z0-9-]+/', '-', preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $input['display_name']))))), '-'));
+
+        $status = 'ACTIVE';
+
+        $description_image_url = "";
+
+        $sub_category = SubCategory::find($input['sub_category_id']);
+
+        if(is_null($sub_category)) {
+            Session::flash('error', 'Invalid sub category.');
+            return redirect()->back()->withInput();
+        }
+
+        $input['is_featured'] = $is_featured;
+        $input['description_image_url'] = '';
+        $input['description_video_url'] = $description_video_url;
+        $product = Product::find($id);
+        $product->update($input);
+
+        if ($request->hasFile('description_image')) {
+			$description_image = $request->file('description_image');
+			$filename = $product->id ."_description_" . str_random(5) . "." . $description_image->getClientOriginalExtension();
+			$description_image->move(public_path() . '/storage/', $filename);
+			$product->description_image_url = $request->root() . '/storage/' . $filename;
+			$product->save();
+		}
+
+		if (!is_null($images) && count($images) > 0) {
+			//get file
+			foreach($images as $image) {
+				$filename = $product->id . "_image_" . str_random(5) . "." . $image->getClientOriginalExtension();
+				$image->move(public_path() . '/storage/', $filename);
+
+				ProductImage::create([
+					'product_id' => $product->id,
+					'url' => $request->root() . '/storage/' . $filename,
+					'status' => 'ACTIVE'
+				]);
+			}
+		}
+
+		if ($request->has('attributes') && is_array($request->get('attributes'))) {
+			foreach($request->get('attributes') as $attribute) {
+				if (strlen($attribute) > 0) {
+					Attribute::create([
+						'product_id' => $product->id,
+						'name' => $attribute,
+						'description' => '',
+						'status' => 'ACTIVE'
+					]);
+				}
+			}
+		}
+
+		if ($request->has('uploaded_image_id') && is_array($request->get('uploaded_image_id')) && count($request->get('uploaded_image_id'))) {
+			$uploaded_images_ids = $request->get('uploaded_image_id');
+			foreach ($uploaded_images_ids as $index => $product_image_id) {
+				$product = ProductImage::find($product_image_id);
+				$product->update(['status' => 'INACTIVE']);
+			}
+		}
+
+		Session::flash('success', 'Product Updated Successfully.');
+
+        return back();
+    }
 }

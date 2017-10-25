@@ -106,11 +106,12 @@
 							<td>{{ $product->status }}</td>
 							<td>
 								@if($product->status == 'ACTIVE')
-								<a class="btn btn-danger" href="/admin/products/{{ $product->id }}/status/INACTIVE"><i class="fa fa-window-close"></i></a>
+								<a class="btn btn-xs btn-danger" href="/admin/products/{{ $product->id }}/status/INACTIVE" title="Deactivate"><i class="fa fa-window-close"></i></a>
 								@endif
 								@if($product->status == 'INACTIVE')
-								<a class="btn btn-success" href="/admin/products/{{ $product->id }}/status/ACTIVE"><i class="fa fa-check-square"></i></a>
+								<a class="btn btn-xs btn-success" href="/admin/products/{{ $product->id }}/status/ACTIVE" title="Activate"><i class="fa fa-check-square"></i></a>
 								@endif
+								<a href="/admin/products/{{$product->id}}/edit" title="Edit" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></a>
 							</td>
 						</tr>
 						@endforeach

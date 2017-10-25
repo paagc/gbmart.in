@@ -11,6 +11,36 @@
 |
 */
 
+// ORDER MATTERS!
+$route_partials = [
+
+    // Admin
+    'admin',
+
+    // Seller
+    'seller',
+
+];
+
+/** Route Partial Loadup
+ ** =================================================== */
+
+foreach ($route_partials as $partial) {
+
+    $file = base_path().'/routes/modules/'.$partial.'.php';
+
+    if ( ! file_exists($file))
+    {
+        $msg = "Route partial [{$partial}] not found.";
+        throw new \Illuminate\Filesystem\FileNotFoundException($msg);
+    }
+
+    require_once $file;
+}
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
 Route::get('/', function () {
     return view('store.home');
 });
@@ -39,10 +69,6 @@ Route::get('/offer', function () {
     return view('store.offer');
 });
 
-Route::get('/rlogin', function () {
-    return view('store.rlogin');
-});
-
 Route::get('/sub-category', function () {
     return view('store.sub-category');
 });
@@ -56,31 +82,3 @@ Route::get('/wishlist', function () {
 });
 
 // Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::prefix('admin')->namespace('Admin')->group(function() {
-    Route::get('login', 'AuthController@getLogin');
-    Route::post('login', 'AuthController@postLogin');
-    Route::get('logout', 'AuthController@logout');
-    Route::middleware('admin.auth')->get('', 'DashboardController@getDashboard');
-    Route::middleware('admin.auth')->get('sub-categories', 'SubCategoryController@index');
-    Route::middleware('admin.auth')->get('sub-categories/create', 'SubCategoryController@getCreate');
-    Route::middleware('admin.auth')->post('sub-categories/create', 'SubCategoryController@postCreate');
-    Route::middleware('admin.auth')->get('sub-categories/{sub_category_id}/status/{status}', 'SubCategoryController@changeStatus');
-    Route::middleware('admin.auth')->get('products', 'ProductController@index');
-    Route::middleware('admin.auth')->get('products/create', 'ProductController@getCreate');
-    Route::middleware('admin.auth')->post('products/create', 'ProductController@postCreate');
-    Route::middleware('admin.auth')->get('products/{product_id}/status/{status}', 'ProductController@changeStatus');
-});
-
-Route::prefix('seller')->namespace('Seller')->group(function() {
-    Route::get('login', 'AuthController@getLogin');
-    Route::post('login', 'AuthController@postLogin');
-    Route::get('logout', 'AuthController@logout');
-    Route::middleware('seller.auth')->get('', 'DashboardController@getDashboard');
-    Route::middleware('seller.auth')->get('seller-products', 'SellerProductController@index');
-    Route::middleware('seller.auth')->get('seller-products/create', 'SellerProductController@getCreate');
-    Route::middleware('seller.auth')->post('seller-products/create', 'SellerProductController@postCreate');
-    Route::middleware('seller.auth')->get('seller-products/{seller_product_id}/status/{status}', 'SellerProductController@changeStatus');
-});

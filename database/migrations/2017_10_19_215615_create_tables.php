@@ -145,7 +145,7 @@ class CreateTables extends Migration
             $table->integer('customer_id')->references('id')->on('users');
             $table->integer('product_id')->references('id')->on('products');
             $table->integer('seller_product_id')->references('id')->on('seller_products');
-            $table->string('extra');
+            $table->text('extra');
             $table->integer('count');
             $table->integer('price');
             $table->integer('delivery_charge');
@@ -207,6 +207,14 @@ class CreateTables extends Migration
             $table->string('link_url');
             $table->string('status');
             $table->date('start_date');
+            $table->date('end_date');
+            $table->timestamps();
+        });
+
+        Schema::create('gift_coupons', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('code')->unique();
+            $table->integer('amount');
             $table->date('end_date');
             $table->timestamps();
         });

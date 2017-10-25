@@ -18,7 +18,7 @@ Route::group(['prefix' => 'admin', 'namespace'=>'Admin'], function() {
 });
 
 
-Route::group(['middleware'=>['role:admin', 'auth'], 'prefix' => 'admin', 'namespace'=>'Admin'],function () {
+Route::group(['middleware'=>['admin.auth'], 'prefix' => 'admin', 'namespace'=>'Admin'],function () {
 
     Route::get('', 'DashboardController@getDashboard');
 

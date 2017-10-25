@@ -19,7 +19,7 @@ Route::group(['prefix' => 'seller', 'namespace'=>'Seller'], function() {
     Route::post('register', 'AuthController@store');
 });
 
-Route::group(['middleware'=>['role:seller', 'auth'], 'prefix' => 'seller', 'namespace'=>'Seller'],function () {
+Route::group(['middleware'=>['seller.auth'], 'prefix' => 'seller', 'namespace'=>'Seller'],function () {
     Route::get('', 'DashboardController@getDashboard');
     Route::get('seller-products', 'SellerProductController@index');
     Route::get('seller-products/create', 'SellerProductController@create');

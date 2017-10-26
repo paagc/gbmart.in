@@ -192,7 +192,7 @@
 								}
 								?>
 
-								@foreach($attributtes as $attribute_id)
+								@foreach($attributes as $attribute_id)
 								<div class="quantity-container info-container">
 									<div class="row">
 										<div class="col-sm-4">

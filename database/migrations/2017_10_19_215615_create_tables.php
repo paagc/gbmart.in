@@ -214,8 +214,9 @@ class CreateTables extends Migration
         Schema::create('gift_coupons', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code')->unique();
-            $table->integer('amount');
+            $table->integer('value');
             $table->string('type');
+            $table->integer('max_amount');
             $table->date('end_date');
             $table->string('status');
             $table->timestamps();

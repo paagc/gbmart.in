@@ -13,6 +13,7 @@
 
 Route::group(['namespace'=>'Store'], function() {
     Route::get('/', 'HomeController@getHome');
+    Route::get('/store/{category_name}/{sub_category_name}/{product_name}', 'ProductDetailsController@getProductDetails');
 });
 
 Route::group(['middleware'=>['store.auth'], 'namespace'=>'Seller'],function () {

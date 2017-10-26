@@ -28,4 +28,8 @@ class SellerProduct extends Model
     public function orders() {
     	return $this->hasMany('App\Order', 'seller_product_id');
     }
+
+    public function attribute_values() {
+        return $this->hasMany('App\AttributeValue', 'seller_product_id');
+    }
 }

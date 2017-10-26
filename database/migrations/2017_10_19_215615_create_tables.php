@@ -215,7 +215,9 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->string('code')->unique();
             $table->integer('amount');
+            $table->string('type');
             $table->date('end_date');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -227,6 +229,7 @@ class CreateTables extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('gift_coupons');
         Schema::dropIfExists('offers');
         Schema::dropIfExists('addresses');
         Schema::dropIfExists('home_slides');

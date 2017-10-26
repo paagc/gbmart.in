@@ -88,7 +88,7 @@
           </li>
           <li @if(Route::current()->uri == "admin/sellers") class="active" @endif><a href="/admin/sellers"><i class="fa fa-users"></i> <span>Sellers</span></a></li>
           <li @if(Route::current()->uri == "admin/offers" || Route::current()->uri == "admin/offers/create") class="active" @endif>
-            <a href="/admin/offers">Offers</a>
+            <a href="/admin/offers"><i class="fa fa-bell"></i> <span>Offers</span></a>
           </li>
         </ul>
       </section>

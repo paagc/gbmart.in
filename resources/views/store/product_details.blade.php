@@ -257,7 +257,7 @@
 						</div>
 					</div>
 
-					@if ($related_products as $product)
+					@if (count($related_products) > 0)
 					<div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp">
 						<div class="more-info-tab clearfix ">
 							<h3 class="new-product-title pull-left">Related Products</h3>

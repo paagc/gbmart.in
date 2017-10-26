@@ -16,6 +16,6 @@ Route::group(['namespace'=>'Store'], function() {
     Route::get('/store/{category_name}/{sub_category_name}/{product_name}', 'ProductDetailsController@getProductDetails');
 });
 
-Route::group(['middleware'=>['store.auth'], 'namespace'=>'Seller'],function () {
+Route::group(['middleware'=>['store.auth'], 'namespace'=>'Store'],function () {
 
 });

@@ -283,51 +283,35 @@
 															</div>
 
 
-															</div>
-
-															<div class="cart clearfix animate-effect">
-																<div class="action">
-																	<ul class="list-unstyled">
-																		<li class="add-cart-button btn-group">
-																			<button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
-																			<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-																		</li>
-																		<li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="wishlist" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-																		<li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="checkout" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> </li>
-																	</ul>
-																</div>
-
-															</div>
-
 														</div>
 
-
+														<div class="cart clearfix animate-effect">
+															<div class="action">
+																<ul class="list-unstyled">
+																	<li class="add-cart-button btn-group">
+																		<button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
+																		<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+																	</li>
+																	<li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="wishlist" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+																	<li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="checkout" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> </li>
+																</ul>
+															</div>
+														</div>
 													</div>
-
 												</div>
-												@endforeach
-
-
-
-
 											</div>
+											@endforeach
 
 										</div>
-
 									</div>
-
-
-
-
-
 								</div>
-
 							</div>
-							@endif	
 						</div>
-						<div class="clearfix"></div>
+						@endif
+						
 					</div>
-
+					<div class="clearfix"></div>
 				</div>
 			</div>
-			@endsection
+		</div>
+		@endsection

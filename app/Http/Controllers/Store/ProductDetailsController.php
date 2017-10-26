@@ -1,4 +1,5 @@
-<?
+<?php
+
 namespace App\Http\Controllers\Store;
 
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ use App\Offer;
 
 class ProductDetailsController extends Controller
 {
-	public function getProductDetails($category_name, $sub_category_name, $product_name) {
+	public function getProductDetails($category_name, $sub_category_name, $product_name, Request $request) {
+
 		$product = Product::where('status', 'ACTIVE')->where('name', $product_name)
 		->whereHas('category', function ($query) use ($category_name) {
 			$query->where('name', $category_name);
@@ -77,7 +79,7 @@ class ProductDetailsController extends Controller
 				'related_products' => $related_products
 			]);
 		} else {
-			abort(404);
+			return abort(404);
 		}
 	}
 }

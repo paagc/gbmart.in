@@ -251,7 +251,7 @@
                                                     <div class="product">
                                                         <div class="product-image">
                                                             <div class="image"> <a href="/store/{{ $product->category->display_name }}/{{ $product->sub_category->display_name }}/{{ $product->display_name }}">
-                                                                <img src="assets/images/products/p1.jpg" alt=""></a> 
+                                                                <img src="{{ $product->product_images[0]->url }}" alt=""></a> 
                                                             </div>
                                                         </div>
                                                         <div class="product-info text-left">

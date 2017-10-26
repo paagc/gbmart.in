@@ -7,7 +7,7 @@
 			<ul class="list-inline list-unstyled">
 				<li><a href="/">Home</a></li>
 				<li><a href="/store/{{ $product->category->name }}">{{ $product->category->display_name }}</a></li>
-				<li><a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}">{{ {{ $product->sub_category->display_name }} }}</a></li>
+				<li><a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}">{{ $product->sub_category->display_name }}</a></li>
 				<li class='active'>{{ $product->display_name }}</li>
 			</ul>
 		</div>
@@ -308,7 +308,7 @@
 							</div>
 						</div>
 						@endif
-						
+
 					</div>
 					<div class="clearfix"></div>
 				</div>

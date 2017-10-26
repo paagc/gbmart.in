@@ -87,8 +87,11 @@
             <a href="/admin/products"><i class="fa fa-tags"></i> <span>Products</span></a>
           </li>
           <li @if(Route::current()->uri == "admin/sellers") class="active" @endif><a href="/admin/sellers"><i class="fa fa-users"></i> <span>Sellers</span></a></li>
-          <li @if(Route::current()->uri == "admin/offers" || Route::current()->uri == "admin/offers/create") class="active" @endif>
+          <li @if(Route::current()->uri == "admin/offers" || Route::current()->uri == "admin/offers/create" || Route::current()->uri == "admin/offers/edit") class="active" @endif>
             <a href="/admin/offers"><i class="fa fa-bell"></i> <span>Offers</span></a>
+          </li>
+          <li @if(Route::current()->uri == "admin/home-slide" || Route::current()->uri == "admin/home-slide/create" || Route::current()->uri == "admin/home-slide/edit") class="active" @endif>
+            <a href="/admin/home-slide"> <span>Home Slides</span></a>
           </li>
         </ul>
       </section>

@@ -46,4 +46,12 @@ Route::group(['middleware'=>['admin.auth'], 'prefix' => 'admin', 'namespace'=>'A
     Route::get('offers/{id}/active', 'OffersController@active');
     Route::get('offers/{id}/edit', 'OffersController@edit');
     Route::put('offers/{id}/edit', 'OffersController@update');
+
+    Route::get('home-slide', 'SliderController@index');
+    Route::get('home-slide/create', 'SliderController@create');
+    Route::post('home-slide/create', 'SliderController@store');
+    Route::get('home-slide/{id}/destroy', 'SliderController@destroy');
+    Route::get('home-slide/{id}/active', 'SliderController@active');
+    Route::get('home-slide/{id}/edit', 'SliderController@edit');
+    Route::put('home-slide/{id}/edit', 'SliderController@update');
 });

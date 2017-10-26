@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\HomeSlide;
+
 class SliderController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class SliderController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.home_slides.index');
     }
 
     /**
@@ -24,7 +26,7 @@ class SliderController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.home_slides.create');
     }
 
     /**
@@ -35,7 +37,23 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|min:3',
+            'link_url' => 'required',
+            'background_image' => 'required'
+        ]);
+
+        $input = $request->all();
+
+        if ($request->hasFile('background_image')) {
+            $background_image = $request->file('background_image');
+            $filename = "Home_slides_" . str_random(5) . "." . $background_image->getClientOriginalExtension();
+            $background_image->move(public_path() . '/storage/', $filename);
+            $input['image_url'] = $request->root() . '/storage/' . $filename;
+        }
+        $input['status'] = 'ACTIVE';
+        $home_slide = HomeSlide::create($input);
+        return redirect('/admin/home-slide');
     }
 
     /**
@@ -57,7 +75,7 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.home_slides.edit');
     }
 
     /**

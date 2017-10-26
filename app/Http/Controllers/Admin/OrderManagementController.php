@@ -40,6 +40,47 @@ class OrderManagementController extends Controller
         ]);
     }
 
+    public function approvedOrders()
+    {
+        $page = 1;
+        $page_size = 15;
+        $approved_orders = new Order;
+
+        $approved_orders = $approved_orders->where('status', 'APPROVED');
+        $approved_orders = $approved_orders->paginate($page_size);
+        return view('admin.orders.approved', [
+            'page' => $page,
+            'page_size' => $page_size,
+            'approved_orders' => $approved_orders
+        ]);
+    }
+
+    public function packedOrders()
+    {
+        return view('admin.orders.packed');
+    }
+
+    public function shippedOrders()
+    {
+        return view('admin.orders.shipped');
+    }
+
+
+    public function deliveredOrders()
+    {
+        return view('admin.orders.delivered');
+    }
+
+    public function cancelledOrders()
+    {
+        return view('admin.orders.cancelled');
+    }
+
+    public function rejectedOrders()
+    {
+        return view('admin.orders.rejected');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

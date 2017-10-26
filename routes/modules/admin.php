@@ -43,5 +43,7 @@ Route::group(['middleware'=>['admin.auth'], 'prefix' => 'admin', 'namespace'=>'A
     Route::get('offers/create', 'OffersController@create');
     Route::post('offers/create', 'OffersController@store');
     Route::get('offers/{id}/destroy', 'OffersController@destroy');
+    Route::get('offers/{id}/active', 'OffersController@active');
     Route::get('offers/{id}/edit', 'OffersController@edit');
+    Route::put('offers/{id}/edit', 'OffersController@update');
 });

@@ -88,7 +88,8 @@ class OffersController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.offers.edit');
+        $offer = Offer::find($id);
+        return view('admin.offers.edit',[ 'offer' => $offer ]);
     }
 
     /**
@@ -100,7 +101,38 @@ class OffersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|min:3',
+            'link_url' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date'
+        ]);
+
+        $input = $request->all();
+
+        if ($request->hasFile('background_image')) {
+            $background_image = $request->file('background_image');
+            $filename = "Offers_banner_" . str_random(5) . "." . $background_image->getClientOriginalExtension();
+            $background_image->move(public_path() . '/storage/', $filename);
+            $input['image_url'] = $request->root() . '/storage/' . $filename;
+        }
+        
+        $offer = Offer::find($id)->update($input);
+        return redirect('/admin/offers');
+    }
+
+    /**
+     * Regain the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function active($id)
+    {
+        $offer = Offer::find($id);
+        $offer->update(['status' => 'ACTIVE']);
+
+        return back();
     }
 
     /**

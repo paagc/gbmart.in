@@ -50,10 +50,12 @@
 							<td>{{ $offer->status }}</td>
 							<td>
 								@if ($offer->status == 'ACTIVE')
-								<a href="/admin/offers/{{$offer->id}}/destroy" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+								<a href="/admin/offers/{{$offer->id}}/destroy" title="Deactivate" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
 								@else
-								<a href="/admin/offers/{{$offer->id}}/edit" title="Edit" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
+								<a href="/admin/offers/{{$offer->id}}/active" title="Activate" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
 								@endif
+
+								<a href="/admin/offers/{{$offer->id}}/edit" title="Edit" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
 							</td>
 						</tr>
 						@empty

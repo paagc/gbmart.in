@@ -16,7 +16,15 @@ class SliderController extends Controller
      */
     public function index()
     {
-        return view('admin.home_slides.index');
+        $page = 1;
+        $page_size = 15;
+        $slides = new HomeSlide;
+        $slides = $slides->paginate($page_size);
+        return view('admin.home_slides.index', [
+            'page' => $page,
+            'page_size' => $page_size,
+            'slides' => $slides
+        ]);
     }
 
     /**

@@ -26,13 +26,21 @@
 							<th>Title</th>
 							<th>Image</th>
 							<tH>Link URL</th>
-							<th>Start Date</th>
-							<th>End Date</th>
 							<th>Status</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
+						@forelse($slides as $index => $slide)
+						<tr>
+							<td>{{ $index+1 }}</td>
+							<td>{{ $slide->title }}</td>
+							<td><a href="{{ $slide->image_url }}" class="btn btn-primary btn-sm" target="_blank">View Image</a></td>
+							<td><a href="{{ $slide->link_url }}" target="_blank">{{ $slide->link_url }}</a></td>
+							<td>{{ $slide->status }}</td>
+						</tr>
+						@empty
+						@endforelse
 					</tbody>
 				</table>
 			</div>

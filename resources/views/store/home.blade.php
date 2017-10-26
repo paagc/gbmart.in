@@ -1,6 +1,12 @@
 @extends('store.app')
 
 @section('content')
+<style>
+    .products .image img {
+        max-height: 200px;
+    }
+</style>
+
 <div class="body-content outer-top-xs" id="top-banner-and-menu">
             <div class="container">
                 <div class="row"> 

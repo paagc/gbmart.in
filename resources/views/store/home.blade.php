@@ -59,7 +59,7 @@
                                     
                                         
                                         <div class="product-info text-left m-t-20">
-                                            <h3 class="name"><a href="/store/{{ $product->category->display_name }}/{{ $product->sub_category->display_name }}/{{ $product->display_name }}">{{ $product->display_name }}</a></h3>
+                                            <h3 class="name"><a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ $product->display_name }}</a></h3>
                                             <div class="rating rateit-small"></div>
                                             <div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($product->seller_products[0]->seller_price, 2, '.', ',') }}</span> 
                                                 
@@ -98,7 +98,7 @@
                                                         <div class="col col-xs-5">
                                                             <div class="product-image">
                                                                 <div class="image"> 
-                                                                    <a href="/store/{{ $product->category->display_name }}/{{ $product->sub_category->display_name }}/{{ $product->display_name }}"> 
+                                                                    <a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}"> 
                                                                         <img src="{{ $product->product_images[0]->url }}" alt=""> 
                                                                     </a> 
                                                                 </div>
@@ -108,7 +108,7 @@
                                                         <div class="col col-xs-7">
                                                             <div class="product-info">
                                                                 <h3 class="name">
-                                                                    <a href="/store/{{ $product->category->display_name }}/{{ $product->sub_category->display_name }}/{{ $product->display_name }}">{{ $product->display_name }}</a>
+                                                                    <a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ $product->display_name }}</a>
                                                                 </h3>
                                                                 <div class="rating rateit-small"></div>
                                                                 <div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($product->seller_products[0]->seller_price, 2, '.', ',') }} </span> </div>
@@ -192,12 +192,12 @@
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
-                                                            <div class="image"> <a href="/store/{{ $product->category->display_name }}/{{ $product->sub_category->display_name }}/{{ $product->display_name }}">
+                                                            <div class="image"> <a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">
                                                                 <img src="{{ $product->product_images[0]->url }}" alt=""></a> 
                                                             </div>
                                                         </div>
                                                         <div class="product-info text-left">
-                                                            <h3 class="name"><a href="/store/{{ $product->category->display_name }}/{{ $product->sub_category->display_name }}/{{ $product->display_name }}">{{ $product->display_name }}</a></h3>
+                                                            <h3 class="name"><a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ $product->display_name }}</a></h3>
                                                             <div class="rating rateit-small"></div>
                                                             <div class="description"></div>
                                                             <div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($product->seller_products[0]->seller_price, 2, '.', ',') }} </span>
@@ -256,12 +256,12 @@
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
-                                                            <div class="image"> <a href="/store/{{ $product->category->display_name }}/{{ $product->sub_category->display_name }}/{{ $product->display_name }}">
+                                                            <div class="image"> <a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">
                                                                 <img src="{{ $product->product_images[0]->url }}" alt=""></a> 
                                                             </div>
                                                         </div>
                                                         <div class="product-info text-left">
-                                                            <h3 class="name"><a href="/store/{{ $product->category->display_name }}/{{ $product->sub_category->display_name }}/{{ $product->display_name }}">{{ $product->display_name }}</a></h3>
+                                                            <h3 class="name"><a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ $product->display_name }}</a></h3>
                                                             <div class="rating rateit-small"></div>
                                                             <div class="description"></div>
                                                             <div class="product-price"> 

@@ -13,10 +13,13 @@ class Product extends Model
     	'display_name',
     	'brand',
     	'original_price',
+        'description_small',
     	'description_text',
         'description_image_url',
         'description_video_url',
         'is_featured',
+        'is_hot_deal',
+        'is_bestseller',
         'status'
     ];
 

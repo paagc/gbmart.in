@@ -97,12 +97,16 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 	public function store(Request $request) {
+		// dd($request);
 		$sub_category_id = 0;
 		$display_name = "";
 		$brand = "";
 		$original_price = 0;
 		$images = [];
 		$is_featured = false;
+		$is_hot_deal = false;
+		$is_bestseller = false;
+		$description_small = "";
 		$description_text = "";
 		$description_image = null;
 		$description_video_url = "";
@@ -139,10 +143,25 @@ class ProductController extends Controller
 			$is_featured = true;
 		}
 
+		if ($request->has('is_hot_deal') && $request->get('is_hot_deal') == "true") {
+			$is_hot_deal = true;
+		}
+
+		if ($request->has('is_bestseller') && $request->get('is_bestseller') == "true") {
+			$is_bestseller = true;
+		}
+
 		if ($request->hasFile('images') && count($request->file('images') > 0)) {
 			$images = $request->file('images');
 		} else {
 			Session::flash('error', 'Atlest one product image is required.');
+			return redirect()->back()->withInput();
+		}
+
+		if ($request->has('description_small') && strlen($request->get('description_small')) > 10 && strlen($request->get('description_small')) <= 200) {
+			$description_text = $request->get('description_small');
+		} else {
+			Session::flash('error', 'Small description is required, atleast 10 characters long and not more than 200 characters.');
 			return redirect()->back()->withInput();
 		}
 
@@ -190,10 +209,13 @@ class ProductController extends Controller
 			'display_name' => $display_name,
 			'brand' => $brand,
 			'original_price' => $original_price,
+			'description_small' => $description_small,
 			'description_text' => $description_text,
 			'description_image_url' => '',
 			'description_video_url' => $description_video_url,
 			'is_featured' => $is_featured,
+			'is_hot_deal' => $is_hot_deal,
+			'is_bestseller' => $is_bestseller,
 			'status' => $status
 		]);
 

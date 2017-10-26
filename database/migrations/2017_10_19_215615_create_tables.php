@@ -101,10 +101,13 @@ class CreateTables extends Migration
             $table->string('display_name');
             $table->string('brand');
             $table->integer('original_price');
+            $table->text('description_small');
             $table->text('description_text');
             $table->string('description_image_url');
             $table->string('description_video_url');
             $table->boolean('is_featured');
+            $table->boolean('is_hot_deal');
+            $table->boolean('is_bestseller');
             $table->string('status');
             $table->timestamps();
         });

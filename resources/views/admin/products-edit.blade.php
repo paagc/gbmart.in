@@ -74,11 +74,25 @@
 								<input type="file" multiple accept=".jpeg,.jpg,.png" name="images[]" class="form-control" id="inputProductImages" placeholder="Upload images" value="{{ old('images') }}">
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-1">
 							<div class="form-group">
 								<label for="inputIsFeatured">Is featured?</label>
 								<br>
-								<input type="checkbox" name="is_featured" id="inputIsFeatured" placeholder="Enter price" value="true" @if(old('is_featured') == "true") checked @elseif($product->is_featured) checked @endif>
+								<input type="checkbox" name="is_featured" id="inputIsFeatured" placeholder="Enter price" value="true" @if(old('is_featured') == true) checked @elseif($product->is_featured) checked @endif>
+							</div>
+						</div>
+						<div class="col-md-1">
+							<div class="form-group">
+								<label for="inputHotDeal">Is hot deal?</label>
+								<br>
+								<input type="checkbox" name="is_hot_deal" id="inputHotDeal" placeholder="Enter price" value="true" @if(old('is_hot_deal') == true) checked @elseif($product->is_hot_deal) checked @endif>
+							</div>
+						</div>
+						<div class="col-md-1">
+							<div class="form-group">
+								<label for="inputBestseller">Is bestseller?</label>
+								<br>
+								<input type="checkbox" name="is_bestseller" id="inputBestseller" placeholder="Enter price" value="true" @if(old('is_bestseller') == true) checked @elseif($product->is_bestseller) checked @endif>
 							</div>
 						</div>
 					</div>
@@ -86,7 +100,7 @@
 						<div class="col-md-8">
 							<div class="form-group">
 								<label for="inputDescriptionText">Description</label>
-								<textarea rows="5" name="description_text" class="form-control" id="inputDescriptionText" placeholder="Enter description">{{ old('description_text') ? old('description_text') : $product->description_text }}</textarea>
+								<textarea rows="8" name="description_text" class="form-control" id="inputDescriptionText" placeholder="Enter description">{{ old('description_text') ? old('description_text') : $product->description_text }}</textarea>
 								@if($errors->has('description_text'))
 							    <span class="text-danger">{{ $errors->first('description_text') }}</span>
 							    @endif
@@ -105,6 +119,13 @@
 								<input type="text" name="description_video_url" class="form-control" id="inputDescriptionVideo" placeholder="Enter video embed url" value="{{ old('description_video_url') ? old('description_video_url') : $product->description_video_url }}">
 								@if($errors->has('description_video_url'))
 							    <span class="text-danger">{{ $errors->first('description_video_url') }}</span>
+							    @endif
+							</div>
+							<div class="form-group">
+								<label for="inputDescriptionSmall">Description</label>
+								<textarea rows="2" name="description_small" class="form-control" id="inputDescriptionSmall" placeholder="Enter small description">{{ old('description_small') ? old('description_small') : $product->description_text }}</textarea>
+								@if($errors->has('description_small'))
+							    <span class="text-danger">{{ $errors->first('description_small') }}</span>
 							    @endif
 							</div>
 						</div>
@@ -138,7 +159,7 @@
 								@if ($image->status == 'ACTIVE')
 								<div class="col-sm-3 col-md-3">
 									<img src="{{ $image->url }}" style="width: 100%">
-									<input type="checkbox" name="uploaded_image_id[]" value="{{$image->id}}" title="check to delete">
+									<input type="checkbox" name="uploaded_image_id[]" value="{{$image->id}}" title="check to delete" @if($image->status == 'ACTIVE') checked @endif>
 								</div>
 								@endif
 							@empty

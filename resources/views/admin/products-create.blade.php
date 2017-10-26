@@ -60,11 +60,25 @@
 								<input type="file" multiple accept=".jpeg,.jpg,.png" name="images[]" class="form-control" id="inputProductImages" placeholder="Upload images" value="{{ old('images') }}">
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-1">
 							<div class="form-group">
 								<label for="inputIsFeatured">Is featured?</label>
 								<br>
 								<input type="checkbox" name="is_featured" id="inputIsFeatured" placeholder="Enter price" value="true" @if(old('is_featured') == "true") checked @endif>
+							</div>
+						</div>
+						<div class="col-md-1">
+							<div class="form-group">
+								<label for="inputHotDeal">Is hot deal?</label>
+								<br>
+								<input type="checkbox" name="is_hot_deal" id="inputHotDeal" placeholder="Enter price" value="true" @if(old('is_hot_deal') == "true") checked @endif>
+							</div>
+						</div>
+						<div class="col-md-1">
+							<div class="form-group">
+								<label for="inputBestseller">Is bestseller?</label>
+								<br>
+								<input type="checkbox" name="is_bestseller" id="inputBestseller" placeholder="Enter price" value="true" @if(old('is_bestseller') == "true") checked @endif>
 							</div>
 						</div>
 					</div>
@@ -72,7 +86,7 @@
 						<div class="col-md-8">
 							<div class="form-group">
 								<label for="inputDescriptionText">Description</label>
-								<textarea rows="5" name="description_text" class="form-control" id="inputDescriptionText" placeholder="Enter description">{{ old('description_text') }}</textarea>
+								<textarea rows="7" name="description_text" class="form-control" id="inputDescriptionText" placeholder="Enter description">{{ old('description_text') }}</textarea>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -83,6 +97,10 @@
 							<div class="form-group">
 								<label for="inputDescriptionVideo">Description video</label>
 								<input type="text" name="description_video_url" class="form-control" id="inputDescriptionVideo" placeholder="Enter video embed url" value="{{ old('description_video_url') }}">
+							</div>
+							<div class="form-group">
+								<label for="inputDescriptionSmall">Small Description</label>
+								<textarea rows="2" name="description_small" class="form-control" id="inputDescriptionSmall" placeholder="Enter small description">{{ old('description_small') }}</textarea>
 							</div>
 						</div>
 					</div>

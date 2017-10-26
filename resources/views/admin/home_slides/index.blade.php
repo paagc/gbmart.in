@@ -38,6 +38,15 @@
 							<td><a href="{{ $slide->image_url }}" class="btn btn-primary btn-sm" target="_blank">View Image</a></td>
 							<td><a href="{{ $slide->link_url }}" target="_blank">{{ $slide->link_url }}</a></td>
 							<td>{{ $slide->status }}</td>
+							<td>
+								@if ($slide->status == 'ACTIVE')
+								<a href="/admin/home-slide/{{$slide->id}}/destroy" title="Deactivate" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+								@else
+								<a href="/admin/home-slide/{{$slide->id}}/active" title="Activate" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
+								@endif
+
+								<a href="/admin/home-slide/{{$slide->id}}/edit" title="Edit" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
+							</td>
 						</tr>
 						@empty
 						@endforelse

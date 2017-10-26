@@ -57,28 +57,78 @@ class OrderManagementController extends Controller
 
     public function packedOrders()
     {
-        return view('admin.orders.packed');
+        $page = 1;
+        $page_size = 15;
+        $packed_orders = new Order;
+
+        $packed_orders = $packed_orders->where('status', 'PACKED');
+        $packed_orders = $packed_orders->paginate($page_size);
+        return view('admin.orders.packed', [
+            'page' => $page,
+            'page_size' => $page_size,
+            'packed_orders' => $packed_orders
+        ]);
     }
 
     public function shippedOrders()
     {
-        return view('admin.orders.shipped');
+        $page = 1;
+        $page_size = 15;
+        $shipped_orders = new Order;
+
+        $shipped_orders = $shipped_orders->where('status', 'SHIPPED');
+        $shipped_orders = $shipped_orders->paginate($page_size);
+        return view('admin.orders.shipped', [
+            'page' => $page,
+            'page_size' => $page_size,
+            'shipped_orders' => $shipped_orders
+        ]);
     }
 
 
     public function deliveredOrders()
     {
-        return view('admin.orders.delivered');
+        $page = 1;
+        $page_size = 15;
+        $delivered_orders = new Order;
+
+        $delivered_orders = $delivered_orders->where('status', 'DELIVERED');
+        $delivered_orders = $delivered_orders->paginate($page_size);
+        return view('admin.orders.delivered', [
+            'page' => $page,
+            'page_size' => $page_size,
+            'delivered_orders' => $delivered_orders
+        ]);
     }
 
     public function cancelledOrders()
     {
-        return view('admin.orders.cancelled');
+        $page = 1;
+        $page_size = 15;
+        $cancelled_orders = new Order;
+
+        $cancelled_orders = $cancelled_orders->where('status', 'CANCELLED');
+        $cancelled_orders = $cancelled_orders->paginate($page_size);
+        return view('admin.orders.cancelled', [
+            'page' => $page,
+            'page_size' => $page_size,
+            'cancelled_orders' => $cancelled_orders
+        ]);
     }
 
     public function rejectedOrders()
     {
-        return view('admin.orders.rejected');
+        $page = 1;
+        $page_size = 15;
+        $rejected_orders = new Order;
+
+        $rejected_orders = $rejected_orders->where('status', 'REJECTED');
+        $rejected_orders = $rejected_orders->paginate($page_size);
+        return view('admin.orders.rejected', [
+            'page' => $page,
+            'page_size' => $page_size,
+            'rejected_orders' => $rejected_orders
+        ]);
     }
 
     /**

@@ -101,15 +101,17 @@
 						<div class="col-md-12">
 							<h4>Attributes</h4>
 							@foreach($product->attributes as $attribute)
-							<h5>{{ $attribute->name }}</h5>
-							<div class="row add_more_attributes" data="{{ $attribute->id }}">
-								<div class="col-md-3">
-									<div class="form-group">
-										<input type="text" name="attributes[{{ $attribute->id }}][]" class="form-control">
+							<div class="attributes_bind">
+								<h5>{{ $attribute->name }}</h5>
+								<div class="row add_more_attributes" data="{{ $attribute->id }}">
+									<div class="col-md-3">
+										<div class="form-group">
+											<input type="text" name="attributes[{{ $attribute->id }}][]" class="form-control">
+										</div>
 									</div>
 								</div>
+								<a href="javascript:void(0)" class="click_to_add">+ add more</a>
 							</div>
-							<a href="javascript:void(0)" class="click_to_add">+ add more</a>
 							@endforeach
 						</div>
 					</div>
@@ -129,7 +131,7 @@
 <script>
 	$(document).ready(function() {
 		$('.click_to_add').click(function() {
-			var sibling = $(this).siblings('.add_more_attributes');
+			var sibling = $(this).parents('.attributes_bind').find('.add_more_attributes');
 			var attr_id = sibling.attr('data');
 			sibling.append('<div class="col-md-3"><div class="form-group"><input type="text" name="attributes['+attr_id+'][]" class="form-control"></div></div>');
 		})

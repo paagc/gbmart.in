@@ -139,7 +139,7 @@
 										</div>
 										<div class="col-sm-9">
 											<div class="stock-box">
-												<span class="value text-red">{{ $product->seller_products[0]->is_in_stock ? "In Stock" : "Out Of Stock" }}</span>
+												<span class="value text-red">{{ ($product->seller_products[0]->is_in_stock ? "In Stock" : "Out Of Stock") }}</span>
 											</div>	
 										</div><br>
 

@@ -14,11 +14,18 @@ class SliderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $page = 1;
         $page_size = 15;
         $slides = new HomeSlide;
+        if($request->has('title') && strlen($request->get('title')) > 0) {
+            $slides = $slides->where('title', 'like', '%' . $request->get('title') . '%');
+        }
+
+        if($request->has('link_url') && strlen($request->get('link_url')) > 0) {
+            $slides = $slides->where('link_url', 'like', '%' . $request->get('link_url') . '%');
+        }
         $slides = $slides->paginate($page_size);
         return view('admin.home_slides.index', [
             'page' => $page,

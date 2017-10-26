@@ -22,7 +22,7 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="title">Title<span class="text-danger"> *</span></label>
-								<input type="text" name="title" class="form-control" id="title" placeholder="Enter Offer Title" value="{{ old('title') }}">
+								<input type="text" name="title" class="form-control" id="title" placeholder="Enter Slide Title" value="{{ old('title') }}">
 								@if($errors->has('title'))
 							    <span class="text-danger">{{ $errors->first('title') }}</span>
 							    @endif

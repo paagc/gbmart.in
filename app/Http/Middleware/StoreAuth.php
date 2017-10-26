@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class AdminAuth
+class StoreAuth
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class AdminAuth
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->type == 'admin' && Auth::user()->status == 'ACTIVE') {
+        if (Auth::check() && Auth::user()->type == 'store' && Auth::user()->status == 'ACTIVE') {
             return $next($request);
         } else {
-            return redirect('/admin/login');
+            return redirect('/login');
         }
     }
 }

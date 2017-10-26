@@ -20,6 +20,9 @@ $route_partials = [
     // Seller
     'seller',
 
+    // Store for customers
+    'store'
+
 ];
 
 /** Route Partial Loadup
@@ -41,9 +44,9 @@ foreach ($route_partials as $partial) {
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('/', function () {
-    return view('store.home');
-});
+// Route::get('/', function () {
+//     return view('store.home');
+// });
 
 Route::get('/account', function () {
     return view('store.account');

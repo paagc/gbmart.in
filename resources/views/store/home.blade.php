@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('store.app')
 
 @section('content')
 <div class="body-content outer-top-xs" id="top-banner-and-menu">
@@ -12,294 +12,30 @@
                             <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Categories</div>
                             <nav class="yamm megamenu-horizontal">
                                 <ul class="nav">
-                                
-                                    
-                                    <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-laptop" aria-hidden="true"></i>ELECTRONICS</a> 
-                                        
+
+                                    @foreach($categories as $category)
+                                    <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle text-uppercase" data-toggle="dropdown"><i class="icon fa {{ $category->fa_icon }}" aria-hidden="true"></i>{{ $category->display_name }}</a>
                                         <ul class="dropdown-menu mega-menu">
                                             <li class="yamm-content">
                                                 <div class="row">
+                                                    @for($i = 0; $i < count($category->sub_categories); $i += 3)
                                                     <div class="col-xs-12 col-sm-12 col-lg-4">
                                                         <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
+                                                            @foreach($category->sub_categories as $index => $sub_category)
+                                                            @if($index >= ($i * 3) && $index < (($i + 1) * 3))
+                                                            <li><a href="/store/{{ $category->name }}/{{ $sub_category->name }}">{{ $sub_category->display_name }}</a></li>
+                                                            @endif
+                                                            @endforeach
+                                                        </ul>
                                                     </div>
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
+                                                    @endfor
                                                 </div>
                                             </li>
                                         </ul>
                                      </li>
-                                
-                                    
-                                    <li class="dropdown menu-item">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="icon fa fa-wrench" aria-hidden="true"></i>
-                                            APPLIANCES
-                                        </a> 
-                                        
-                                        <ul class="dropdown-menu mega-menu">
-                                            <li class="yamm-content">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                </div>
-                                                
-                                            </li>
-                                            
-                                        </ul>
-                                        
-                                     </li>
-                                    
-                                <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp;<i class="icon fa fa-male" aria-hidden="true"></i>&nbsp;MEN</a> 
-                                        
-                                        <ul class="dropdown-menu mega-menu">
-                                            <li class="yamm-content">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                </div>
-                                                
-                                            </li>
-                                            
-                                        </ul>
-                                        
-                                     </li>  
-                                    
-                                <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp;<i class="icon fa fa-female" aria-hidden="true"></i>WOMEN</a> 
-                                        
-                                        <ul class="dropdown-menu mega-menu">
-                                            <li class="yamm-content">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                </div>
-                                                
-                                            </li>
-                                            
-                                        </ul>
-                                        
-                                     </li>
-                                    
-                                <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-paper-plane" aria-hidden="true"></i>BABY & KIDS</a> 
-                                        
-                                        <ul class="dropdown-menu mega-menu">
-                                            <li class="yamm-content">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                </div>
-                                                
-                                            </li>
-                                            
-                                        </ul>
-                                        
-                                     </li>
-                                        <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-home" aria-hidden="true"></i>HOME & FURNITURE</a> 
-                                        
-                                        <ul class="dropdown-menu mega-menu">
-                                            <li class="yamm-content">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                </div>
-                                                
-                                            </li>
-                                            
-                                        </ul>
-                                        
-                                     </li>
-                                
-                                    
-                                        <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-book" aria-hidden="true"></i>BOOKS & MORE</a> 
-                                        
-                                        <ul class="dropdown-menu mega-menu">
-                                            <li class="yamm-content">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-12 col-lg-4">
-                                                        <ul>
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                    </div>
-                                                </div>
-                                                
-                                            </li>
-                                            
-                                        </ul>
-                                        
-                                     </li>
-                                    
+                                     @endforeach
                                 </ul>
-                            
                             </nav>
-                        
                         </div>
                         
                         <div class="sidebar-widget hot-deals wow fadeInUp outer-bottom-xs">

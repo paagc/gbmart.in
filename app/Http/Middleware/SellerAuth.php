@@ -16,7 +16,7 @@ class SellerAuth
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->hasRole('seller') && Auth::user()->status == 'ACTIVE') {
+        if (Auth::check() && Auth::user()->type == 'seller' && Auth::user()->status == 'ACTIVE') {
             return $next($request);
         } else {
             return redirect('/seller/login');

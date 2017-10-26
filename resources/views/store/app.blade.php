@@ -286,7 +286,7 @@
                                             </ul>
                                         </li> -->
                                         
-                                        @foreach(\App\Category::with(['sub_categories' => function($query) { $query->where('status', 'ACTIVE')->orderBy('id', 'asc'); }])->where('status', 'ACTIVE')->orderBy('id', 'asc')->get() as $index => $category)
+                                        @foreach(\App\Category::with(['sub_categories' => function($query) { $query->where('status', 'ACTIVE')->orderBy('id', 'asc'); }])->whereHas('sub_categories', function ($query) { $query->where('status', 'ACTIVE'); })->where('status', 'ACTIVE')->orderBy('id', 'asc')->get() as $index => $category)
 
                                         @if($index < 10)
                                         <li class="dropdown"> <a href="#" class="dropdown-toggle text-uppercase" data-hover="dropdown" data-toggle="dropdown">{{ $category->display_name }}</a>

@@ -16,7 +16,7 @@ use App\Attribute;
 class HomeController extends Controller
 {
 	public function getHome(Request $request) {
-		$categories = Category::with(['sub_categories' => function($query) { $query->where('status', 'ACTIVE')->orderBy('id', 'asc'); }])->where('status', 'ACTIVE')->orderBy('id', 'asc')->get();
+		$categories = Category::with(['sub_categories' => function($query) { $query->where('status', 'ACTIVE')->orderBy('id', 'asc'); }])->whereHas('sub_categories', function ($query) { $query->where('status', 'ACTIVE'); })->where('status', 'ACTIVE')->orderBy('id', 'asc')->get();
 
 		return view('store.home', [ 'categories' => $categories ]);
 	}

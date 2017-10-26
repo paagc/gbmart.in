@@ -185,7 +185,7 @@
 								<?php
 								$attrs = $product->attribute_values;
 								$attributes = [];
-								for ($i = 0; $i < count($attrs); i++) {
+								for ($i = 0; $i < count($attrs); $i++) {
 									if (!array_key_exists($attrs[$i]->attribute_id, $attributes)) {
 										array_push($attributes, $attrs[$i]->attribute_id)
 									}

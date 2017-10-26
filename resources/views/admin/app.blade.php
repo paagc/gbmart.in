@@ -77,23 +77,99 @@
     <aside class="main-sidebar">
       <section class="sidebar">
         <ul class="sidebar-menu" data-widget="tree">
-          <li @if(Route::current()->uri == "admin") class="active" @endif>
+          <li class="{{{Request::is('admin') ? 'active' : ''}}}">
             <a href="/admin"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
           </li>
-          <li @if(Route::current()->uri == "admin/sub-categories" || Route::current()->uri == "admin/sub-categories/create") class="active" @endif>
+
+          <li class="{{{Request::is('admin/sub-categories') || Request::is('admin/sub-categories/create') ? 'active' : ''}}}">
             <a href="/admin/sub-categories"><i class="fa fa-outdent"></i> <span>Sub Categories</span></a>
           </li>
-          <li @if(Route::current()->uri == "admin/products" || Route::current()->uri == "admin/products/create") class="active" @endif>
+
+          <li class="treeview {{{Request::is('admin/orders/pending')||Request::is('admin/orders/approved')|| Request::is('admin/orders/packed') || Request::is('admin/orders/shipped') || Request::is('admin/orders/delivered') || Request::is('admin/orders/cancelled') || Request::is('admin/orders/rejected') ? 'active' : ''}}}">
+            <a href="#">
+              <i class="fa fa-files-o"></i>
+              <span>Order Management</span>
+              <span class="pull-right-container">
+                <span class="caret"></span>
+              </span>
+            </a>
+            <ul class="treeview-menu menu-open">
+              <li>
+                <a href="#">
+                  <i class="icon-tasks"></i>
+                  Today's Orders
+                  <b class="badge badge-warning pull-right"></b>
+                </a>
+              </li>
+              <li class="{{{Request::is('admin/orders/pending') ? 'active' : ''}}}">
+                <a href="/admin/orders/pending">
+                  <i class="icon-tasks"></i>
+                  Pending Orders
+                  <b class="badge badge-error pull-right"></b>
+                </a>
+              </li>
+              <li class="{{{Request::is('admin/orders/approved') ? 'active' : ''}}}">
+                <a href="/admin/orders/approved">
+                  <i class="icon-tasks"></i>
+                  Approved Orders
+                  <b class="badge badge-error pull-right"></b>
+                </a>
+              </li>
+              <li class="{{{Request::is('admin/orders/packed') ? 'active' : ''}}}">
+                <a href="/admin/orders/packed">
+                  <i class="icon-tasks"></i>
+                  Packed Orders
+                  <b class="badge badge-error pull-right"></b>
+                </a>
+              </li>
+              <li class="{{{Request::is('admin/orders/shipped') ? 'active' : ''}}}">
+                <a href="/admin/orders/shipped">
+                  <i class="icon-tasks"></i>
+                  Shipped Orders
+                  <b class="badge badge-error pull-right"></b>
+                </a>
+              </li>
+              <li class="{{{Request::is('admin/orders/delivered') ? 'active' : ''}}}">
+                <a href="/admin/orders/delivered">
+                  <i class="icon-inbox"></i>
+                  Delivered Orders
+                  <b class="badge badge-success pull-right"></b>
+                </a>
+              </li>
+              <li class="{{{Request::is('admin/orders/cancelled') ? 'active' : ''}}}">
+                <a href="/admin/orders/cancelled">
+                  <i class="icon-tasks"></i>
+                  Cancelled Orders
+                  <b class="badge badge-error pull-right"></b>
+                </a>
+              </li>
+              <li class="{{{Request::is('admin/orders/rejected') ? 'active' : ''}}}">
+                <a href="/admin/orders/rejected">
+                  <i class="icon-tasks"></i>
+                  Rejected Orders
+                  <b class="badge badge-error pull-right"></b>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="{{{Request::is('admin/products') || Request::is('admin/products/create') ? 'active' : ''}}}">
             <a href="/admin/products"><i class="fa fa-tags"></i> <span>Products</span></a>
           </li>
-          <li @if(Route::current()->uri == "admin/sellers") class="active" @endif><a href="/admin/sellers"><i class="fa fa-users"></i> <span>Sellers</span></a></li>
-          <li @if(Route::current()->uri == "admin/offers" || Route::current()->uri == "admin/offers/create" || Route::current()->uri == "admin/offers/edit") class="active" @endif>
+
+          <li class="{{{Request::is('admin/sellers') ? 'active' : ''}}}">
+            <a href="/admin/sellers"><i class="fa fa-users"></i> <span>Sellers</span></a>
+          </li>
+
+          <li class="{{{Request::is('admin/offers') || Request::is('admin/offers/create') ? 'active' : ''}}}">
             <a href="/admin/offers"><i class="fa fa-bell"></i> <span>Offers</span></a>
           </li>
-          <li @if(Route::current()->uri == "admin/home-slide" || Route::current()->uri == "admin/home-slide/create" || Route::current()->uri == "admin/home-slide/edit") class="active" @endif>
+
+          <li class="{{{Request::is('admin/home-slide') || Request::is('admin/home-slide/create') ? 'active' : ''}}}">
             <a href="/admin/home-slide"> <span>Home Slides</span></a>
           </li>
-          <li @if(Route::current()->uri == "admin/gift-coupon" || Route::current()->uri == "admin/gift-coupon/create" || Route::current()->uri == "admin/gift-coupon/edit") class="active" @endif>
+
+          <li class="{{{Request::is('admin/gift-coupon') || Request::is('admin/gift-coupon/create') ? 'active' : ''}}}">
             <a href="/admin/gift-coupon"> <span>Gift Coupons</span></a>
           </li>
         </ul>

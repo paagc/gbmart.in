@@ -62,4 +62,12 @@ Route::group(['middleware'=>['admin.auth'], 'prefix' => 'admin', 'namespace'=>'A
     Route::get('gift-coupon/{id}/active', 'GiftCouponsController@active');
     Route::get('gift-coupon/{id}/edit', 'GiftCouponsController@edit');
     Route::put('gift-coupon/{id}/edit', 'GiftCouponsController@update');
+
+    Route::get('orders/pending', 'OrderManagementController@pendingOrders');
+    Route::get('orders/approved', 'OrderManagementController@approvedOrders');
+    Route::get('orders/packed', 'OrderManagementController@packedOrders');
+    Route::get('orders/shipped', 'OrderManagementController@shippedOrders');
+    Route::get('orders/delivered', 'OrderManagementController@deliveredOrders');
+    Route::get('orders/cancelled', 'OrderManagementController@cancelledOrders');
+    Route::get('orders/rejected', 'OrderManagementController@rejectedOrders');
 });

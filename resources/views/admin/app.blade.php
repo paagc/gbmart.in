@@ -93,6 +93,9 @@
           <li @if(Route::current()->uri == "admin/home-slide" || Route::current()->uri == "admin/home-slide/create" || Route::current()->uri == "admin/home-slide/edit") class="active" @endif>
             <a href="/admin/home-slide"> <span>Home Slides</span></a>
           </li>
+          <li @if(Route::current()->uri == "admin/gift-coupon" || Route::current()->uri == "admin/gift-coupon/create" || Route::current()->uri == "admin/gift-coupon/edit") class="active" @endif>
+            <a href="/admin/gift-coupon"> <span>Gift Coupons</span></a>
+          </li>
         </ul>
       </section>
     </aside>

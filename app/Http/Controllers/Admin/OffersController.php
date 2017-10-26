@@ -14,12 +14,18 @@ class OffersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $page = 1;
         $page_size = 15;
         $offers = new Offer;
+        if($request->has('title') && strlen($request->get('title')) > 0) {
+            $offers = $offers->where('title', 'like', '%' . $request->get('title') . '%');
+        }
 
+        if($request->has('link_url') && strlen($request->get('link_url')) > 0) {
+            $offers = $offers->where('link_url', 'like', '%' . $request->get('link_url') . '%');
+        }
         $offers = $offers->paginate($page_size);
         return view('admin.offers.index', [
             'page' => $page,

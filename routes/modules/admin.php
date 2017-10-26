@@ -54,4 +54,12 @@ Route::group(['middleware'=>['admin.auth'], 'prefix' => 'admin', 'namespace'=>'A
     Route::get('home-slide/{id}/active', 'SliderController@active');
     Route::get('home-slide/{id}/edit', 'SliderController@edit');
     Route::put('home-slide/{id}/edit', 'SliderController@update');
+
+    Route::get('gift-coupon', 'GiftCouponsController@index');
+    Route::get('gift-coupon/create', 'GiftCouponsController@create');
+    Route::post('gift-coupon/create', 'GiftCouponsController@store');
+    Route::get('gift-coupon/{id}/destroy', 'GiftCouponsController@destroy');
+    Route::get('gift-coupon/{id}/active', 'GiftCouponsController@active');
+    Route::get('gift-coupon/{id}/edit', 'GiftCouponsController@edit');
+    Route::put('gift-coupon/{id}/edit', 'GiftCouponsController@update');
 });

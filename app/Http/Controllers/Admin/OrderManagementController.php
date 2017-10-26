@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Order;
+use App\OrderLog;
+
 class OrderManagementController extends Controller
 {
     /**
@@ -24,7 +27,17 @@ class OrderManagementController extends Controller
      */
     public function pendingOrders()
     {
-        return view('admin.orders.pending');
+        $page = 1;
+        $page_size = 15;
+        $pending_orders = new Order;
+
+        $pending_orders = $pending_orders->where('status', 'PENDING');
+        $pending_orders = $pending_orders->paginate($page_size);
+        return view('admin.orders.pending', [
+            'page' => $page,
+            'page_size' => $page_size,
+            'pending_orders' => $pending_orders
+        ]);
     }
 
     /**

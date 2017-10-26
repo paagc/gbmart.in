@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('store.app')
 
 @section('content')
 <div class="body-content outer-top-xs" id="top-banner-and-menu">

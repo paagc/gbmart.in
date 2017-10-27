@@ -73,7 +73,7 @@ class ProductDetailsController extends Controller
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
 		}])->orderBy('updated_at', 'desc')->limit(10)->get();
 
-		$attributes = Product::where('status', $product->id)->where('status', 'ACTIVE')->get();
+		$attributes = Product::where('product_id', $product->id)->where('status', 'ACTIVE')->get();
 
 		if (!is_null($product)) {
 			return view('store.product_details', [ 'product' => $product,

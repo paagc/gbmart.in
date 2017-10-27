@@ -182,48 +182,18 @@
 										</div>
 									</div>
 								</div>
-								<?php
-								$attributes = [];
-								$attr_ids = [];
-								foreach ($product->seller_products[0]->attribute_values as $attribute_value)
-								{
-									if ($attribute_value->status == 'ACTIVE' && $attribute_value->attribute->status == 'ACTIVE')
-									{
-										if (array_key_exists($attribute_value->attribute->id, $attr_ids))
-										{
-										}
-										else
-										{
-											array_push($attr_ids, $attribute_value->attribute->id);
-											array_push($attributes, [ 
-												'name' => $attribute_value->attribute->name,
-												'values' => []
-											]);
-										}
-									}
-								}
 
-								foreach ($product->seller_products[0]->attribute_values as $index => $attribute_value)
-								{
-									foreach ($attributes as $attribute)
-									{
-										if ($attribute_value->status == 'ACTIVE' && $attribute['name'] == $attribute_value->attribute->name)
-										{
-											array_push($attributes[$index]['values'], $attribute_value->value);
-										}
-									}
-								}
-								?>
-
-								@if(count($attributes) > 0)
+								@if(count($attributes) > 0 && count($product->seller_products[0]->attribute_values) > 0)
 								<div class="quantity-container info-container">
 									<div class="row">
 										@foreach($attributes as $attribute)
 										<div class="col-sm-4">
-											<label>{{ $attribute['name'] }}</label>
+											<label>{{ $attribute->name }}</label>
 											<select class="form-control" name="cat1" required>
-												@foreach($attribute['values'] as $value)
-												<option>{{ $value }}</option>
+												@foreach($product->seller_products[0]->attribute_values as $attribute_value)
+												@if($attribute->id == $attribute_value->attribute_id && $attribute_value->status == 'ACTIVE')
+												<option>{{ $attribute_value->value }}</option>
+												@endif
 												@endforeach
 											</select>
 										</div>

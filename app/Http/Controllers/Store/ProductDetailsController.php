@@ -13,6 +13,7 @@ use App\SubCategory;
 use App\Product;
 use App\ProductImage;
 use App\Attribute;
+use App\AttributeValue;
 use App\HomeSlide;
 use App\Offer;
 
@@ -70,13 +71,16 @@ class ProductDetailsController extends Controller
 			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
 		}, 'product_images' => function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
-		} ])->orderBy('updated_at', 'desc')->limit(10)->get();
+		}])->orderBy('updated_at', 'desc')->limit(10)->get();
+
+		$attributes = Product::where('status', $product->id)->where('status', 'ACTIVE')->get();
 
 		if (!is_null($product)) {
 			return view('store.product_details', [ 'product' => $product,
 				'hot_deal_products' => $hot_deal_products,
 				'featured_products' => $featured_products,
-				'related_products' => $related_products
+				'related_products' => $related_products,
+				'attributes' => $attributes
 			]);
 		} else {
 			return abort(404);

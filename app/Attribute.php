@@ -16,4 +16,8 @@ class Attribute extends Model
     protected function product() {
     	return $this->belongsTo('App\Product', 'product_id');
     }
+
+    protected function attribute_values() {
+    	return $this->hasMany('App\AttributeValue', 'product_id');
+    }
 }

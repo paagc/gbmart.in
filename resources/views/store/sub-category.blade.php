@@ -235,7 +235,7 @@
 			var selected_brands = [];
 			var price_min = {{ $price_range_min }}, price_max = {{ $price_range_max }};
 			var page = {{ $page }};
-			$('.check-brand').each(fucntion () {
+			$('.check-brand').each(function () {
 				if($(this).prop('checked') == true) {
 					selected_brands.push($(this).attr('data-value'));
 				}

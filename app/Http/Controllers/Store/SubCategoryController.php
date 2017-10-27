@@ -79,6 +79,12 @@ class SubCategoryController extends Controller
 
 		$products = $products->with([ 'seller_products' => function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
+			if ($price_min != $price_range_min && $price_min > 0) {
+				$query->where('seller_price' '>=', $price_min);
+			}
+			if ($price_max != $price_range_max && $price_range_max > 0) {
+				$query->where('seller_price' '<=', $price_max);
+			}
 		}, 'product_images' => function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
 		} ]);

@@ -26,7 +26,7 @@
 							<div class="sidebar-widget-body">
 								<ul>
 									@foreach($brands as $brand)
-									<div class="checkbox"> <label> <input type="checkbox" class="check-brand" data-value="{{ $brand }}"> {{ $brand }} </label> </div>
+									<div class="checkbox"> <label> <input type="checkbox" class="check-brand" data-value="{{ $brand }}" @if (array_key_exists($brand, $selected_brands)) checked @endif> {{ $brand }} </label> </div>
 									@endforeach
 								</ul>
 							</div>
@@ -233,7 +233,7 @@
 		function filter() {
 			var url = "{{ url()->current() }}";
 			var selected_brands = [];
-			var price_min = {{ $price_range_min }}, price_max = {{ $price_range_max }};
+			var price_min = {{ $price_min }}, price_max = {{ $price_max }}, price_range_min = {{ $price_range_min }}, price_range_max = {{ $price_range_max }};
 			var page = {{ $page }};
 			$('.check-brand').each(function () {
 				if($(this).prop('checked') == true) {
@@ -245,7 +245,7 @@
 				price_min = parseInt(price_values[0]);
 				price_max = parseInt(price_values[1]);
 			}
-			if (branselected_brandsds.length > 0 || price_min != price_range_min || price_max != price_range_max)) {
+			if (selected_brands.length > 0 || price_min != price_range_min || price_max != price_range_max) {
 				url += "?";
 				if (selected_brands.length > 0) {
 					for (var i = 0; i < selected_brands.length; i++) {
@@ -266,7 +266,7 @@
 			window.location.href = url;
 		}
 
-		$('.filter-button').change(filter);
+		$('.filter-button').click(filter);
 	});
 </script>
 @endsection

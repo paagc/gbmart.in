@@ -205,18 +205,16 @@
 									}
 								}
 
-								foreach ($product->seller_products[0]->attribute_values as $attribute_value)
+								foreach ($product->seller_products[0]->attribute_values as $index => $attribute_value)
 								{
 									foreach ($attributes as $attribute)
 									{
 										if ($attribute_value->status == 'ACTIVE' && $attribute['name'] == $attribute_value->attribute->name)
 										{
-											array_push($attribute['values'], $attribute_value->value);
+											array_push($attributes[$index]['values'], $attribute_value->value);
 										}
 									}
 								}
-
-								print_r($attributes);
 								?>
 
 								@foreach($attributes as $attribute)

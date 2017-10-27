@@ -215,9 +215,10 @@
 								}
 								?>
 
-								@foreach($attributes as $attribute)
+								@if(count($attributes) > 0)
 								<div class="quantity-container info-container">
 									<div class="row">
+										@foreach($attributes as $attribute)
 										<div class="col-sm-4">
 											<label>{{ $attribute['name'] }}</label>
 											<select class="form-control" name="cat1" required>
@@ -226,9 +227,10 @@
 												@endforeach
 											</select>
 										</div>
+										@endforeach
 									</div>
 								</div>
-								@endforeach
+								@endif
 							</div>
 						</div>
 					</div>

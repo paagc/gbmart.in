@@ -183,16 +183,43 @@
 									</div>
 								</div>
 								<?php
-								$attrs = $product->attribute_values;
 								$attributes = [];
-								for ($i = 0; $i < count($attrs); $i++) {
-									if (!array_key_exists($attrs[$i]->attribute_id, $attributes)) {
-										array_push($attributes, $attrs[$i]->attribute_id);
+								// for ($i = 0; $i < count($attrs); $i++) {
+								// 	if (!array_key_exists($attrs[$i]->attribute_id, $attributes)) {
+								// 		array_push($attributes, $attrs[$i]->attribute_id);
+								// 	}
+								// }
+								$attr_ids = [];
+								foreach ($product->attribute_values as $attribute_value)
+								{
+									if ($attribute_value->status == 'ACTIVE' && $attribute_value->attribute->status == 'ACTIVE')
+									{
+										if (!array_key_exists($attribute_value->attribute->id, $attr_ids))
+										{
+											array_push($attr_ids, $attribute_value->attribute->id);
+											array_push($attributes, [ 
+												'name' => $attribute_value->attribute->name,
+												'values' => []
+											]);
+										}
 									}
 								}
+
+								foreach ($product->attribute_values as $attribute_value)
+								{
+									foreach ($attributes as $attribute)
+									{
+										if ($attribute_value->status == 'ACTIVE' && $attribute['name'] == $attribute_value->attribute->name)
+										{
+											array_push($attribute['values'], $attribute_value->value);
+										}
+									}
+								}
+
+								print_r($attributes);
 								?>
 
-								@foreach($attributes as $attribute_id)
+								<!-- @foreach($attributes as $attribute_id)
 								<div class="quantity-container info-container">
 									<div class="row">
 										<div class="col-sm-4">
@@ -211,7 +238,7 @@
 										</div>
 									</div>
 								</div>
-								@endforeach
+								@endforeach -->
 							</div>
 						</div>
 					</div>
@@ -233,7 +260,7 @@
 								<div class="tab-content">
 									<div id="description" class="tab-pane in active">
 										<div class="product-tab">
-											<p class="text">{{ $product->description }}</p>
+											<p class="text">{{ $product->description_text }}</p>
 										</div>	
 									</div>
 

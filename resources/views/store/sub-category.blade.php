@@ -52,7 +52,7 @@
 						</div>
 
 						<div class="sidebar-widget outer-bottom-small wow fadeInUp">
-							<h3 class="section-title">fEATURED PRODUCTS</h3>
+							<h3 class="section-title">FEATURED PRODUCTS</h3>
 							<div class="sidebar-widget-body outer-top-xs">
 								<div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
 									<div class="item">

@@ -190,7 +190,7 @@
 								// 	}
 								// }
 								$attr_ids = [];
-								foreach ($product->attribute_values as $attribute_value)
+								foreach ($product->seller_products[0]->attribute_values as $attribute_value)
 								{
 									if ($attribute_value->status == 'ACTIVE' && $attribute_value->attribute->status == 'ACTIVE')
 									{

@@ -6,7 +6,7 @@
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
 				<li><a href="/">Home</a></li>
-				<li><a href="/store/{{ $product->category->name }}">{{ $product->category->display_name }}</a></li>
+				<li><a href="#">{{ $product->category->display_name }}</a></li>
 				<li><a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}">{{ $product->sub_category->display_name }}</a></li>
 				<li class='active'>{{ $product->display_name }}</li>
 			</ul>
@@ -120,7 +120,7 @@
 						</div>     			
 						<div class='col-sm-6 col-md-7 product-info-block'>
 							<div class="product-info">
-								<h1 class="name">{{ $product->name }}</h1>
+								<h1 class="name">{{ $product->display_name }}</h1>
 
 								<div class="rating-reviews m-t-20">
 									<div class="row">

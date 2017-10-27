@@ -205,7 +205,7 @@
 									}
 								}
 
-								foreach ($product->attribute_values as $attribute_value)
+								foreach ($product->seller_products[0]->attribute_values as $attribute_value)
 								{
 									foreach ($attributes as $attribute)
 									{

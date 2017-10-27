@@ -219,26 +219,20 @@
 								print_r($attributes);
 								?>
 
-								<!-- @foreach($attributes as $attribute_id)
+								@foreach($attributes as $attribute)
 								<div class="quantity-container info-container">
 									<div class="row">
 										<div class="col-sm-4">
-											@foreach($product->attribute_values as $attribute_value)
-											@if($attribute_value->attribute->id == $attributes[i])
-											<label>{{ $attribute_value->attribute->name }}</label>
-											@endif
-											@endforeach
+											<label>{{ $attribute['name'] }}</label>
 											<select class="form-control" name="cat1" required>
-												@foreach($product->attribute_values as $attribute_value)
-												@if($attribute_value->attribute->id == $attributes[i])
-												<option>{{ $attribute_value->value }}</option>
-												@endif
+												@foreach($attribute['values'] as $value)
+												<option>{{ $value }}</option>
 												@endforeach
 											</select>
 										</div>
 									</div>
 								</div>
-								@endforeach -->
+								@endforeach
 							</div>
 						</div>
 					</div>

@@ -122,8 +122,8 @@
 							    @endif
 							</div>
 							<div class="form-group">
-								<label for="inputDescriptionSmall">Description</label>
-								<textarea rows="2" name="description_small" class="form-control" id="inputDescriptionSmall" placeholder="Enter small description">{{ old('description_small') ? old('description_small') : $product->description_text }}</textarea>
+								<label for="inputDescriptionSmall">Small Description</label>
+								<textarea rows="2" name="description_small" class="form-control" id="inputDescriptionSmall" placeholder="Enter small description">{{ old('description_small') ? old('description_small') : $product->description_small }}</textarea>
 								@if($errors->has('description_small'))
 							    <span class="text-danger">{{ $errors->first('description_small') }}</span>
 							    @endif
@@ -149,6 +149,20 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-md-12">
+							<div class="row">
+								@foreach ($product->attributes as $attribute)
+								@if ($attribute->status == 'ACTIVE')
+								<div class="col-md-3 product-attribute">
+									<div class="form-group">
+										<p>{{$attribute->name}} <i class="fa fa-times click_to_delete" title="delete" style="cursor: pointer;float: right;color: red;margin-right: 25px;"></i></p>
+										<input type="checkbox" name="product_attribute_id[]" value="{{$attribute->id}}" title="check to delete" class="check_to_delete" style="display: none;">
+									</div>
+								</div>
+								@endif
+								@endforeach
+							</div>
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -157,9 +171,10 @@
 						<div class="col-sm-12 col-md-12">
 							@forelse ($product->product_images as $image)
 								@if ($image->status == 'ACTIVE')
-								<div class="col-sm-3 col-md-3">
-									<img src="{{ $image->url }}" style="width: 100%">
-									<input type="checkbox" name="uploaded_image_id[]" value="{{$image->id}}" title="check to delete" @if($image->status == 'ACTIVE') checked @endif>
+								<div class="col-sm-3 col-md-3 product_image" style="padding: 15px;">
+									<img src="{{ $image->url }}" style="width: 100%; height: 200px;margin: auto;display: block;">
+									<input type="checkbox" name="uploaded_image_id[]" value="{{$image->id}}" title="check to delete" class="check_to_delete" style="display: none;">
+									<i class="fa fa-trash click_to_delete" title="delete" style="cursor: pointer;color: red;"></i>
 								</div>
 								@endif
 							@empty
@@ -171,9 +186,11 @@
 						<div class="col-md-12">
 							<h4>Description Image</h4>
 						</div>
-						<div class="col-sm-12 col-md-12">
+						<div class="col-sm-4 col-md-4 description_image">
 							@if ($product->description_image_url)
-							<img src="{{ $product->description_image_url }}" style="width: 100%">
+								<img src="{{ $product->description_image_url }}" style="width: 100%">
+								<input type="checkbox" name="delete_description_image" value="true" title="check to delete" class="check_to_delete" style="display: none;">
+								<i class="fa fa-trash click_to_delete" title="delete" style="cursor: pointer;color: red;"></i>
 							@else
 							<p>No Image Uploaded</p>
 							@endif
@@ -199,6 +216,15 @@
 		$('.clear-product-attributes').click(function() {
 			$('.product-attributes').html('<div class="col-md-3 product-attribute"><div class="form-group"><input name="attributes[]" class="form-control" placeholder="Size, colour, or any other variation"></div></div>');
 		});
+
+		$('.click_to_delete').click(function() {
+			if (confirm('Are you sure, you want to delete ?')) {
+				$(this).siblings('.check_to_delete').prop('checked', true);
+				$(this).parents('.product_image').css('display', 'none');
+				$(this).parents('.description_image').css('display', 'none');
+				$(this).parents('.product-attribute').css('display', 'none');
+			}
+		})
 	});
 </script>
 @endsection

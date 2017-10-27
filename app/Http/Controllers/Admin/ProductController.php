@@ -159,7 +159,7 @@ class ProductController extends Controller
 		}
 
 		if ($request->has('description_small') && strlen($request->get('description_small')) > 10 && strlen($request->get('description_small')) <= 200) {
-			$description_text = $request->get('description_small');
+			$description_small = $request->get('description_small');
 		} else {
 			Session::flash('error', 'Small description is required, atleast 10 characters long and not more than 200 characters.');
 			return redirect()->back()->withInput();
@@ -306,13 +306,26 @@ class ProductController extends Controller
 
     	$input = $request->all();
     	$is_featured = false;
+		$is_hot_deal = false;
+		$is_bestseller = false;
     	$images = [];
     	$description_image = null;
         $description_video_url = "";
+        $description_small = "";
+
+        // dd($request->all());
 
     	if ($request->has('is_featured') && $request->get('is_featured') == "true") {
-            $is_featured = true;
-        }
+			$is_featured = true;
+		}
+
+		if ($request->has('is_hot_deal') && $request->get('is_hot_deal') == "true") {
+			$is_hot_deal = true;
+		}
+
+		if ($request->has('is_bestseller') && $request->get('is_bestseller') == "true") {
+			$is_bestseller = true;
+		}
 
         if ($request->hasFile('images') && count($request->file('images') > 0)) {
             $images = $request->file('images');
@@ -325,6 +338,13 @@ class ProductController extends Controller
         if ($request->has('description_video_url') && strlen($request->get('description_video_url')) > 3) {
             $description_video_url = $request->get('description_video_url');
         }
+
+        if ($request->has('description_small') && strlen($request->get('description_small')) > 10 && strlen($request->get('description_small')) <= 200) {
+			$description_small = $request->get('description_small');
+		} else {
+			Session::flash('error', 'Small description is required, atleast 10 characters long and not more than 200 characters.');
+			return redirect()->back()->withInput();
+		}
 
         $name = "";
 
@@ -342,7 +362,9 @@ class ProductController extends Controller
         }
 
         $input['is_featured'] = $is_featured;
-        $input['description_image_url'] = '';
+        $input['is_hot_deal'] = $is_hot_deal;
+        $input['is_bestseller'] = $is_bestseller;
+        $input['description_small'] = $description_small;
         $input['description_video_url'] = $description_video_url;
         $product = Product::find($id);
         $product->update($input);
@@ -387,6 +409,19 @@ class ProductController extends Controller
 			foreach ($uploaded_images_ids as $index => $product_image_id) {
 				$product = ProductImage::find($product_image_id);
 				$product->update(['status' => 'INACTIVE']);
+			}
+		}
+
+		if ($request->has('delete_description_image')) {
+			$product->description_image_url = '';
+			$product->save();
+		}
+
+		if ($request->has('product_attribute_id') && is_array($request->get('product_attribute_id')) && count($request->get('product_attribute_id'))) {
+			$product_attribute_ids = $request->get('product_attribute_id');
+			foreach ($product_attribute_ids as $index => $product_attribute_id) {
+				$product_attribute = Attribute::find($product_attribute_id);
+				$product_attribute->update(['status' => 'INACTIVE']);
 			}
 		}
 

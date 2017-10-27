@@ -184,17 +184,15 @@
 								</div>
 								<?php
 								$attributes = [];
-								// for ($i = 0; $i < count($attrs); $i++) {
-								// 	if (!array_key_exists($attrs[$i]->attribute_id, $attributes)) {
-								// 		array_push($attributes, $attrs[$i]->attribute_id);
-								// 	}
-								// }
 								$attr_ids = [];
 								foreach ($product->seller_products[0]->attribute_values as $attribute_value)
 								{
 									if ($attribute_value->status == 'ACTIVE' && $attribute_value->attribute->status == 'ACTIVE')
 									{
-										if (!array_key_exists($attribute_value->attribute->id, $attr_ids))
+										if (array_key_exists($attribute_value->attribute->id, $attr_ids))
+										{
+										}
+										else
 										{
 											array_push($attr_ids, $attribute_value->attribute->id);
 											array_push($attributes, [ 

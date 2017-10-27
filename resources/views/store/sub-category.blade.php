@@ -19,14 +19,14 @@
 				<div class="sidebar-module-container">
 					<div class="sidebar-filter">
 						<div class="sidebar-widget wow fadeInUp">
-							<h3 class="section-title">Shop By &nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary">Filter</button></h3>
+							<h3 class="section-title">Shop By &nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary filter-button">Filter</button></h3>
 							<div class="widget-header">
 								<h4 class="widget-title">Brands</h4>
 							</div>
 							<div class="sidebar-widget-body">
 								<ul>
 									@foreach($brands as $brand)
-									<div class="checkbox"> <label> <input type="checkbox" class="brands"> {{ $brand }} </label> </div>
+									<div class="checkbox"> <label> <input type="checkbox" class="check-brand" data-value="{{ $brand }}"> {{ $brand }} </label> </div>
 									@endforeach
 								</ul>
 							</div>
@@ -227,11 +227,46 @@
 				step: 100,
 				value: [{{ $price_min }}, {{ $price_max }}],
 				handle: "square"
-
 			});
-
 		}
 
+		function filter() {
+			var url = "{{ url()->current() }}";
+			var selected_brands = [];
+			var price_min = {{ $price_range_min }}, price_max = {{ $price_range_max }};
+			var page = {{ $page }};
+			$('.check-brand').each(fucntion () {
+				if($(this).prop('checked') == true) {
+					selected_brands.push($(this).attr('data-value'));
+				}
+			});
+			var price_values = $('input.price-range-slider').val().split(',');
+			if (price_values.length == 2) {
+				price_min = parseInt(price_values[0]);
+				price_max = parseInt(price_values[1]);
+			}
+			if (branselected_brandsds.length > 0 || price_min != price_range_min || price_max != price_range_max)) {
+				url += "?";
+				if (selected_brands.length > 0) {
+					for (var i = 0; i < selected_brands.length; i++) {
+						url += ((url.includes('&') ? "&" : "")) + "selected_brands[]=" + selected_brands[i];
+					}
+				}
+				if (price_min != price_range_min) {
+					url += ((url.includes('&') ? "&" : "")) + "price_min=" + price_min;
+				}
+				if (price_max != price_range_max) {
+					url += ((url.includes('&') ? "&" : "")) + "price_max=" + price_max;
+				}
+				if (page > 1) {
+					url += ((url.includes('&') ? "&" : "")) + "page=" + page;
+				}
+			}
+
+			window.location.href = url;
+		}
+
+		$('.filter-button').change(filter);
 	});
 </script>
 @endsection

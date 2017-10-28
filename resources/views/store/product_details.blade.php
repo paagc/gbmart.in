@@ -19,7 +19,7 @@
 		<div class='row single-product'>
 			<div class='col-md-3 sidebar'>
 				<div class="sidebar-module-container">
-
+					<?php print_r($product) ?>
 					@if (count($hot_deal_products) > 0)
 					<div class="sidebar-widget hot-deals wow fadeInUp outer-bottom-xs">
 						<h3 class="section-title">Hot Deals</h3>
@@ -52,7 +52,7 @@
 						</div>
 					</div>
 					@endif
-
+					<?php print_r($product) ?>
 					@if (count($featured_products) > 0)
 					<div class="sidebar-widget outer-bottom-small wow fadeInUp">
 						<h3 class="section-title">FEATURED PRODUCTS</h3>
@@ -87,7 +87,7 @@
 						</div>
 					</div>
 					@endif
-
+					<?php print_r($product) ?>
 				</div>
 			</div>
 			<div class='col-md-9'>
@@ -265,45 +265,44 @@
 																<img src="{{ $product->product_images[0]->url }}" alt="">
 															</a> 
 														</div>
+													</div>
+													<div class="product-info text-left">
+														<h3 class="name"><a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ $product->display_name }}</a></h3>
+														<div class="rating rateit-small"></div>
+														<div class="description"></div>
+														<div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($product->seller_products[0]->seller_price, 2, '.', ',') }} </span>
+															<span class="price-before-discount"><span class="fa fa-inr"></span>{{ number_format($product->original_price, 2, '.', ',') }}</span> 
 														</div>
-														<div class="product-info text-left">
-															<h3 class="name"><a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ $product->display_name }}</a></h3>
-															<div class="rating rateit-small"></div>
-															<div class="description"></div>
-															<div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($product->seller_products[0]->seller_price, 2, '.', ',') }} </span>
-																<span class="price-before-discount"><span class="fa fa-inr"></span>{{ number_format($product->original_price, 2, '.', ',') }}</span> 
-															</div>
+													</div>
 
-
-														</div>
-
-														<div class="cart clearfix animate-effect">
-															<div class="action">
-																<ul class="list-unstyled">
-																	<li class="add-cart-button btn-group">
-																		<button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
-																		<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-																	</li>
-																	<li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="wishlist" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-																	<li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="checkout" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> </li>
-																</ul>
-															</div>
+													<div class="cart clearfix animate-effect">
+														<div class="action">
+															<ul class="list-unstyled">
+																<li class="add-cart-button btn-group">
+																	<button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
+																	<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+																</li>
+																<li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="wishlist" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+																<li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="checkout" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> </li>
+															</ul>
 														</div>
 													</div>
 												</div>
 											</div>
-											@endforeach
-
 										</div>
+										@endforeach
+
 									</div>
 								</div>
 							</div>
 						</div>
-						@endif
-
 					</div>
-					<div class="clearfix"></div>
+					@endif
+
 				</div>
+				<div class="clearfix"></div>
 			</div>
 		</div>
-		@endsection
+	</div>
+</div>
+@endsection

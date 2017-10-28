@@ -79,7 +79,7 @@ class ProductDetailsController extends Controller
 
 		if (!is_null($product)) {
 			return view('store.product_details', [ 
-				'product' => $product,
+				'main_product' => $product,
 				'hot_deal_products' => $hot_deal_products,
 				'featured_products' => $featured_products,
 				'related_products' => $related_products,

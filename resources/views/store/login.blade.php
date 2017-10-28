@@ -16,7 +16,33 @@
 	<div class="container">
 		<div class="sign-in-page">
 			<div class="row">
-				<!-- Sign-in -->			
+				<!-- Sign-in -->
+				@if(Session::has('error'))
+				<div class="col-md-offset-3 col-md-6">
+					<h5 class="text-center text-danger">{{ Session::get('error') }}</h5>
+				</div>
+				@endif
+				@if($errors->has('email'))
+				<div class="col-md-offset-3 col-md-6">
+					<h5 class="text-center text-danger">{{ $errors->first('email') }}</h5>
+				</div>
+				@elseif($errors->has('name'))
+				<div class="col-md-offset-3 col-md-6">
+					<h5 class="text-center text-danger">{{ $errors->first('name') }}</h5>
+				</div>
+				@elseif($errors->has('mobile_number'))
+				<div class="col-md-offset-3 col-md-6">
+					<h5 class="text-center text-danger">{{ $errors->first('mobile_number') }}</h5>
+				</div>
+				@elseif($errors->has('password'))
+				<div class="col-md-offset-3 col-md-6">
+					<h5 class="text-center text-danger">{{ $errors->first('password') }}</h5>
+				</div>
+				@elseif($errors->has('confirm_password'))
+				<div class="col-md-offset-3 col-md-6">
+					<h5 class="text-center text-danger">{{ $errors->first('confirm_password') }}</h5>
+				</div>
+				@endif
 				<div class="col-md-6 col-sm-6 sign-in">
 					<h4 class="">Sign in</h4>
 					<p class="">Hello, Welcome to your account.</p>

@@ -63,6 +63,10 @@ class AuthController extends Controller
         $input['type'] = 'customer';
         $input['status'] = 'ACTIVE';
 
+		if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $user = User::create($input);
 
         Auth::login($user);

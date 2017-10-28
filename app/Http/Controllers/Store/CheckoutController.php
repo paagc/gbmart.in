@@ -27,8 +27,8 @@ class CheckoutController extends Controller
 					'quantity' => $item->qty,
 					'options' => $item->options
 				]);
-				$subtotal = $item->qty * $seller_product->seller_price;
-				$total = $item->qty * $seller_product->seller_price + $seller_product->delivery_charge;
+				$subtotal += $item->qty * $seller_product->seller_price;
+				$total += $item->qty * $seller_product->seller_price + $seller_product->delivery_charge;
 			}
 		}
 
@@ -73,8 +73,8 @@ class CheckoutController extends Controller
 					'quantity' => $item->qty,
 					'options' => $item->options
 				]);
-				$subtotal = $item->qty * $seller_product->seller_price;
-				$total = $item->qty * $seller_product->seller_price + $seller_product->delivery_charge;
+				$subtotal += $item->qty * $seller_product->seller_price;
+				$total += $item->qty * $seller_product->seller_price + $seller_product->delivery_charge;
 			}
 		}
 

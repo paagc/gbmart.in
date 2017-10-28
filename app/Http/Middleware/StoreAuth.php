@@ -16,7 +16,7 @@ class StoreAuth
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->type == 'store' && Auth::user()->status == 'ACTIVE') {
+        if (Auth::check() && Auth::user()->type == 'customer' && Auth::user()->status == 'ACTIVE') {
             return $next($request);
         } else {
             return redirect('/login');

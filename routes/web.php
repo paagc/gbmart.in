@@ -48,40 +48,40 @@ Route::get('/home', 'HomeController@index')->name('home');
 //     return view('store.home');
 // });
 
-Route::get('/account', function () {
-    return view('store.account');
-});
+// Route::get('/account', function () {
+//     return view('store.account');
+// });
 
-Route::get('/cart', function () {
-    return view('store.cart');
-});
+// Route::get('/cart', function () {
+//     return view('store.cart');
+// });
 
-Route::get('/checkout', function () {
-    return view('store.checkout');
-});
+// Route::get('/checkout', function () {
+//     return view('store.checkout');
+// });
 
-Route::get('/detail', function () {
-    return view('store.detail');
-});
+// Route::get('/detail', function () {
+//     return view('store.detail');
+// });
 
-Route::get('/clogin', function () {
-    return view('store.login');
-});
+// Route::get('/clogin', function () {
+//     return view('store.login');
+// });
 
-Route::get('/offer', function () {
-    return view('store.offer');
-});
+// Route::get('/offer', function () {
+//     return view('store.offer');
+// });
 
-Route::get('/sub-category', function () {
-    return view('store.sub-category');
-});
+// Route::get('/sub-category', function () {
+//     return view('store.sub-category');
+// });
 
-Route::get('/track', function () {
-    return view('store.track');
-});
+// Route::get('/track', function () {
+//     return view('store.track');
+// });
 
-Route::get('/wishlist', function () {
-    return view('store.wishlist');
-});
+// Route::get('/wishlist', function () {
+//     return view('store.wishlist');
+// });
 
 // Auth::routes();

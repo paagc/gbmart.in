@@ -10,6 +10,8 @@ class Order extends Model
     	'customer_id',
     	'product_id',
     	'seller_product_id',
+        'address',
+        'extra',
     	'count',
     	'price',
     	'delivery_charge',

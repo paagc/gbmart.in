@@ -52,7 +52,7 @@ class AuthController extends Controller
 	}
 
 	public function postRegister(Request $request) {
-		$request->validate([
+		$validator = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:6',

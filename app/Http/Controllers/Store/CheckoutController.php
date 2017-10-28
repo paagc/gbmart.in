@@ -14,42 +14,19 @@ use App\User;
 class CheckoutController extends Controller
 {
 	public function get(Request $request) {
-		if (Auth::check() && Auth::user()->type == 'customer') {
-			return redirect('/');
-		} else {
-			return view('store.login');
-		}
+		return view('store.checkout');
 	}
 
 	public function post(Request $request) {
-		$email = "";
-		$password = "";
-		$remember = false;
+		
+		return back()->with();
+	}
 
-		if ($request->has('email')) {
-			$email = $request->get('email');
-		}
+	public function getCart(Request $request) {
+		return view('store.cart');
+	}
 
-		if ($request->has('password')) {
-			$password = $request->get('password');
-		}
-
-		if ($request->has('remember')) {
-			$remember = $request->get('remember');
-		}
-
-		$user = User::where('email', $email)->where('status', 'ACTIVE')->where('type', 'customer')->first();
-
-		if (is_null($user)) {
-			Session::flash('error', 'Invalid user.');
-			return redirect()->back();
-		}
-
-		if (Auth::attempt([ 'email' => $email, 'password' => $password ], $remember)) {
-			return redirect('/');
-		} else {
-			Session::flash('error', 'Login unsuccessful.');
-			return redirect()->back();
-		}
+	public function postCart(Request $request) {
+		return back()->with();
 	}
 }

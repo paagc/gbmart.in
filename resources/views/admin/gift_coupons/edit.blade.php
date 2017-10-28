@@ -44,7 +44,11 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label for="type">Type<span class="text-danger"> *</span></label>
-								<input type="text" name="type" class="form-control" id="type" placeholder="Coupon Type" value="{{ old('type') ? old('type') : $coupon->type }}">
+								<select name="type" class="form-control" id="type" placeholder="Coupon Type">
+									<option></option>
+									<option value="PERCENTAGE" @if(old('type') == 'PERCENTAGE' || $coupon->type == 'PERCETAGE') selected @endif>Percentage</option>
+									<option value="ABSOLUTE" @if(old('type') == 'ABSOLUTE' || $coupon->type == 'ABSOLUTE') selected @endif>Absolute</option>
+								</select>
 								@if($errors->has('type'))
 							    <span class="text-danger">{{ $errors->first('type') }}</span>
 							    @endif

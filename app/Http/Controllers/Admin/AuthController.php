@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use Auth;
 use Session;
+use App\User;
 
 class AuthController extends Controller
 {

@@ -52,7 +52,32 @@ class CheckoutController extends Controller
 	}
 
 	public function post(Request $request) {
-		return "checkout";
+		dd($request);
+		$payment_method = $request->get('payment_method');
+		$payment_reference = $request->get('payment_reference');
+		$address = $request->get('address');
+		$status = "INITIATED";
+		if ($payment_method == "COD") {
+			$status = "PENDING";
+		}
+
+		$subtotal = 0;
+		$total = 0;
+
+		$cart_items = [];
+		foreach(Cart::content()  as $item) {
+			$seller_product = SellerProduct::find($item->id);
+			if (!is_null($seller_product)) {
+				array_push($cart_items, [
+					'seller_product' => $seller_product,
+					'quantity' => $item->qty,
+					'options' => $item->options
+				]);
+				$subtotal = $item->qty * $seller_product->seller_price;
+				$total = $item->qty * $seller_product->seller_price + $seller_product->delivery_charge;
+			}
+		}
+
 		return back();
 	}
 }

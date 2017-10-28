@@ -15,166 +15,182 @@
 <div class="body-content">
 	<div class="container">
 		<div class="checkout-box ">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="panel-group checkout-steps">
-						<div class="panel panel-default checkout-step-03">
-							<div class="panel-heading">
-								<h4 class="unicase-checkout-title">
-									<a href="#">
-										<span>3</span>Shipping Information
-									</a>
-								</h4>
-							</div>
-							<div id="collapseThree" class="panel-collapse collapse in">
-								<div class="panel-body">
-									<div class="form-group">
-										<label class="info-title" for="Shipping Address">Shipping Address<span>*</span></label>
-										<textarea class="form-control unicase-form-control text-input"  name="shippingaddress" required="required"></textarea>
-									</div>
-
-
-
-									<div class="form-group">
-										<label class="info-title" for="Billing State ">Shipping State  <span>*</span></label>
-										<input type="text" class="form-control unicase-form-control text-input" id="shippingstate" name="shippingstate" required>
-									</div>
-									<div class="form-group">
-										<label class="info-title" for="Billing City">Shipping City <span>*</span></label>
-										<input type="text" class="form-control unicase-form-control text-input" id="shippingcity" name="shippingcity" required="required">
-									</div>
-									<div class="form-group">
-										<label class="info-title" for="Billing Pincode">Shipping Pincode <span>*</span></label>
-										<input type="text" class="form-control unicase-form-control text-input" id="shippingpincode" name="shippingpincode" required="required">
-									</div>
+			<form action="/store/checkout" method="POST">
+				{{ csrf_field() }}
+				<input type="hidden" value="{{ $payment_reference }}">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel-group checkout-steps">
+							<div class="panel panel-default checkout-step-03">
+								<div class="panel-heading">
+									<h4 class="unicase-checkout-title">
+										<a href="#">
+											<span>1</span>Shipping Information
+										</a>
+									</h4>
 								</div>
-							</div>
-						</div>
-
-						<div class="panel panel-default checkout-step-06">
-							<div class="panel-heading">
-								<h4 class="unicase-checkout-title">
-									<a href="#">
-										<span>4</span>Payment method
-									</a>
-								</h4>
-							</div>
-							<div id="collapseSix" class="panel-collapse collapse in">
-								<div class="panel-body">
-									<div class="panel-heading">
-										<h4 class="unicase-checkout-title">
-											<a href="#">
-												Select your Payment Method
-											</a>
-										</h4>
-									</div>
-									<div id="collapseOne" class="panel-collapse collapse in">
-
-										<!-- panel-body  -->
-										<div class="panel-body">
-											<form name="payment" method="post">
-												<input type="radio" name="paymethod" value="COD" checked="checked"> COD
-												<input type="radio" name="paymethod" value="ONLINE"> Debit / Credit Card / Intenet Banking<br /><br />
-												<input type="submit" value="submit" name="submit" class="btn btn-primary">
-											</form>		
+								<div id="collapseThree" class="panel-collapse collapse in">
+									<div class="panel-body">
+										<div class="row">
+											<h5>Existing Addresses</h5>
+											@foreach($addresses as $address)
+											<div class="col-md-12">
+												<div class="radio">
+													<input type="radio" name="address" value="{{ $address->line_1 . ", " . $address->line_2 . ", " . $address->city_town . ", " . $address->state .  ", " . $address->pin_code }}"> 
+													<label>{{ $address->line_1 . ", " . $address->line_2 . ", " . $address->city_town . ", " . $address->state .  ", " . $address->pin_code }}</label>
+												</div>
+											</div>
+											@endforeach
+											<div class="col-md-12">
+												<div class="radio">
+													<input type="radio" name="address" value="new"> 
+													<label>New address ?</label>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<input type="text" name="new_address['line_1']" class="form-control" placeholder="Line 1">
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<input type="text" name="new_address['line_2']" class="form-control" placeholder="Line 2">
+												</div>
+											</div>
+											<div class="col-md-2">
+												<div class="form-group">
+													<input type="text" name="new_address['city_town']" class="form-control" placeholder="City/Town">
+												</div>
+											</div>
+											<div class="col-md-2">
+												<div class="form-group">
+													<input type="text" name="new_address['state']" class="form-control" placeholder="State">
+												</div>
+											</div>
+											<div class="col-md-2">
+												<div class="form-group">
+													<input type="text" name="new_address['pin_code']" class="form-control" placeholder="PIN Code">
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
-						<div class="panel panel-default checkout-step-06">
-							<div class="panel-heading">
-								<h4 class="unicase-checkout-title">
-									<a href="#">
-										<span>5</span>Order Review
-									</a>
-								</h4>
-							</div>
-							<div class="panel-collapse collapse in">
-								<div class="panel-body">
-									<div class="body-content outer-top-xs">
-										<div>
-											<div class="row ">
-												<div class="shopping-cart">
-													<div class="shopping-cart-table ">
-														<div class="table-responsive">
-															<table class="table">
-																<thead>
-																	<tr>
-																		<th class="cart-romove item">Remove</th>
-																		<th class="cart-description item">Image</th>
-																		<th class="cart-product-name item">Product Name</th>
-
-																		<th class="cart-qty item">Quantity</th>
-																		<th class="cart-sub-total item">Shipping</th>
-																		<th class="cart-total last-item">Grandtotal</th>
-																	</tr>
-																</thead>
-
-																<tbody>
-																	<tr>
-																		<td class="romove-item"><a href="#" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
-																		<td class="cart-image">
-																			<a class="entry-thumbnail" href="detail.html">
-																				<img src="assets/images/products/p2.jpg" alt="">
-																			</a>
-																		</td>
-																		<td class="cart-product-name-info">
-																			<h4 class='cart-product-description'><a href="detail">Floral Print Buttoned</a></h4>
-																			<div class="row">
-																				<div class="col-sm-12">
-																					<div class="rating rateit-small"></div>
-																				</div>
-																			</div>
-																		</td>
-
-																		<td class="cart-product-quantity">
-																			<div class="cart-quantity">
-																				<div class="quant-input">
-																					<div class="arrows">
-																						<div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
-																						<div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
-																					</div>
-																					<input type="text" value="1">
-																				</div>
-																			</div>
-																		</td>
-																		<td class="cart-product-sub-total"><span class="cart-sub-total-price">RS.300.00</span></td>
-																		<td class="cart-product-grand-total"><span class="cart-grand-total-price">RS.300.00</span></td>
-																	</tr>
-																</tbody>
-															</table>
+							<div class="panel panel-default checkout-step-06">
+								<div class="panel-heading">
+									<h4 class="unicase-checkout-title">
+										<a href="#">
+											<span>2</span>Payment method
+										</a>
+									</h4>
+								</div>
+								<div id="collapseSix" class="panel-collapse collapse in">
+									<div class="panel-body">
+										<div class="panel-heading">
+											<h4 class="unicase-checkout-title">
+												Select your Payment Method
+											</h4>
+										</div>
+										<div id="collapseOne" class="panel-collapse collapse in">
+											<div class="panel-body">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="radio">
+															<input type="radio" name="payment_method" value="COD"> 
+															<label> Cash on delivery (COD)</label>
 														</div>
 													</div>
-													<center>
-														<div class="col-md-4 col-sm-12 cart-shopping-total">
-															<table class="table">
-																<thead>
-																	<tr>
-																		<th>
-																			<div class="cart-sub-total">
-																				Subtotal<span class="inner-left-md fa fa-inr">600.00</span>
-																			</div>
-																			<div class="cart-grand-total">
-																				Grand Total<span class="inner-left-md fa-inr">600.00</span>
-																			</div>
-																		</th>
-																	</tr>
-																</thead>
-																<tbody>
-																	<tr>
-																		<td>
-																			<div class="cart-checkout-btn pull-right">
-																				<a href="checkout"><button type="submit" class="btn btn-primary checkout-btn">Place Order</button></a>
+													<div class="col-md-12">
+														<div class="radio">
+															<input type="radio" name="payment_method" value="ONLINE"> 
+															<label> Card Payment / Internet Banking / Wallets</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 
-																			</div>
-																		</td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>		
-													</center>	
+							<div class="panel panel-default checkout-step-06">
+								<div class="panel-heading">
+									<h4 class="unicase-checkout-title">
+										<a href="#">
+											<span>3</span>Order Review
+										</a>
+									</h4>
+								</div>
+								<div class="panel-collapse collapse in">
+									<div class="panel-body">
+										<div class="body-content outer-top-xs">
+											<div>
+												<div class="row">
+													<div class="shopping-cart">
+														<div class="shopping-cart-table ">
+															<div class="table-responsive">
+																<table class="table">
+																	<thead>
+																		<tr>
+																			<th class="cart-romove item">#</th>
+																			<th class="cart-description item">Image</th>
+																			<th class="cart-product-name item">Product Name</th>
+																			<th class="cart-qty item">Quantity</th>
+																			<th class="cart-sub-total item">Shipping</th>
+																			<th class="cart-total last-item">Grand Total</th>
+																		</tr>
+																	</thead>
+
+																	<tbody>
+																		@foreach($cart_items as $index => $item)
+																		<tr>
+																			<td class="romove-item">{{ $index + 1 }}</td>
+																			<td class="cart-image">
+																				<a class="entry-thumbnail" href="/store/{{ $item['seller_product']->product->category->name }}/{{ $item['seller_product']->product->sub_category->name }}/{{ $item['seller_product']->product->name }}">
+																					<img src="{{ $item['seller_product']->product->product_images[0]->url }}" alt="">
+																				</a>
+																			</td>
+																			<td class="cart-product-name-info">
+																				<h4 class='cart-product-description'><a href="/store/{{ $item['seller_product']->product->category->name }}/{{ $item['seller_product']->product->sub_category->name }}/{{ $item['seller_product']->product->name }}">{{ $item['seller_product']->product->display_name }}</a></h4>
+																			</td>
+																			<td class="cart-product-quantity">
+																				<div class="cart-quantity">
+																					{{ $item['quantity'] }}
+																				</div>
+																			</td>
+																			<td class="cart-product-sub-total"><span class="cart-sub-total-price">RS. {{ number_format($item['seller_product']->seller_price * $item['quantity'], 2, '.', ',') }}</span></td>
+																			<td class="cart-product-grand-total"><span class="cart-grand-total-price">RS. {{ number_format($item['seller_product']->seller_price * $item['quantity'] + $item['seller_product']->delivery_charge, 2, '.', ',') }}</span></td>
+																		</tr>
+																		@endforeach
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														<center>
+															<div class="col-md-4 col-sm-12 cart-shopping-total">
+																<table class="table">
+																	<thead>
+																		<tr>
+																			<th>
+																				<div class="cart-sub-total">
+																					Sub Total<span class="inner-left-md fa fa-inr">{{ number_format($subtotal, 2, '.', ',') }}</span>
+																				</div>
+																				<div class="cart-grand-total">
+																					Grand Total<span class="inner-left-md fa fa-inr">{{ number_format($total, 2, '.', ',') }}</span>
+																				</div>
+																			</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																	</tbody>
+																</table>
+															</div>		
+														</center>
+														<div class="cart-checkout-btn pull-right">
+															<button type="submit" class="btn btn-primary checkout-btn">Place Order</button>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -183,10 +199,10 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-4">
+					</div>
 				</div>
-				<div class="col-md-4">
-				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 </div>

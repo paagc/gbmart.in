@@ -31,6 +31,7 @@ class CartController extends Controller
 			$seller_product = SellerProduct::find($item->id);
 			if (!is_null($seller_product)) {
 				array_push($cart_items, [
+					'rowId' => $item->rowId,
 					'seller_product' => $seller_product,
 					'quantity' => $item->qty,
 					'options' => $item->options

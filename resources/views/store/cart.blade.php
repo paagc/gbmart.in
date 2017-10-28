@@ -35,7 +35,7 @@
 									<td colspan="7">
 										<div class="shopping-cart-btn">
 											<span class="">
-												<a href="index" class="btn btn-upper btn-primary outer-left-xs">Continue Shopping</a>
+												<a href="/" class="btn btn-upper btn-primary outer-left-xs">Continue Shopping</a>
 												<!-- <a href="#" class="btn btn-upper btn-primary pull-right outer-right-xs">Update shopping cart</a> -->
 											</span>
 										</div>
@@ -45,7 +45,7 @@
 							<tbody>
 								@foreach($cart_items as $item)
 								<tr>
-									<td class="romove-item"><a href="#" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
+									<td class="romove-item"><a href="/store/cart/remove/{{ $item['rowId'] }}" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
 									<td class="cart-image">
 										<a class="entry-thumbnail" href="/store/{{ $item['seller_product']->product->category->name }}/{{ $item['seller_product']->product->sub_category->name }}/{{ $item['seller_product']->product->name }}">
 											<img src="{{ $item['seller_product']->product->product_images[0]->url }}" alt="">
@@ -69,8 +69,8 @@
 									<td class="cart-product-quantity">
 										{{ $item['quantity'] }}
 									</td>
-									<td class="cart-product-sub-total"><span class="cart-sub-total-price">RS. {{ $item['seller_product']->seller_price * $item['quantity'] }}</span></td>
-									<td class="cart-product-grand-total"><span class="cart-grand-total-price">RS. {{ $item['seller_product']->seller_price * $item['quantity'] + $item['seller_product']->delivery_charge }}</span></td>
+									<td class="cart-product-sub-total"><span class="cart-sub-total-price">RS. {{ number_format($item['seller_product']->seller_price * $item['quantity'], 2, '.', ',') }}</span></td>
+									<td class="cart-product-grand-total"><span class="cart-grand-total-price">RS. {{ number_format($item['seller_product']->seller_price * $item['quantity'] + $item['seller_product']->delivery_charge, 2, '.', ',') }}</span></td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -83,10 +83,10 @@
 							<tr>
 								<th>
 									<div class="cart-sub-total">
-										Subtotal<span class="inner-left-md fa fa-inr">{{ $subtotal }}</span>
+										Subtotal<span class="inner-left-md fa fa-inr">{{ number_format($subtotal, 2, '.', ',') }}</span>
 									</div>
 									<div class="cart-grand-total">
-										Grand Total<span class="inner-left-md fa-inr">{{ $total }}</span>
+										Grand Total<span class="inner-left-md fa-inr">{{ number_format($total, 2, '.', ',') }}</span>
 									</div>
 								</th>
 							</tr>
@@ -95,8 +95,7 @@
 							<tr>
 								<td>
 									<div class="cart-checkout-btn pull-right">
-										<a href="checkout"><button type="submit" class="btn btn-primary checkout-btn">PROCCED TO CHECKOUT</button></a>
-
+										<a href="/store/checkout"><button class="btn btn-primary checkout-btn">PROCCED TO CHECKOUT</button></a>
 									</div>
 								</td>
 							</tr>

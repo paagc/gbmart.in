@@ -52,13 +52,14 @@
                                 <li><a href="/seller/register"><i class="fa fa-users"></i>Be a seller</a></li>
 
                                 @if (Auth::check() && Auth::user() && Auth::user()->type == 'customer')
-                                <li><a href="account"><i class="icon fa fa-user"></i>My Account</a></li>
-                                <li><a href="wishlist"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-                                <li><a href="checkout"><i class="icon fa fa-check"></i>Checkout</a></li>
-                                <li><a href="track"><i class="icon fa fa-thumb-tack"></i>Track Your Order</a></li>
-                                <li style="color:white;">Welcome, {{ Auth::user()->name }} </li>  
+                                <li><a href="/account"><i class="icon fa fa-user"></i>My Account</a></li>
+                                <li><a href="/wishlist"><i class="icon fa fa-heart"></i>Wishlist</a></li>
+                                <li><a href="/store/checkout"><i class="icon fa fa-check"></i>Checkout</a></li>
+                                <li><a href="/track"><i class="icon fa fa-thumb-tack"></i>Track Your Order</a></li>
+                                <li style="color:white;">Welcome, {{ Auth::user()->name }} </li>
+                                <li><a href="/logout"><i class="icon fa fa-sign-out"></i>Log out</a></li>
                                 @else
-                                <li><a href="login"><i class="icon fa fa-lock"></i>Login/Register</a></li>
+                                <li><a href="/login"><i class="icon fa fa-lock"></i>Login/Register</a></li>
                                 @endif
                             </ul>
                         </div>

@@ -13,6 +13,10 @@
 
 Route::group(['namespace'=>'Store'], function() {
     Route::get('/', 'HomeController@getHome');
+    Route::get('/login', 'AuthController@getLogin');
+    Route::post('/login', 'AuthController@postLogin');
+    Route::post('/register', 'AuthController@postRegister');
+    Route::get('/logout', 'AuthController@logout');
     Route::get('/store/cart/add/{seller_product_id}', 'ProductDetailsController@addToCart');
     Route::get('/store/cart/remove/{seller_product_id}', 'ProductDetailsController@removeFromCart');
     Route::get('/store/{category_name}/{sub_category_name}/{product_name}', 'ProductDetailsController@getProductDetails');
@@ -20,5 +24,6 @@ Route::group(['namespace'=>'Store'], function() {
 });
 
 Route::group(['middleware'=>['store.auth'], 'namespace'=>'Store'], function () {
-
+	Route::get('/store/checkout', 'CheckoutController@get');
+	Route::post('/store/checkout', 'CheckoutController@post');
 });

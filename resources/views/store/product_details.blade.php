@@ -40,7 +40,7 @@
 										<div class="action">
 											<div class="add-cart-button btn-group">
 												<button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary icon seller-product" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
-												<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+												<button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</button>
 												<button class="btn btn-primary cart-btn" type="button">Buy now</button>
 											</div>
 										</div>
@@ -326,11 +326,26 @@
     	});
 
         $('.seller-product').click(function () {
-        	options = {};
-        	if ($('input[seller-product-quantity]').length > 0) {
+        	var options = {};
+        	var parent = $(this).parent().parent().parent().parent();
+        	if ($(parent).find('input[seller-product-quantity]').length > 0) {
+        		options.quantity = parseInt($(parent).find('input[seller-product-quantity]').val());
         	}
 
-            window.location.href = '/store/cart/add/' + $(this).attr('seller-product-id');
+        	$(parent).find('input[seller-product-option]').each(function () {
+        		options[$(this).attr('seller-product-option')] = $(this).val();
+        	});
+
+        	$(parent).find('select[seller-product-option]').each(function () {
+        		options[$(this).attr('seller-product-option')] = $(this).val();
+        	});
+
+        	var qr = decodeURI($.param(options));
+        	var href = '/store/cart/add/' + $(this).attr('seller-product-id');;
+        	if (qr && qr.length > 0) {
+	            href += "?" + qr;
+	        }
+	        window.location.href = href;
         });
     });
 </script>

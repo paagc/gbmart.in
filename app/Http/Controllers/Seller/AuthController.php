@@ -37,6 +37,13 @@ class AuthController extends Controller
 			$remember = $request->get('remember');
 		}
 
+		$user = User::where('email', $email)->where('status', 'ACTIVE')->where('type', 'seller')->first();
+
+		if (is_null($user)) {
+			Session::flash('error', 'Invalid user.');
+			return redirect()->back();
+		}
+
 		if (Auth::attempt([ 'email' => $email, 'password' => $password ], $remember)) {
 			return redirect('/seller');
 		} else {

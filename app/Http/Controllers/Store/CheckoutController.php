@@ -1,24 +1,27 @@
+<?
+
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Store;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Auth;
 use Session;
+use App\User;
 
-class AuthController extends Controller
+class CheckoutController extends Controller
 {
-	public function getLogin(Request $request) {
-		if (Auth::check() && Auth::user()->hasRole('admin')) {
-			return redirect('/admin');
+	public function get(Request $request) {
+		if (Auth::check() && Auth::user()->type == 'customer') {
+			return redirect('/');
 		} else {
-			return view('admin.login');
+			return view('store.login');
 		}
 	}
 
-	public function postLogin(Request $request) {
+	public function post(Request $request) {
 		$email = "";
 		$password = "";
 		$remember = false;
@@ -35,7 +38,7 @@ class AuthController extends Controller
 			$remember = $request->get('remember');
 		}
 
-		$user = User::where('email', $email)->where('status', 'ACTIVE')->where('type', 'admin')->first();
+		$user = User::where('email', $email)->where('status', 'ACTIVE')->where('type', 'customer')->first();
 
 		if (is_null($user)) {
 			Session::flash('error', 'Invalid user.');
@@ -43,15 +46,10 @@ class AuthController extends Controller
 		}
 
 		if (Auth::attempt([ 'email' => $email, 'password' => $password ], $remember)) {
-			return redirect('/admin');
+			return redirect('/');
 		} else {
 			Session::flash('error', 'Login unsuccessful.');
 			return redirect()->back();
 		}
-	}
-
-	public function logout() {
-		Auth::logout();
-		return redirect('/admin/login');
 	}
 }

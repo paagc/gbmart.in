@@ -72,7 +72,7 @@
                                             <div class="action">
                                                 <div class="add-cart-button btn-group">
                                                     <button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary icon seller-product" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </buuton>
-                                                    <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                                    <button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</button>
                                                     <button class="btn btn-primary cart-btn" type="button">Buy now</button>
                                                 </div>
                                             </div>
@@ -209,7 +209,7 @@
                                                                 <ul class="list-unstyled">
                                                                     <li class="add-cart-button btn-group">
                                                                         <a href="#" seller-product-id="{{ $product->seller_products[0]->id }}" data-toggle="tooltip" class="btn btn-primary icon seller-product" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </a>
-                                                                        <a class="btn btn-primary cart-btn" type="button">Add to cart</a>
+                                                                        <a href="#" seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</a>
                                                                     </li>
                                                                     <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="wishlist" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
                                                                     <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="checkout" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> </li>

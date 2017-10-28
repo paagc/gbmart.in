@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Store;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Auth;
 use Session;
+use App\User;
 
 class AuthController extends Controller
 {
 	public function getLogin(Request $request) {
-		if (Auth::check() && Auth::user()->hasRole('admin')) {
-			return redirect('/admin');
+		if (Auth::check() && Auth::user()->type == 'customer') {
+			return redirect('/');
 		} else {
-			return view('admin.login');
+			return view('store.login');
 		}
 	}
 
@@ -35,7 +36,7 @@ class AuthController extends Controller
 			$remember = $request->get('remember');
 		}
 
-		$user = User::where('email', $email)->where('status', 'ACTIVE')->where('type', 'admin')->first();
+		$user = User::where('email', $email)->where('status', 'ACTIVE')->where('type', 'customer')->first();
 
 		if (is_null($user)) {
 			Session::flash('error', 'Invalid user.');
@@ -43,15 +44,34 @@ class AuthController extends Controller
 		}
 
 		if (Auth::attempt([ 'email' => $email, 'password' => $password ], $remember)) {
-			return redirect('/admin');
+			return redirect('/');
 		} else {
 			Session::flash('error', 'Login unsuccessful.');
 			return redirect()->back();
 		}
 	}
 
+	public function postRegister(Request $request) {
+		$request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+            'mobile_number' => 'required|size:10',
+            'confirm_password' => 'required|same:password'
+        ]);
+        $input = $request->all();
+        $input['type'] = 'customer';
+        $input['status'] = 'ACTIVE';
+
+        $user = User::create($input);
+
+        Auth::login($user);
+
+        return redirect('/');
+	}
+
 	public function logout() {
 		Auth::logout();
-		return redirect('/admin/login');
+		return redirect('/');
 	}
 }

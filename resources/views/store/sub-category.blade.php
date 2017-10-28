@@ -147,7 +147,7 @@
 																	<button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary icon seller-product" data-toggle="dropdown" type="button">
 																		<i class="fa fa-shopping-cart"></i>													
 																	</button>
-																	<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+																	<button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</button>
 
 																</li>
 

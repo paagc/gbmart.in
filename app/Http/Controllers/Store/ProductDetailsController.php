@@ -90,19 +90,16 @@ class ProductDetailsController extends Controller
 		}
 	}
 
-	public function test($seller_product_id, Request $request) {
-		$seller_product = SellerProduct::find($seller_product_id);
-		if (!is_null($seller_product)) {
-			Cart::add($seller_product->id, $seller_product->product->display_name, 1, $seller_product->seller_price);
-		}
-		dd(Cart::content());
-		return back();
-	}
-
 	public function addToCart($seller_product_id, Request $request) {
 		$seller_product = SellerProduct::find($seller_product_id);
 
 		$options = $request->query();
+		$quantity = 1;
+
+		if ($request->has('quantity') && is_numeric($request->get('quantity'))) {
+			$quantity = (int) $request->get('quantity');
+		}
+
 		if (!is_null($seller_product)) {
 			$cart_item = null;
 
@@ -114,10 +111,10 @@ class ProductDetailsController extends Controller
 
 			if (is_null($cart_item)) {
 				$options['image'] = $seller_product->product->product_images[0]->url;
-				Cart::add($seller_product->id, $seller_product->product->display_name, 1, $seller_product->seller_price, $options);
+				Cart::add($seller_product->id, $seller_product->product->display_name, $quantity, $seller_product->seller_price, $options);
 			} else {
 				$options['image'] = $seller_product->product->product_images[0]->url;
-				$cart_item->qty = $cart_item->qty + 1;
+				$cart_item->qty = $cart_item->qty + $quantity;
 				Cart::update($cart_item->rowId, [
 					'id' => $cart_item->id,
 					'name' => $cart_item->name,

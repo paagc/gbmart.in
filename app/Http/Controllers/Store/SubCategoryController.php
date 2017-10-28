@@ -20,6 +20,7 @@ use App\Offer;
 class SubCategoryController extends Controller
 {
 	public function getProducts($category_name, $sub_category_name, Request $request) {
+		// dd($request);
 		$page = 1;
 		$page_size = 12;
 		$page_count = 1;
@@ -77,13 +78,13 @@ class SubCategoryController extends Controller
 			$products = $products->whereIn('brand', $selected_brands);
 		}
 
-		$products = $products->with([ 'seller_products' => function ($query) {
+		$products = $products->with([ 'seller_products' => function ($query) use ($price_range_min, $price_range_max, $price_min, $price_max) {
 			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
 			if ($price_min != $price_range_min && $price_min > 0) {
-				$query->where('seller_price' '>=', $price_min);
+				$query->where('seller_price', '>=', $price_min);
 			}
 			if ($price_max != $price_range_max && $price_range_max > 0) {
-				$query->where('seller_price' '<=', $price_max);
+				$query->where('seller_price', '<=', $price_max);
 			}
 		}, 'product_images' => function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');

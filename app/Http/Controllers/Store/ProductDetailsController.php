@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Store;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Cart;
 use Route;
 use Session;
 use Carbon\Carbon;
@@ -12,6 +13,7 @@ use App\Category;
 use App\SubCategory;
 use App\Product;
 use App\ProductImage;
+use App\SellerProduct;
 use App\Attribute;
 use App\AttributeValue;
 use App\HomeSlide;
@@ -85,5 +87,52 @@ class ProductDetailsController extends Controller
 		} else {
 			return abort(404);
 		}
+	}
+
+	public function test($seller_product_id, Request $request) {
+		$seller_product = SellerProduct::find($seller_product_id);
+		if (!is_null($seller_product)) {
+			Cart::add($seller_product->id, $seller_product->product->display_name, 1, $seller_product->seller_price);
+		}
+		dd(Cart::content());
+		return back();
+	}
+
+	public function addToCart($seller_product_id, Request $request) {
+		$seller_product = SellerProduct::find($seller_product_id);
+
+		$options = $request->query();
+		if (!is_null($seller_product)) {
+			$cart_item = null;
+
+			foreach(Cart::content() as $item) {
+				if ($item->id == $seller_product->id) {
+					$cart_item = $item;
+				}
+			}
+
+			if (is_null($cart_item)) {
+				$options['image'] = $seller_product->product->product_images[0]->url;
+				Cart::add($seller_product->id, $seller_product->product->display_name, 1, $seller_product->seller_price, $options);
+			} else {
+				$options['image'] = $seller_product->product->product_images[0]->url;
+				$cart_item->qty = $cart_item->qty + 1;
+				Cart::update($cart_item->rowId, [
+					'id' => $cart_item->id,
+					'name' => $cart_item->name,
+					'qty' => $cart_item->qty,
+					'price' => $cart_item->price,
+					'options' => $cart_item->options
+				]);
+			}
+		}
+
+		return back();
+	}
+
+	public function removeFromCart($cart_row_id, Request $request) {
+		Cart::remove($cart_row_id);
+
+		return back();
 	}
 }

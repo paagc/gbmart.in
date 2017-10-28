@@ -60,15 +60,9 @@
                                 <li><a href="login"><i class="icon fa fa-lock"></i>Login/Register</a></li>
                             </ul>
                         </div>
-                        
-                        
-                        
-                    
                         <div class="clearfix"></div>
                     </div>
-                    
                 </div>
-                
             </div>
         
             <div class="main-header">
@@ -93,38 +87,38 @@
                              </div>
                         
                         
-                        <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row"> 
-                        
-                            
+                        <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
                             <div class="dropdown dropdown-cart"> <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
                                 <div class="items-cart-inner">
                                     <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
-                                    <div class="basket-item-count"><span class="count">2</span></div>
-                                    <div class="total-price-basket"> <span class="lbl">cart -</span> <span class="total-price"><span class="fa fa-inr"></span>600.00</span></div>
+                                    <div class="basket-item-count"><span class="count">{{ Cart::count() }}</span></div>
+                                    <div class="total-price-basket"> <span class="lbl">cart -</span> <span class="total-price"><span class="fa fa-inr"></span>{{ Cart::subtotal() }}</span></div>
                                 </div>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <div class="cart-item product-summary">
+                                        @foreach(Cart::content() as $item)
                                         <div class="row">
                                             <div class="col-xs-4">
-                                                <div class="image"> <a href="detail"><img src="/assets/images/cart.jpg" alt=""></a> </div>
+                                                <div class="image"><img src="{{ $item->options->get('image') }}" alt=""></div>
                                             </div>
                                             <div class="col-xs-7">
-                                                <h3 class="name"><a href="detail">Product Name</a></h3>
-                                                <div class="price"><span class="fa fa-inr"></span>600.00</div>
+                                                <h3 class="name"><span style="font-weight: 600;">{{ $item->name }}</span> x <span style="font-weight: 600;">{{ $item->qty }}</span></h3>
+                                                <div class="price"><span class="fa fa-inr"></span>{{ $item->price }}</div>
                                             </div>
-                                            <div class="col-xs-1 action"> <a href="#"><i class="fa fa-trash"></i></a> </div>
+                                            <div class="col-xs-1 action"> <a href="/store/cart/remove/{{ $item->rowId }}"><i class="fa fa-trash"></i></a> </div>
                                         </div>
+                                        @endforeach
                                     </div>
                                     
                                     <div class="clearfix"></div>
                                     <hr>
                                     <div class="clearfix cart-total">
-                                        <div class="pull-right"> <span class="text">Sub Total :</span><span class='price'><span class="fa fa-inr"></span>600.00</span> </div>
+                                        <div class="pull-right"> <span class="text">Sub Total :</span><span class='price'><span class="fa fa-inr"></span>{{ Cart::subtotal() }}</span> </div>
                                         <div class="clearfix"></div>
-                                    <a href="checkout" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> 
-                                    <a href="cart" class="btn btn-upper btn-primary btn-block m-t-20">Cart</a> 
+                                    <a href="/store/checkout" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> 
+                                    <a href="/store/cart" class="btn btn-upper btn-primary btn-block m-t-20">Cart</a> 
                                     </div>
                                 </li>
                             </ul>
@@ -145,147 +139,6 @@
                             <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
                                 <div class="nav-outer">
                                     <ul class="nav navbar-nav">
-                                        
-                                        <!-- <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">ELECTRONICS</a>
-                                            <ul class="dropdown-menu pages">
-                                                <li>
-                                                    <div class="yamm-content">
-                                                        <div class="row">
-                                                            <div class="col-xs-12 col-menu">
-                                                                <ul class="links">
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        
-                                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">APPLIANCES</a>
-                                            <ul class="dropdown-menu pages">
-                                                <li>
-                                                    <div class="yamm-content">
-                                                        <div class="row">
-                                                            <div class="col-xs-12 col-menu">
-                                                                <ul class="links">
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        
-                                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">MEN</a>
-                                            <ul class="dropdown-menu pages">
-                                                <li>
-                                                    <div class="yamm-content">
-                                                        <div class="row">
-                                                            <div class="col-xs-12 col-menu">
-                                                                <ul class="links">
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        
-                                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">WOMEN</a>
-                                            <ul class="dropdown-menu pages">
-                                                <li>
-                                                    <div class="yamm-content">
-                                                        <div class="row">
-                                                            <div class="col-xs-12 col-menu">
-                                                                <ul class="links">
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        
-                                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">BABY & KIDS</a>
-                                            <ul class="dropdown-menu pages">
-                                                <li>
-                                                    <div class="yamm-content">
-                                                        <div class="row">
-                                                            <div class="col-xs-12 col-menu">
-                                                                <ul class="links">
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        
-                                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">HOME & FURNITURE</a>
-                                            <ul class="dropdown-menu pages">
-                                                <li>
-                                                    <div class="yamm-content">
-                                                        <div class="row">
-                                                            <div class="col-xs-12 col-menu">
-                                                                <ul class="links">
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        
-                                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">BOOKS & MORE</a>
-                                            <ul class="dropdown-menu pages">
-                                                <li>
-                                                    <div class="yamm-content">
-                                                        <div class="row">
-                                                            <div class="col-xs-12 col-menu">
-                                                                <ul class="links">
-                                                                    <li><a href="subcat">Cat 1</a></li>
-                                                                    <li><a href="subcat">Cat 2</a></li>
-                                                                    <li><a href="subcat">Cat 3</a></li>
-                                                                    <li><a href="subcat">Cat 4</a></li>
-                                                                    
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li> -->
-                                        
                                         @foreach(\App\Category::with(['sub_categories' => function($query) { $query->where('status', 'ACTIVE')->orderBy('id', 'asc'); }])->whereHas('sub_categories', function ($query) { $query->where('status', 'ACTIVE'); })->where('status', 'ACTIVE')->orderBy('id', 'asc')->get() as $index => $category)
 
                                         @if($index < 10)

@@ -13,6 +13,8 @@
 
 Route::group(['namespace'=>'Store'], function() {
     Route::get('/', 'HomeController@getHome');
+    Route::get('/store/cart/add/{seller_product_id}', 'ProductDetailsController@addToCart');
+    Route::get('/store/cart/remove/{seller_product_id}', 'ProductDetailsController@removeFromCart');
     Route::get('/store/{category_name}/{sub_category_name}/{product_name}', 'ProductDetailsController@getProductDetails');
     Route::get('/store/{category_name}/{sub_category_name}', 'SubCategoryController@getProducts');
 });

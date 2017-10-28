@@ -124,11 +124,11 @@
 											<div class="product">		
 												<div class="product-image">
 													<div class="image">
-														<a href="{{ $product->product_images[0]->url }}"><img  src="{{ $product->product_images[0]->url }}" alt=""></a>
+														<a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}"><img  src="{{ $product->product_images[0]->url }}" alt=""></a>
 													</div>	
 												</div>
 												<div class="product-info text-left">
-													<h3 class="name"><a href="{{ $product->product_images[0]->url }}">{{ $product->display_name }}</a></h3>
+													<h3 class="name"><a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ $product->display_name }}</a></h3>
 													<div class="rating rateit-small"></div>
 													<div class="description">{{ $product->description_small }}</div>
 

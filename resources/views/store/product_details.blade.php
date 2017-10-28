@@ -39,7 +39,7 @@
 									<div class="cart clearfix animate-effect">
 										<div class="action">
 											<div class="add-cart-button btn-group">
-												<button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+												<button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary icon seller-product" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
 												<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
 												<button class="btn btn-primary cart-btn" type="button">Buy now</button>
 											</div>
@@ -170,13 +170,13 @@
 														<div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
 														<div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
 													</div>
-													<input type="text" value="1">
+													<input type="text" value="1" seller-product-quantity disabled>
 												</div>
 											</div>
 										</div>
 
 										<div class="col-sm-8">
-											<a href="/store/cart/add/{{ $main_product->seller_products[0]->id }}" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> Add to cart</a>
+											<a href="#" seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary seller-product"><i class="fa fa-shopping-cart inner-right-vs"></i> Add to cart</a>
 											<a href="checkout" class="btn btn-primary"><i class="fa fa-shopping-bag inner-right-vs"></i> Buy now</a>
 										</div>
 									</div>
@@ -188,7 +188,7 @@
 										@foreach($attributes as $attribute)
 										<div class="col-sm-4">
 											<label>{{ $attribute->name }}</label>
-											<select class="form-control" name="cat1" required>
+											<select class="form-control" name="cat1" seller-product-option="{{ $attribute->name }}" required>
 												@foreach($main_product->seller_products[0]->attribute_values as $attribute_value)
 												@if($attribute->id == $attribute_value->attribute_id && $attribute_value->status == 'ACTIVE')
 												<option>{{ $attribute_value->value }}</option>
@@ -278,8 +278,8 @@
 														<div class="action">
 															<ul class="list-unstyled">
 																<li class="add-cart-button btn-group">
-																	<button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
-																	<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+																	<button seller-product-id="{{ $product->seller_products[0]->id }}" data-toggle="tooltip" class="btn btn-primary icon seller-product" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
+																	<button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</button>
 																</li>
 																<li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="wishlist" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
 																<li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="checkout" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> </li>
@@ -304,4 +304,34 @@
 		</div>
 	</div>
 </div>
+@endsection
+
+@section('footer')
+<script>
+    $(document).ready(function () {
+    	$('.quant-input .arrows .arrow').click(function () {
+    		var val = 0;
+    		if (!isNaN($(this).parent().parent().find('input').val())) {
+    			val = parseInt($(this).parent().parent().find('input').val());
+    		}
+    		if ($(this).hasClass('plus')) {
+    			val++;
+    		}
+    		if ($(this).hasClass('minus')) {
+    			if (val > 0) {
+					val--;
+				}
+    		}
+    		$(this).parent().parent().find('input').val(val);
+    	});
+
+        $('.seller-product').click(function () {
+        	options = {};
+        	if ($('input[seller-product-quantity]').length > 0) {
+        	}
+
+            window.location.href = '/store/cart/add/' + $(this).attr('seller-product-id');
+        });
+    });
+</script>
 @endsection

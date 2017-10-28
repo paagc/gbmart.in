@@ -144,7 +144,7 @@
 														<div class="action">
 															<ul class="list-unstyled">
 																<li class="add-cart-button btn-group">
-																	<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
+																	<button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary icon seller-product" data-toggle="dropdown" type="button">
 																		<i class="fa fa-shopping-cart"></i>													
 																	</button>
 																	<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
@@ -267,6 +267,10 @@
 		}
 
 		$('.filter-button').click(filter);
+
+        $('.seller-product').click(function () {
+            window.location.href = '/store/cart/add/' + $(this).attr('seller-product-id');
+        });
 	});
 </script>
 @endsection

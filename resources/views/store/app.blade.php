@@ -50,14 +50,16 @@
                                 <li><a><i class="fa fa-phone"></i>(+91)8467-896-789</a></li>
                                 <li><a><i class="fa fa-envelope"></i>support@gbmart.in</a></li>
                                 <li><a href="/seller/register"><i class="fa fa-users"></i>Be a seller</a></li>
+
+                                @if (Auth::check() && Auth::user() && Auth::user()->type == 'customer')
                                 <li><a href="account"><i class="icon fa fa-user"></i>My Account</a></li>
                                 <li><a href="wishlist"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-                                
                                 <li><a href="checkout"><i class="icon fa fa-check"></i>Checkout</a></li>
                                 <li><a href="track"><i class="icon fa fa-thumb-tack"></i>Track Your Order</a></li>
-                                <li style="color:white;">Welcome, Ajay </li>  
-                                
+                                <li style="color:white;">Welcome, {{ Auth::user()->name }} </li>  
+                                @else
                                 <li><a href="login"><i class="icon fa fa-lock"></i>Login/Register</a></li>
+                                @endif
                             </ul>
                         </div>
                         <div class="clearfix"></div>

@@ -21,7 +21,7 @@ Route::group(['namespace'=>'Store'], function() {
     Route::get('/logout', 'AuthController@logout');
     Route::get('/store/cart', 'CartController@get');
     Route::get('/store/pay/request/{payment_reference}', 'PaymentController@request')->middleware('store.auth');
-    Route::post('/store/pay/response/{payment_reference}', 'PaymentController@response')->middleware('store.auth');
+    Route::post('/store/pay/response/{payment_reference}', 'PaymentController@response');
     Route::get('/store/cart/add/{seller_product_id}', 'CartController@addToCart');
     Route::get('/store/cart/remove/{seller_product_id}', 'CartController@removeFromCart');
     Route::get('/store/{category_name}/{sub_category_name}', 'SubCategoryController@getProducts');

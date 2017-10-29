@@ -27,7 +27,7 @@ class PaymentController extends Controller
 		"display_currency_rates" => "",
 		"description" => "",
 		"return_url" => "",
-		"mode" => "TEST",
+		"mode" => "LIVE",
 		"payment_mode" => "",
 		"card_brand" => "",
 		"payment_option" => "",

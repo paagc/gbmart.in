@@ -84,6 +84,44 @@ class CartController extends Controller
 		return back();
 	}
 
+	public function buyNow($seller_product_id, Request $request) {
+		$seller_product = SellerProduct::find($seller_product_id);
+
+		$options = $request->query();
+		$quantity = 1;
+
+		if ($request->has('quantity') && is_numeric($request->get('quantity'))) {
+			$quantity = (int) $request->get('quantity');
+		}
+
+		if (!is_null($seller_product)) {
+			$cart_item = null;
+
+			foreach(Cart::content() as $item) {
+				if ($item->id == $seller_product->id) {
+					$cart_item = $item;
+				}
+			}
+
+			if (is_null($cart_item)) {
+				// $options['image'] = $seller_product->product->product_images[0]->url;
+				Cart::add($seller_product->id, $seller_product->product->display_name, $quantity, $seller_product->seller_price, $options);
+			} else {
+				// $options['image'] = $seller_product->product->product_images[0]->url;
+				$cart_item->qty = $cart_item->qty + $quantity;
+				Cart::update($cart_item->rowId, [
+					'id' => $cart_item->id,
+					'name' => $cart_item->name,
+					'qty' => $cart_item->qty,
+					'price' => $cart_item->price,
+					'options' => $cart_item->options
+				]);
+			}
+		}
+
+		return redirect('/store/checkout');
+	}
+
 	public function removeFromCart($cart_row_id, Request $request) {
 		Cart::remove($cart_row_id);
 

@@ -107,6 +107,6 @@ class CheckoutController extends Controller
 
 		$orders = Order::where('payment_reference', $payment_reference)->get();
 
-		return redirect('/store/pay/' . $payment_reference);
+		return redirect('/store/pay/request/' . $payment_reference);
 	}
 }

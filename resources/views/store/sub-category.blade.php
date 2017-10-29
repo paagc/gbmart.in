@@ -152,13 +152,13 @@
 																</li>
 
 																<li class="lnk wishlist">
-																	<a class="add-to-cart" href="detail" title="Wishlist">
+																	<a class="add-to-cart" title="Wishlist">
 																		<i class="icon fa fa-heart"></i>
 																	</a>
 																</li>
 
 																<li class="lnk">
-																	<a class="add-to-cart" href="detail" title="Buy now">
+																	<a seller-product-id="{{ $product->seller_products[0]->id }}" class="add-to-cart buy-now" title="Buy now">
 																		<i class="fa fa-shopping-bag"></i>
 																	</a>
 																</li>
@@ -270,6 +270,10 @@
 
         $('.seller-product').click(function () {
             window.location.href = '/store/cart/add/' + $(this).attr('seller-product-id');
+        });
+        
+        $('.buy-now').click(function () {
+            window.location.href = '/store/cart/buy-now/' + $(this).attr('seller-product-id');
         });
 	});
 </script>

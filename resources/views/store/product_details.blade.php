@@ -41,7 +41,7 @@
 											<div class="add-cart-button btn-group">
 												<button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary icon seller-product" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
 												<button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</button>
-												<button class="btn btn-primary cart-btn" type="button">Buy now</button>
+												<button seller-product-id="{{ $main_product->seller_products[0]->id }}" class="btn btn-primary cart-btn buy-now" type="button">Buy now</button>
 											</div>
 										</div>
 									</div>
@@ -177,7 +177,7 @@
 
 										<div class="col-sm-8">
 											<a href="#" seller-product-id="{{ $main_product->seller_products[0]->id }}" class="btn btn-primary seller-product"><i class="fa fa-shopping-cart inner-right-vs"></i> Add to cart</a>
-											<a href="checkout" class="btn btn-primary"><i class="fa fa-shopping-bag inner-right-vs"></i> Buy now</a>
+											<a href="#" seller-product-id="{{ $main_product->seller_products[0]->id }}" class="btn btn-primary buy-now"><i class="fa fa-shopping-bag inner-right-vs"></i> Buy now</a>
 										</div>
 									</div>
 								</div>
@@ -282,7 +282,7 @@
 																	<button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</button>
 																</li>
 																<li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="wishlist" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-																<li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="checkout" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> </li>
+																<li class="lnk"> <a seller-product-id="{{ $product->seller_products[0]->id }}" data-toggle="tooltip" class="add-to-cart buy-now"  title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> </li>
 															</ul>
 														</div>
 													</div>
@@ -342,6 +342,29 @@
 
         	var qr = decodeURI($.param(options));
         	var href = '/store/cart/add/' + $(this).attr('seller-product-id');;
+        	if (qr && qr.length > 0) {
+	            href += "?" + qr;
+	        }
+	        window.location.href = href;
+        });
+
+        $('.buy-now').click(function () {
+        	var options = {};
+        	var parent = $(this).parent().parent().parent().parent();
+        	if ($(parent).find('input[seller-product-quantity]').length > 0) {
+        		options.quantity = parseInt($(parent).find('input[seller-product-quantity]').val());
+        	}
+
+        	$(parent).find('input[seller-product-option]').each(function () {
+        		options[$(this).attr('seller-product-option')] = $(this).val();
+        	});
+
+        	$(parent).find('select[seller-product-option]').each(function () {
+        		options[$(this).attr('seller-product-option')] = $(this).val();
+        	});
+
+        	var qr = decodeURI($.param(options));
+        	var href = '/store/cart/buy-now/' + $(this).attr('seller-product-id');;
         	if (qr && qr.length > 0) {
 	            href += "?" + qr;
 	        }

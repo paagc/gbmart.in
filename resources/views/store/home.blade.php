@@ -73,7 +73,7 @@
                                                 <div class="add-cart-button btn-group">
                                                     <button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary icon seller-product" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </buuton>
                                                     <button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</button>
-                                                    <button class="btn btn-primary cart-btn" type="button">Buy now</button>
+                                                    <button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary cart-btn buy-now" type="button">Buy now</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -212,7 +212,7 @@
                                                                         <a href="#" seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</a>
                                                                     </li>
                                                                     <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="wishlist" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                                                    <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="checkout" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> </li>
+                                                                    <li class="lnk"> <a seller-product-id="{{ $product->seller_products[0]->id }}" href="#" data-toggle="tooltip" class="add-to-cart buy-now" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -280,7 +280,7 @@
                                                                         <a data-toggle="tooltip" class="add-to-cart" href="wishlist" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> 
                                                                     </li>
                                                                     <li class="lnk"> 
-                                                                        <a data-toggle="tooltip" class="add-to-cart" href="checkout" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> 
+                                                                        <a  seller-product-id="{{ $product->seller_products[0]->id }}" data-toggle="tooltip" class="add-to-cart buy-now" href="#" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> 
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -306,6 +306,10 @@
     $(document).ready(function () {
         $('.seller-product').click(function () {
             window.location.href = '/store/cart/add/' + $(this).attr('seller-product-id');
+        });
+
+        $('.buy-now').click(function () {
+            window.location.href = '/store/cart/buy-now/' + $(this).attr('seller-product-id');
         });
     });
 </script>

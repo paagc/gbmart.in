@@ -24,6 +24,7 @@ Route::group(['namespace'=>'Store'], function() {
     Route::post('/store/pay/response/{payment_reference}', 'PaymentController@response');
     Route::get('/store/cart/add/{seller_product_id}', 'CartController@addToCart');
     Route::get('/store/cart/remove/{seller_product_id}', 'CartController@removeFromCart');
+    Route::get('/store/cart/buy-now/{seller_product_id}', 'CartController@buyNow');
     Route::get('/store/{category_name}/{sub_category_name}', 'SubCategoryController@getProducts');
     Route::get('/store/{category_name}/{sub_category_name}/{product_name}', 'ProductDetailsController@getProductDetails');
 });

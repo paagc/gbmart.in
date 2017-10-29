@@ -176,7 +176,7 @@
 										</div>
 
 										<div class="col-sm-8">
-											<a href="#" seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary seller-product"><i class="fa fa-shopping-cart inner-right-vs"></i> Add to cart</a>
+											<a href="#" seller-product-id="{{ $main_product->seller_products[0]->id }}" class="btn btn-primary seller-product"><i class="fa fa-shopping-cart inner-right-vs"></i> Add to cart</a>
 											<a href="checkout" class="btn btn-primary"><i class="fa fa-shopping-bag inner-right-vs"></i> Buy now</a>
 										</div>
 									</div>

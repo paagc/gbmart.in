@@ -67,8 +67,8 @@ class AuthController extends Controller
 		if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        
-        $input['password'] =  bycrpt($input['password']);
+
+        $input['password'] =  bcrypt($input['password']);
         $user = User::create($input);
 
         Auth::login($user);

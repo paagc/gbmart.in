@@ -59,6 +59,7 @@ class PaymentController extends Controller
 		$status = "";
 		$payment_method = "";
 		if (count($orders) > 0) {
+			// $parameters['_token'] = csrf_token();
 			$parameters['reference_no'] = $payment_reference;
 			$parameters['amount'] = 0;
 			$parameters['description'] = "Payment of order for " . Auth::user()->email . " , " . $payment_reference . ", on " . date('d-M-y');

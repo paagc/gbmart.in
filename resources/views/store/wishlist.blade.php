@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('store.app')
 
 @section('content')
 <div class="breadcrumb">
@@ -25,33 +25,36 @@
 				</tr>
 			</thead>
 			<tbody>
+				@foreach($wishlist as $item)
 				<tr>
-					<td class="col-md-2"><img src="assets/images/products/p2.jpg" alt="imga"></td>
+					<td class="col-md-2"><img src="{{ $item->product->product_images[0]->url }}" alt=""></td>
 					<td class="col-md-7">
-						<div class="product-name"><a href="#">Floral Print Buttoned</a></div>
+						<div class="product-name"><a href="/store/{{ $item->product->category->name }}/{{ $item->product->sub_category->name }}/{{ $item->product->name }}">{{ $item->product->display_name }}</a></div>
 						<div class="rating">
 							<i class="fa fa-star rate"></i>
 							<i class="fa fa-star rate"></i>
 							<i class="fa fa-star rate"></i>
 							<i class="fa fa-star rate"></i>
 							<i class="fa fa-star non-rate"></i>
-							
 						</div>
 					<div class="price fa fa-inr">
-							400.00
-							<span class="fa fa-inr">900.00</span>
+							{{ number_format($item->product->seller_products[0]->seller_price, 2, '.', ',') }}
+							<span class="fa fa-inr">{{ number_format($item->product->original_price, 2, '.', ',') }}</span>
 						</div>
 					</td>
 					<td class="col-md-2">
-						<a href="#" class="btn-upper btn btn-primary">Add to cart</a>
+						<a seller-product-id="{{ $item->product->seller_products[0]->id }}" href="#" class="btn-upper btn btn-primary">Add to cart</a>
 					</td>
 					<td class="col-md-1 close-btn">
-						<a href="#" class=""><i class="fa fa-times"></i></a>
+						<a product-id="{{ $item->product->id }}" href="#" class="remove-wishlist"><i class="fa fa-times"></i></a>
 					</td>
 				</tr>
-				
+				@endforeach
 			</tbody>
 		</table>
+		@if(count($wishlist) < 1)
+		<h3>No products on your wishlist</h3>
+		@endif
 	</div>
 </div>			</div>
 		</div>
@@ -59,4 +62,19 @@
 	</div>
 </div>
 
+@endsection
+
+@section('footer')
+<script>
+	$(document).ready(function () {
+        $('.seller-product').click(function () {
+            window.location.href = '/store/cart/add/' + $(this).attr('seller-product-id');
+        });
+
+        $('.remove-wishlist').click(function () {
+        	var url = '/store/wishlist/remove/' + $(this).attr('product-id');
+        	window.location.href = url;
+        });
+    });
+</script>
 @endsection

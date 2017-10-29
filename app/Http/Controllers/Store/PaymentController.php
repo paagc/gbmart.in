@@ -82,7 +82,7 @@ class PaymentController extends Controller
 
 
 			// For testing
-			$parameters['amount'] = 1;
+			// $parameters['amount'] = 1;
 
 			$hashData = $this->ebs_secret_key;
 			ksort($parameters);
@@ -110,12 +110,20 @@ class PaymentController extends Controller
 
 	public function response($payment_reference, Request $request) {
 		// dd($request);
-		if ($request->has('ResponseCode') && $request->get('ResponseCode') == '0') {
-			Cart::destroy();
-			$orders = Order::where('payment_reference', $payment_reference)->get();
-			foreach($orders as $order) {
-				$order->status = "PENDING";
-				$order->save();
+		if ($request->has('ResponseCode')) {
+			if ($request->get('ResponseCode') == '0') {
+				Cart::destroy();
+				$orders = Order::where('payment_reference', $payment_reference)->get();
+				foreach($orders as $order) {
+					$order->status = "PENDING";
+					$order->save();
+				}
+			} else {
+				$orders = Order::where('payment_reference', $payment_reference)->get();
+				foreach($orders as $order) {
+					$order->status = "FAILED";
+					$order->save();
+				}
 			}
 		}
 		return view('store.pay-response');

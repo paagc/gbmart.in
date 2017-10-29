@@ -211,7 +211,7 @@
                                                                         <a href="#" seller-product-id="{{ $product->seller_products[0]->id }}" data-toggle="tooltip" class="btn btn-primary icon seller-product" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </a>
                                                                         <a href="#" seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</a>
                                                                     </li>
-                                                                    <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="wishlist" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                                                                    <li product-id="{{ $product->id }}" class="lnk wishlist add-wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="#" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
                                                                     <li class="lnk"> <a seller-product-id="{{ $product->seller_products[0]->id }}" href="#" data-toggle="tooltip" class="add-to-cart buy-now" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> </li>
                                                                 </ul>
                                                             </div>
@@ -276,8 +276,8 @@
                                                                         <a href="#" seller-product-id="{{ $product->seller_products[0]->id }}" data-toggle="tooltip" class="btn btn-primary icon seller-product" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </a>
                                                                         <a href="#" seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</a>
                                                                     </li>
-                                                                    <li class="lnk wishlist"> 
-                                                                        <a data-toggle="tooltip" class="add-to-cart" href="wishlist" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> 
+                                                                    <li class="lnk wishlist add"> 
+                                                                        <a product-id="{{ $product->id }}" data-toggle="tooltip" class="add-to-cart add-wishlist" href="#" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> 
                                                                     </li>
                                                                     <li class="lnk"> 
                                                                         <a  seller-product-id="{{ $product->seller_products[0]->id }}" data-toggle="tooltip" class="add-to-cart buy-now" href="#" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> 
@@ -310,6 +310,10 @@
 
         $('.buy-now').click(function () {
             window.location.href = '/store/cart/buy-now/' + $(this).attr('seller-product-id');
+        });
+
+        $('.add-wishlist').click(function () {
+            window.location.href = '/store/wishlist/add/' + $(this).attr('product-id');
         });
     });
 </script>

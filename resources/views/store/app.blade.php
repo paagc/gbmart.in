@@ -53,8 +53,8 @@
                             <li><a href="/seller/register"><i class="fa fa-users"></i>Be a seller</a></li>
 
                             @if (Auth::check() && Auth::user() && Auth::user()->type == 'customer')
-                            <li><a href="/account"><i class="icon fa fa-user"></i>My Account</a></li>
-                            <li><a href="/wishlist"><i class="icon fa fa-heart"></i>Wishlist</a></li>
+                            <li><a href="/store/my-account"><i class="icon fa fa-user"></i>My Account</a></li>
+                            <li><a href="/store/wishlist"><i class="icon fa fa-heart"></i>Wishlist</a></li>
                             <li><a href="/store/checkout"><i class="icon fa fa-check"></i>Checkout</a></li>
                             <li><a href="/track"><i class="icon fa fa-thumb-tack"></i>Track Your Order</a></li>
                             <li style="color:white;">Welcome, {{ Auth::user()->name }} </li>

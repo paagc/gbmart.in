@@ -95,6 +95,7 @@
 										<div id="collapseOne" class="panel-collapse collapse in">
 											<div class="panel-body">
 												<div class="row">
+													@
 													<div class="col-md-12">
 														<div class="radio">
 															<input type="radio" name="payment_method" value="COD"> 

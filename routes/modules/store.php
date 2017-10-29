@@ -22,6 +22,10 @@ Route::group(['namespace'=>'Store'], function() {
     Route::get('/store/cart', 'CartController@get');
     Route::get('/store/pay/request/{payment_reference}', 'PaymentController@request')->middleware('store.auth');
     Route::post('/store/pay/response/{payment_reference}', 'PaymentController@response');
+    Route::get('/store/wishlist', 'WishlistController@getAll')->middleware('store.auth');
+    Route::get('/store/wishlist/add/{product_id}', 'WishlistController@add')->middleware('store.auth');
+    Route::get('/store/wishlist/remove/{product_id}', 'WishlistController@remove')->middleware('store.auth');
+    Route::get('/store/my-account', 'MyAccountController@view')->middleware('store.auth');
     Route::get('/store/cart/add/{seller_product_id}', 'CartController@addToCart');
     Route::get('/store/cart/remove/{seller_product_id}', 'CartController@removeFromCart');
     Route::get('/store/cart/buy-now/{seller_product_id}', 'CartController@buyNow');

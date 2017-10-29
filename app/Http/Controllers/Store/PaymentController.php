@@ -108,7 +108,16 @@ class PaymentController extends Controller
 		}
 	}
 
-	public function response(Request $request) {
-		dd($request);
+	public function response($payment_reference, Request $request) {
+		// dd($request);
+		if ($request->has('ResponseCode') && $request->get('ResponseCode') == '0') {
+			Cart::destroy();
+			$orders = Order::where('payment_reference', $payment_reference)->get();
+			foreach($orders as $order) {
+				$order->status = "PENDING";
+				$order->save();
+			}
+		}
+		return view('store.pay-response');
 	}
 }

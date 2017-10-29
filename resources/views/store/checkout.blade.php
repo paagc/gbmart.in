@@ -17,7 +17,7 @@
 		<div class="checkout-box ">
 			<form action="/store/checkout" method="POST">
 				{{ csrf_field() }}
-				<input type="hidden" value="{{ $payment_reference }}">
+				<input type="hidden" name="payment_reference" value="{{ $payment_reference }}">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="panel-group checkout-steps">
@@ -36,7 +36,7 @@
 											@foreach($addresses as $address)
 											<div class="col-md-12">
 												<div class="radio">
-													<input type="radio" name="address" value="{{ $address->line_1 . ", " . $address->line_2 . ", " . $address->city_town . ", " . $address->state .  ", " . $address->pin_code }}"> 
+													<input type="radio" name="address" value="{{ $address->id }}"> 
 													<label>{{ $address->line_1 . ", " . $address->line_2 . ", " . $address->city_town . ", " . $address->state .  ", " . $address->pin_code }}</label>
 												</div>
 											</div>
@@ -49,27 +49,27 @@
 											</div>
 											<div class="col-md-3">
 												<div class="form-group">
-													<input type="text" name="new_address['line_1']" class="form-control" placeholder="Line 1">
+													<input type="text" name="new_address[line_1]" class="form-control" placeholder="Line 1">
 												</div>
 											</div>
 											<div class="col-md-3">
 												<div class="form-group">
-													<input type="text" name="new_address['line_2']" class="form-control" placeholder="Line 2">
+													<input type="text" name="new_address[line_2]" class="form-control" placeholder="Line 2">
 												</div>
 											</div>
 											<div class="col-md-2">
 												<div class="form-group">
-													<input type="text" name="new_address['city_town']" class="form-control" placeholder="City/Town">
+													<input type="text" name="new_address[city_town]" class="form-control" placeholder="City/Town">
 												</div>
 											</div>
 											<div class="col-md-2">
 												<div class="form-group">
-													<input type="text" name="new_address['state']" class="form-control" placeholder="State">
+													<input type="text" name="new_address[state]" class="form-control" placeholder="State">
 												</div>
 											</div>
 											<div class="col-md-2">
 												<div class="form-group">
-													<input type="text" name="new_address['pin_code']" class="form-control" placeholder="PIN Code">
+													<input type="text" name="new_address[pin_code]" class="form-control" placeholder="PIN Code">
 												</div>
 											</div>
 										</div>

@@ -148,7 +148,10 @@ class CreateTables extends Migration
             $table->integer('customer_id')->references('id')->on('users');
             $table->integer('product_id')->references('id')->on('products');
             $table->integer('seller_product_id')->references('id')->on('seller_products');
-            $table->text('address');
+            $table->string('address');
+            $table->string('city');
+            $table->string('state');
+            $table->string('postal_code');
             $table->text('extra');
             $table->integer('count');
             $table->integer('price');

@@ -11,6 +11,7 @@ use Cart;
 use App\User;
 use App\Order;
 use App\SellerProduct;
+use App\Address;
 
 class CheckoutController extends Controller
 {
@@ -52,10 +53,18 @@ class CheckoutController extends Controller
 	}
 
 	public function post(Request $request) {
-		dd($request);
 		$payment_method = $request->get('payment_method');
 		$payment_reference = $request->get('payment_reference');
-		$address = $request->get('address');
+		$address_id = $request->get('address');
+		$new_address = $request->get('new_address');
+
+		$address = Address::where('user_id', Auth::user()->id)->where('id', $address_id)->first();
+		if (is_null($address) && $address_id == "new") {
+			$new_address['user_id'] = Auth::user()->id;
+			$new_address['status'] = 'ACTIVE';
+			$address = Address::create($new_address);
+		}
+
 		$status = "INITIATED";
 		if ($payment_method == "COD") {
 			$status = "PENDING";
@@ -75,9 +84,29 @@ class CheckoutController extends Controller
 				]);
 				$subtotal += $item->qty * $seller_product->seller_price;
 				$total += $item->qty * $seller_product->seller_price + $seller_product->delivery_charge;
+
+				Order::create([
+					'customer_id' => Auth::user()->id,
+					'product_id' => $seller_product->product->id,
+					'seller_product_id' => $seller_product->id,
+					'address' => $address->line_1 . ", " . $address->line_2,
+					'city' => $address->city_town,
+					'state' => $address->state,
+					'postal_code' => $address->pin_code,
+					'extra' => '"' . implode('","', $item->options->all()) . '"',
+					'count' => $item->qty,
+					'price' => $seller_product->seller_price,
+					'delivery_charge' => $seller_product->delivery_charge,
+					'total_amount' => ($item->price * $item->qty + $seller_product->delivery_charge),
+					'payment_method' => $payment_method,
+					'payment_reference' => $payment_reference,
+					'status' => $status
+				]);
 			}
 		}
 
-		return back();
+		$orders = Order::where('payment_reference', $payment_reference)->get();
+
+		return redirect('/store/pay/' . $payment_reference);
 	}
 }

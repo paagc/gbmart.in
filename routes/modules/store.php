@@ -20,6 +20,8 @@ Route::group(['namespace'=>'Store'], function() {
     Route::post('/register', 'AuthController@postRegister');
     Route::get('/logout', 'AuthController@logout');
     Route::get('/store/cart', 'CartController@get');
+    Route::get('/store/pay/{payment_reference}', 'PaymentController@request');
+    Route::post('/store/pay/{payment_reference}', 'PaymentController@response');
     Route::get('/store/cart/add/{seller_product_id}', 'CartController@addToCart');
     Route::get('/store/cart/remove/{seller_product_id}', 'CartController@removeFromCart');
     Route::get('/store/{category_name}/{sub_category_name}', 'SubCategoryController@getProducts');

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use Auth;
 use Session;
+use Validator;
 use App\User;
 
 class AuthController extends Controller
@@ -52,7 +53,7 @@ class AuthController extends Controller
 	}
 
 	public function postRegister(Request $request) {
-		$validator = $request->validate([
+		$validator =  Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:6',

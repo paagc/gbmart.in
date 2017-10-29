@@ -66,10 +66,10 @@ class CartController extends Controller
 			}
 
 			if (is_null($cart_item)) {
-				$options['image'] = $seller_product->product->product_images[0]->url;
+				// $options['image'] = $seller_product->product->product_images[0]->url;
 				Cart::add($seller_product->id, $seller_product->product->display_name, $quantity, $seller_product->seller_price, $options);
 			} else {
-				$options['image'] = $seller_product->product->product_images[0]->url;
+				// $options['image'] = $seller_product->product->product_images[0]->url;
 				$cart_item->qty = $cart_item->qty + $quantity;
 				Cart::update($cart_item->rowId, [
 					'id' => $cart_item->id,

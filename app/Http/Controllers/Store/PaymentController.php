@@ -65,6 +65,7 @@ class PaymentController extends Controller
 			$parameters['return_url'] = $request->root() . '/store/pay/response/' . $payment_reference;
 			$parameters['name'] = Auth::user()->name;
 			$parameters['email'] = Auth::user()->email;
+			$parameters['parameters'] = Auth::user()->mobile_number;
 
 			foreach($orders as $index => $order) {
 				if ($index == 0) {

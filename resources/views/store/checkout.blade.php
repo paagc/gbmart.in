@@ -51,27 +51,62 @@
 												<div class="form-group">
 													<input type="text" name="new_address[line_1]" class="form-control" placeholder="Line 1">
 												</div>
+												@if($errors->has('new_address.line_1'))
+												@foreach($errors->get('new_address.line_1') as $message)
+												<p style="color: #ff0000;">{{ $message }}</p>
+												@endforeach
+												@endif
 											</div>
 											<div class="col-md-3">
 												<div class="form-group">
 													<input type="text" name="new_address[line_2]" class="form-control" placeholder="Line 2">
 												</div>
+												@if($errors->has('new_address.line_2'))
+												@foreach($errors->get('new_address.line_2') as $message)
+												<p style="color: #ff0000;">{{ $message }}</p>
+												@endforeach
+												@endif
 											</div>
 											<div class="col-md-2">
 												<div class="form-group">
 													<input type="text" name="new_address[city_town]" class="form-control" placeholder="City/Town">
 												</div>
+												@if($errors->has('new_address.city_town'))
+												@foreach($errors->get('new_address.city_town') as $message)
+												<p style="color: #ff0000;">{{ $message }}</p>
+												@endforeach
+												@endif
 											</div>
 											<div class="col-md-2">
 												<div class="form-group">
 													<input type="text" name="new_address[state]" class="form-control" placeholder="State">
 												</div>
+												@if($errors->has('new_address.state'))
+												@foreach($errors->get('new_address.state') as $message)
+												<p style="color: #ff0000;">{{ $message }}</p>
+												@endforeach
+												@endif
 											</div>
 											<div class="col-md-2">
 												<div class="form-group">
 													<input type="text" name="new_address[pin_code]" class="form-control" placeholder="PIN Code">
 												</div>
+												@if($errors->has('new_address.pin_code'))
+												@foreach($errors->get('new_address.pin_code') as $message)
+												<p style="color: #ff0000;">{{ $message }}</p>
+												@endforeach
+												@endif
 											</div>
+											@if($errors->has('address'))
+											@foreach($errors->get('address') as $message)
+											<p style="color: #ff0000;">{{ $message }}</p>
+											@endforeach
+											@endif
+											@if($errors->has('new_address'))
+											@foreach($errors->get('new_address') as $message)
+											<p style="color: #ff0000;">{{ $message }}</p>
+											@endforeach
+											@endif
 										</div>
 									</div>
 								</div>
@@ -95,7 +130,6 @@
 										<div id="collapseOne" class="panel-collapse collapse in">
 											<div class="panel-body">
 												<div class="row">
-													@
 													<div class="col-md-12">
 														<div class="radio">
 															<input type="radio" name="payment_method" value="COD"> 
@@ -108,6 +142,11 @@
 															<label> Card Payment / Internet Banking / Wallets</label>
 														</div>
 													</div>
+													@if($errors->has('payment_method'))
+													@foreach($errors->get('payment_method') as $message)
+													<p style="color: #ff0000;">{{ $message }}</p>
+													@endforeach
+													@endif
 												</div>
 											</div>
 										</div>

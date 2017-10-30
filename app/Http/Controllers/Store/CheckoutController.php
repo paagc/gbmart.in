@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Session;
 use Cart;
+use Validator;
 use App\User;
 use App\Order;
 use App\SellerProduct;
@@ -53,6 +54,21 @@ class CheckoutController extends Controller
 	}
 
 	public function post(Request $request) {
+		$validator =  Validator::make($request->all(), [
+            'address' => 'required',
+            'new_address' => 'required_if:address,new|array|size:5',
+            'new_address.line_1' => 'required_if:address,new|max:30',
+            'new_address.line_2' => 'required_if:address,new|max:30',
+            'new_address.city_town' => 'required_if:address,new|max:15',
+            'new_address.state' => 'required_if:address,new|max:15',
+            'new_address.pin_code' => 'required_if:address,new',
+            'payment_method' => 'required|in:COD,ONLINE'
+        ]);
+
+		if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
 		$payment_method = $request->get('payment_method');
 		$payment_reference = $request->get('payment_reference');
 		$address_id = $request->get('address');

@@ -38,7 +38,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <style>
-    .custom-product-image {
+    /*.custom-product-image {
         display: flex;
     }
     .custom-product-image a {
@@ -46,7 +46,7 @@
     }
     .custom-product-image img {
         margin: auto;
-    }
+    }*/
     </style>
 </head>
 <body class="cnt-home">
@@ -346,16 +346,16 @@
         <script src="/assets/js/scripts.js"></script>
         @yield('footer')
         <script>
-            function setProductImageHeight() {
-                $('.custom-product-image').each(function () {
-                    var w = $(this).width();
-                    $(this).css('height', w);
-                    $(this).find('img').css('max-height', w);
-                });
-            }
+            // function setProductImageHeight() {
+            //     $('.custom-product-image').each(function () {
+            //         var w = $(this).width();
+            //         $(this).css('height', w);
+            //         $(this).find('img').css('max-height', w);
+            //     });
+            // }
 
-            $(window).load(setProductImageHeight);
-            $(window).resize(setProductImageHeight);
+            // $(window).load(setProductImageHeight);
+            // $(window).resize(setProductImageHeight);
         </script>
     </body>
 

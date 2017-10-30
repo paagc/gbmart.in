@@ -285,9 +285,9 @@
 
                             <div class="module-body">
                                 <ul class='list-unstyled'>
-                                    <li><a href="about">About Us</a></li>
-                                    <li><a href="write">Write To us</a></li>
-                                    <li><a href="terms">Terms And Condition</a></li>
+                                    <li><a href="/about-us">About Us</a></li>
+                                    <li><a href="/write-to-us">Write To us</a></li>
+                                    <li><a href="/terms-and-conditions">Terms And Condition</a></li>
                                 </ul>
                             </div>
 
@@ -302,11 +302,11 @@
 
                             <div class="module-body">
                                 <ul class='list-unstyled'>
-                                    <li><a href="privacy">Privacy</a></li>
-                                    <li><a href="cancel">Cancellation</a></li>
-                                    <li><a href="disclaimer">Disclaimer</a></li>
-                                    <li><a href="return">Return And Refund</a></li>
-                                    <li><a href="ship">Shipping And Delivery</a></li>
+                                    <li><a href="/privacy">Privacy</a></li>
+                                    <li><a href="/cancellation">Cancellation</a></li>
+                                    <li><a href="/disclaimer">Disclaimer</a></li>
+                                    <li><a href="/return-and-refund">Return And Refund</a></li>
+                                    <li><a href="/shipping-and-delivery">Shipping And Delivery</a></li>
                                 </ul>
                             </div>
 

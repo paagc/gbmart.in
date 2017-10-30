@@ -62,7 +62,7 @@
 													<div class="row product-micro-row">
 														<div class="col col-xs-5">
 															<div class="product-image">
-																<div class="image product-image-sm"> 
+																<div class="image custom-product-image"> 
 																	<a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}"> 
 																		<img src="{{ $product->product_images[0]->url }}" alt=""> 
 																	</a> 
@@ -123,7 +123,7 @@
 										<div class="products">
 											<div class="product">		
 												<div class="product-image">
-													<div class="image product-image-md">
+													<div class="image custom-product-image">
 														<a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}"><img  src="{{ $product->product_images[0]->url }}" alt=""></a>
 													</div>	
 												</div>

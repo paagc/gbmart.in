@@ -38,58 +38,13 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <style>
-    .product-image-lg {
-        background-color: #afafaf;
-        height: 250px;
-        width: 250px;
-        margin-left: auto;
-        margin-right: auto;
+    .custom-product-image {
         display: flex;
     }
-    .product-image-lg a {
-        max-width: 250px;
-        max-height: 250px;
+    .custom-product-image a {
         margin: auto;
     }
-    .product-image-lg img {
-        max-width: 250px;
-        max-height: 250px;
-        margin: auto;
-    }
-    .product-image-md {
-        background-color: #afafaf;
-        height: 200px;
-        width: 200px;
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-    }
-    .product-image-md a {
-        max-width: 200px;
-        max-height: 200px;
-        margin: auto;
-    }
-    .product-image-md img {
-        max-width: 200px;
-        max-height: 200px;
-        margin: auto;
-    }
-    .product-image-sm {
-        background-color: #afafaf;
-        height: 150px;
-        width: 150px;
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-    }
-    .product-image-sm a {
-        max-width: 150px;
-        max-height: 150px;
-        margin: auto;
-    }
-    .product-image-sm img {
-        max-width: 150px;
-        max-height: 150px;
+    .custom-product-image img {
         margin: auto;
     }
     </style>
@@ -390,6 +345,18 @@
         <script src="/assets/js/wow.min.js"></script> 
         <script src="/assets/js/scripts.js"></script>
         @yield('footer')
+        <script>
+            function setProductImageHeight() {
+                $('.custom-product-image').each(function () {
+                    var w = $(this).width();
+                    $(this).css('height', w);
+                    $(this).find('img').css('max-height', w);
+                });
+            }
+
+            $(window).load(setProductImageHeight);
+            $(window).resize(setProductImageHeight);
+        </script>
     </body>
 
 

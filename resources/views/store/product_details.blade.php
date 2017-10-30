@@ -27,7 +27,7 @@
 							<div class="item">
 								<div class="products">
 									<div class="hot-deal-wrapper">
-										<div class="image product-image-lg"> <img src="{{ $product->product_images[0]->url }}" alt=""> </div>
+										<div class="image custom-product-image"> <img src="{{ $product->product_images[0]->url }}" alt=""> </div>
 									</div>
 									<div class="product-info text-left m-t-20">
 										<h3 class="name"><a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ $product->display_name }}</a></h3>
@@ -66,7 +66,7 @@
 												<div class="row product-micro-row">
 													<div class="col col-xs-5">
 														<div class="product-image">
-															<div class="image product-image-sm"> <a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}"> <img src="{{ $product->product_images[0]->url }}" alt=""> </a> </div>
+															<div class="image custom-product-image"> <a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}"> <img src="{{ $product->product_images[0]->url }}" alt=""> </a> </div>
 														</div>
 													</div>
 													<div class="col col-xs-7">

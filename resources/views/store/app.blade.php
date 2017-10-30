@@ -37,6 +37,62 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <style>
+    .product-image-lg {
+        background-color: #afafaf;
+        height: 250px;
+        width: 250px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+    }
+    .product-image-lg a {
+        max-width: 250px;
+        max-height: 250px;
+        margin: auto;
+    }
+    .product-image-lg img {
+        max-width: 250px;
+        max-height: 250px;
+        margin: auto;
+    }
+    .product-image-md {
+        background-color: #afafaf;
+        height: 200px;
+        width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+    }
+    .product-image-md a {
+        max-width: 200px;
+        max-height: 200px;
+        margin: auto;
+    }
+    .product-image-md img {
+        max-width: 200px;
+        max-height: 200px;
+        margin: auto;
+    }
+    .product-image-sm {
+        background-color: #afafaf;
+        height: 150px;
+        width: 150px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+    }
+    .product-image-sm a {
+        max-width: 150px;
+        max-height: 150px;
+        margin: auto;
+    }
+    .product-image-sm img {
+        max-width: 150px;
+        max-height: 150px;
+        margin: auto;
+    }
+    </style>
 </head>
 <body class="cnt-home">
 
@@ -48,7 +104,7 @@
                 <div class="header-top-inner">
                     <div class="cnt-account">
                         <ul class="list-unstyled">
-                            <li><a><i class="fa fa-phone"></i>(+91)8467-896-789</a></li>
+                            <li><a href="tel:+918055623322" style="text-decoration: none;"><i class="fa fa-phone"></i>(+91) 8055-623-322</a></li>
                             <li><a><i class="fa fa-envelope"></i>support@gbmart.in</a></li>
                             <li><a href="/seller/register"><i class="fa fa-users"></i>Be a seller</a></li>
 
@@ -194,7 +250,7 @@
                                         @endif
                                         @endforeach
 
-                                        <li class="dropdown  navbar-right special-menu"><a href="subcat">Todays offer</a></li>
+                                        <!-- <li class="dropdown  navbar-right special-menu"><a href="subcat">Todays offer</a></li> -->
                                     </ul>
 
                                     <div class="clearfix"></div>
@@ -254,7 +310,7 @@
                                     <li class="media">
                                         <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-mobile fa-stack-1x fa-inverse"></i> </span> </div>
                                         <div class="media-body">
-                                            <p>(+91)8467-896-789</p>
+                                            <p><a href="tel:+918055623322" style="text-decoration: none;">(+91) 8055-623-322</a></p>
                                         </div>
                                     </li>
                                     <li class="media">

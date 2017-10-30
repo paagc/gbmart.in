@@ -27,7 +27,7 @@
 							<div class="item">
 								<div class="products">
 									<div class="hot-deal-wrapper">
-										<div class="image"> <img src="{{ $product->product_images[0]->url }}" alt=""> </div>
+										<div class="image product-image-lg"> <img src="{{ $product->product_images[0]->url }}" alt=""> </div>
 									</div>
 									<div class="product-info text-left m-t-20">
 										<h3 class="name"><a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ $product->display_name }}</a></h3>
@@ -66,7 +66,7 @@
 												<div class="row product-micro-row">
 													<div class="col col-xs-5">
 														<div class="product-image">
-															<div class="image"> <a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}"> <img src="{{ $product->product_images[0]->url }}" alt=""> </a> </div>
+															<div class="image product-image-sm"> <a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}"> <img src="{{ $product->product_images[0]->url }}" alt=""> </a> </div>
 														</div>
 													</div>
 													<div class="col col-xs-7">
@@ -98,7 +98,7 @@
 									@foreach($main_product->product_images as $index => $main_product_image)
 									<div class="single-product-gallery-item" id="slide{{ $index + 1 }}">
 										<a data-lightbox="image-{{ $index + 1 }}" data-title="Gallery" href="{{ $main_product_image->url }}">
-											<img class="img-responsive" alt="" src="assets/images/blank.gif" data-echo="{{ $main_product_image->url }}" />
+											<img class="img-responsive" alt="" src="assets/images/blank.gif" data-echo="{{ $main_product_image->url }}" style="max-height: 300px;" />
 										</a>
 									</div>
 									@endforeach
@@ -109,7 +109,7 @@
 										@foreach($main_product->product_images as $index => $main_product_image)
 										<div class="item">
 											<a class="horizontal-thumb active" data-target="#owl-single-product" data-slide="{{ $index + 1 }}" href="#slide{{ $index + 1 }}">
-												<img class="img-responsive" width="85" alt="" src="assets/images/blank.gif" data-echo="{{ $main_product_image->url }}" />
+												<img class="img-responsive" width="85" alt="" src="assets/images/blank.gif" data-echo="{{ $main_product_image->url }}" style="max-height: 80px;" />
 											</a>
 										</div>
 										@endforeach

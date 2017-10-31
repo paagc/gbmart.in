@@ -24,14 +24,14 @@ trait SMSTrait
 
 		$postData = array(
 		    'authkey' => self::$authKey,
-		    'mobiles' => "91" . $mobile_number,
+		    'mobiles' => $mobile_number,
 		    'message' => urlencode($message),
 		    'sender' => self::$senderId,
 		    'route' => self::$route
 		);
 
 		$client = new \GuzzleHttp\Client();
-		$response = $client->post(self::$url, $postData);
+		$response = $client->get(self::$url . '?' . http_build_query($postData));
 		return;
 	}
 }

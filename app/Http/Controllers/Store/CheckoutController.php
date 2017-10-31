@@ -90,6 +90,28 @@ class CheckoutController extends Controller
 		$total = 0;
 
 		$cart_items = [];
+		$payment_type_mismatch_seller_products = [];
+
+		foreach(Cart::content()  as $item) {
+			$seller_product = SellerProduct::find($item->id);
+			if (!is_null($seller_product)) {
+				if ($seller_product->is_cod_available == 0 && $payment_method == "COD") {
+					array_push($payment_type_mismatch_seller_products, [
+						'rowId' => $item->rowId,
+						'seller_product' => $seller_product]
+					);
+				}
+				if ($seller_product->is_online_payment_available  == 0 && $payment_method == "ONLINE") {
+					array_push($payment_type_mismatch_seller_products, $seller_product);
+				}
+			}
+		}
+
+		if (count($payment_type_mismatch_seller_products) > 0) {
+			Session::flash('payment_type_mismatch_seller_products', $payment_type_mismatch_seller_products);
+			return back();
+		}
+
 		foreach(Cart::content()  as $item) {
 			$seller_product = SellerProduct::find($item->id);
 			if (!is_null($seller_product)) {

@@ -232,6 +232,14 @@
 																</table>
 															</div>		
 														</center>
+														@if(Session::has('payment_type_mismatch_seller_products') && is_array(Session::get('payment_type_mismatch_seller_products')) && count(Session::get('payment_type_mismatch_seller_products')) > 0)
+														<div class="col-md-12">
+															<h3>These product(s) are not available for the select payment option.</h3>
+															@foreach(Session::get('payment_type_mismatch_seller_products') as $seller_product)
+															<p>{{ $seller_product['seller_product']->product->display_name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/store/cart/remove/{{ $seller_product['rowId'] }}" style="color: #ff0000; font-size: 12px;"> Remove</a></p>
+															@endforeach
+														</div>
+														@endif
 														<div class="cart-checkout-btn pull-right">
 															<button type="submit" class="btn btn-primary checkout-btn">Place Order</button>
 														</div>

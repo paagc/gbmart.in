@@ -41,7 +41,7 @@ class Order extends Model
                 OrderLog::create([
                     'order_id' => $order->id,
                     'status' => $order->status,
-                    'remarks' => 'Order created for product "' . $order->product->display_name .'" at Rs. ' . number_format($order->seller_product->seller_price, 2, '.', ',') . ', waiting for acceptance from seller.' . $order->payment_reference
+                    'remarks' => 'Order created for product "' . $order->product->display_name .'" at Rs. ' . number_format($order->seller_product->seller_price, 2, '.', ',') . ', waiting for acceptance from seller. REF: ' . $order->payment_reference
                 ]);
             }
         });

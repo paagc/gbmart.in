@@ -66,7 +66,7 @@
 									<td class="romove-item">{{ $order->id }}</td>
 									<td class="cart-image">
 										<a class="entry-thumbnail" href="/store/{{ $order->product->category->name }}/{{ $order->product->sub_category->name }}/{{ $order->product->name }}">
-											<img src="{{ $order->product->product_images[0]->url }}" alt="">
+											<img src="{{ $order->product->product_images[0]->url }}" alt="" style="max-height: 100px; max-width: 100px;">
 										</a>
 									</td>
 									<td class="cart-product-name-info">
@@ -74,13 +74,13 @@
 									</td>
 									<td class="cart-product-quantity">
 										<div class="cart-quantity">
-											{{ $order->quantity }}
+											{{ $order->count }}
 										</div>
 									</td>
 									<td class="cart-product-sub-total"><span class="cart-sub-total-price">Rs. {{ number_format($order->total_amount, 2, '.', ',') }}</span></td>
 									<td class="cart-product-grand-total">
 										<span class="cart-grand-total-price">
-											{{ date('d-m-y H:i', strtodate($order->created_at)) }}
+											{{ date('d-m-y H:i', strtotime($order->created_at)) }}
 										</span>
 									</td>
 									<td>{{ $order->status }}</td>

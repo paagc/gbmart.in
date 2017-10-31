@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\OrderLog;
+
 class Order extends Model
 {
     protected $fillable =[
@@ -23,6 +25,27 @@ class Order extends Model
         'payment_reference',
     	'status'
     ];
+
+    protected static function boot() {
+        parent::boot();
+
+        static::created(function($order) {
+            if ($order->status == "INITIATED") {
+                OrderLog::create([
+                    'order_id' => $order->id,
+                    'status' => $order->status,
+                    'remarks' => 'Order created for product "' . $order->product->display_name .'" at Rs. ' . number_format($order->seller_product->seller_price, 2, '.', ',') . ', waiting for completion of payment. REF: ' . $order->payment_reference
+                ]);
+            }
+            if ($order->status == "PENDING") {
+                OrderLog::create([
+                    'order_id' => $order->id,
+                    'status' => $order->status,
+                    'remarks' => 'Order created for product "' . $order->product->display_name .'" at Rs. ' . number_format($order->seller_product->seller_price, 2, '.', ',') . ', waiting for acceptance from seller.' . $order->payment_reference
+                ]);
+            }
+        });
+    }   
 
     public function customer() {
     	return $this->belongsTo('App\User', 'customer_id');

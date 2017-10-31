@@ -78,7 +78,7 @@ class ProductDetailsController extends Controller
 		if (!is_null($product)) {
 			$attributes = Attribute::where('product_id', $product->id)->where('status', 'ACTIVE')->get();
 
-			return view('store.product_details', [ 
+			return view('store.product-details', [ 
 				'main_product' => $product,
 				'hot_deal_products' => $hot_deal_products,
 				'featured_products' => $featured_products,

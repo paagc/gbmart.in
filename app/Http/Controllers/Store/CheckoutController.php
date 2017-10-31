@@ -36,7 +36,7 @@ class CheckoutController extends Controller
 
 		$addresses = Auth::user()->addresses;
 
-		$payment_reference = 
+		$payment_reference = "";
 		$existingOrderWithSamePaymentReference = [];
 
 		do {

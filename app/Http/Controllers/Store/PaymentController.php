@@ -12,6 +12,7 @@ use App\User;
 use App\Order;
 use App\SellerProduct;
 use App\Address;
+use App\Traits\SMSTrait;
 
 class PaymentController extends Controller
 {
@@ -97,6 +98,11 @@ class PaymentController extends Controller
 
 			if ($status == "PENDING" && $payment_method == "COD") {
 				Cart::destroy();
+				if (count($orders) == 1) {
+					SMSTrait::send(Auth::user()->mobile_number, "Your order for " . (strlen($orders[0]->product->display_name) > 20 ? substr($orders[0]->product->display_name, 0, 15) . '...' : $orders[0]->product->display_name) . "  has been placed. Order Ref.: " . $payment_reference);
+				} else if (count($orders) > 1) {
+					SMSTrait::send(Auth::user()->mobile_number, "Your order for " . count($orders) . " items(s) has been placed. Order Ref.: " . $payment_reference);
+				}
 				return redirect('/')->with('message', 'Your order is successful.');
 			} else if ($status == "INITIATED" && $payment_method == "ONLINE") {
 				return view('store.pay-request', [ 'parameters' => $parameters ]);
@@ -117,6 +123,11 @@ class PaymentController extends Controller
 				foreach($orders as $order) {
 					$order->status = "PENDING";
 					$order->save();
+				}
+				if (count($orders) == 1) {
+					SMSTrait::send(Auth::user()->mobile_number, "Your order for " . (strlen($orders[0]->product->display_name) > 20 ? substr($orders[0]->product->display_name, 0, 15) . '...' : $orders[0]->product->display_name) . "  has been placed. Order Ref.: " . $payment_reference);
+				} else if (count($orders) > 1) {
+					SMSTrait::send(Auth::user()->mobile_number, "Your order for " . count($orders) . " items(s) has been placed. Order Ref.: " . $payment_reference);
 				}
 			} else {
 				$orders = Order::where('payment_reference', $payment_reference)->get();

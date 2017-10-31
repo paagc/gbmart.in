@@ -17,7 +17,7 @@ class OrderLog extends Model
         parent::boot();
 
         static::created(function($order_log) {
-        	if ($order_log->status != 'INITIATED' && $order_log->status != 'FAILED') {
+        	if ($order_log->status != 'INITIATED' && $order_log->status != 'FAILED' && $order_log->status != 'PENDING') {
 	        	SMSTrait::send($order_log->order->customer->mobile_number, $order_log->remarks);
 	        }
         });

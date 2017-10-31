@@ -86,7 +86,7 @@
 						<div class="col-md-8">
 							<div class="form-group">
 								<label for="inputDescriptionText">Description</label>
-								<textarea rows="7" name="description_text" class="form-control" id="inputDescriptionText" placeholder="Enter description">{{ old('description_text') }}</textarea>
+								<textarea rows="7" name="description_text" class="form-control textarea" id="inputDescriptionText" placeholder="Enter description">{{ old('description_text') }}</textarea>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -144,6 +144,8 @@
 		$('.clear-product-attributes').click(function() {
 			$('.product-attributes').html('<div class="col-md-3 product-attribute"><div class="form-group"><input name="attributes[]" class="form-control" placeholder="Size, colour, or any other variation"></div></div>');
 		});
+
+		$('.textarea').wysihtml5();
 	});
 </script>
 @endsection

@@ -100,7 +100,7 @@
 						<div class="col-md-8">
 							<div class="form-group">
 								<label for="inputDescriptionText">Description</label>
-								<textarea rows="8" name="description_text" class="form-control" id="inputDescriptionText" placeholder="Enter description">{{ old('description_text') ? old('description_text') : $product->description_text }}</textarea>
+								<textarea rows="8" name="description_text" class="form-control text-area" id="inputDescriptionText" placeholder="Enter description">{{ old('description_text') ? old('description_text') : $product->description_text }}</textarea>
 								@if($errors->has('description_text'))
 							    <span class="text-danger">{{ $errors->first('description_text') }}</span>
 							    @endif
@@ -224,7 +224,9 @@
 				$(this).parents('.description_image').css('display', 'none');
 				$(this).parents('.product-attribute').css('display', 'none');
 			}
-		})
+		});
+
+		$('.textarea').wysihtml5();
 	});
 </script>
 @endsection

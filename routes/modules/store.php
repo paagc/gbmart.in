@@ -30,6 +30,7 @@ Route::group(['namespace'=>'Store'], function() {
     Route::get('/store/cart', 'CartController@get');
     Route::get('/store/checkout', 'CheckoutController@get')->middleware('store.auth');
 	Route::post('/store/checkout', 'CheckoutController@post')->middleware('store.auth');
+	Route::get('/store/checkout/delete-address/{address_id}', 'CheckoutController@deleteAddress')->middleware('store.auth');
     Route::get('/store/pay/request/{payment_reference}', 'PaymentController@request')->middleware('store.auth');
     Route::post('/store/pay/response/{payment_reference}', 'PaymentController@response');
     Route::get('/store/wishlist', 'WishlistController@getAll')->middleware('store.auth');

@@ -57,10 +57,10 @@ class CheckoutController extends Controller
 		$validator =  Validator::make($request->all(), [
             'address' => 'required',
             'new_address' => 'required_if:address,new|array|size:5',
-            'new_address.line_1' => 'required_if:address,new|max:30',
-            'new_address.line_2' => 'required_if:address,new|max:30',
-            'new_address.city_town' => 'required_if:address,new|max:15',
-            'new_address.state' => 'required_if:address,new|max:15',
+            'new_address.line_1' => 'required_if:address,new|max:50',
+            'new_address.line_2' => 'required_if:address,new|max:50',
+            'new_address.city_town' => 'required_if:address,new|max:20',
+            'new_address.state' => 'required_if:address,new|max:20',
             'new_address.pin_code' => 'required_if:address,new',
             'payment_method' => 'required|in:COD,ONLINE'
         ]);
@@ -124,5 +124,15 @@ class CheckoutController extends Controller
 		$orders = Order::where('payment_reference', $payment_reference)->get();
 
 		return redirect('/store/pay/request/' . $payment_reference);
+	}
+
+	public function deleteAddress($address_id, Request $request) {
+		$address = Address::find($address_id);
+		if (!is_null($address)) {
+			$address->status = "INACTIVE";
+			$address->save();
+		}
+
+		return back();
 	}
 }

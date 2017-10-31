@@ -34,12 +34,17 @@
 										<div class="row">
 											<h5>Existing Addresses</h5>
 											@foreach($addresses as $address)
+											@if($address->status == 'ACTIVE')
 											<div class="col-md-12">
 												<div class="radio">
 													<input type="radio" name="address" value="{{ $address->id }}"> 
 													<label>{{ $address->line_1 . ", " . $address->line_2 . ", " . $address->city_town . ", " . $address->state .  ", " . $address->pin_code }}</label>
+													<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<a address-id="{{ $address->id }}" href="javascript: return null;" class="delete-address" style="color: #ff0000; weight: 600;"><i class="fa fa-close"></i></a>
+													</span>
 												</div>
 											</div>
+											@endif
 											@endforeach
 											<div class="col-md-12">
 												<div class="radio">
@@ -246,4 +251,15 @@
 		</div>
 	</div>
 </div>
+@endsection
+
+@section('footer')
+<script>
+	$(document).ready(function () {
+		$('.delete-address').click(function () {
+			var id = $(this).attr('address-id');
+			window.location.href = "/store/checkout/delete-address/" + id;
+		});
+	});
+</script>
 @endsection

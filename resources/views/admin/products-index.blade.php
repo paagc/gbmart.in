@@ -22,7 +22,8 @@
 				<table class="table table-bordered">
 					<tbody>
 						<tr>
-							<th>#</th>
+							<!-- <th>#</th> -->
+							<th>ID</th>
 							<th>Display Name</th>
 							<th>Slug Name</th>
 							<tH>Brand</th>
@@ -96,7 +97,7 @@
 						@endif
 						@foreach($products as $index => $product)
 						<tr>
-							<td>{{ (($page - 1) * $page_size) + $index + 1 }}</td>
+							<td>{{ $product->id }}</td>
 							<td>{{ $product->display_name }}</td>
 							<td>{{ $product->name }}</td>
 							<td>{{ $product->brand }}</td>

@@ -346,7 +346,7 @@
         <script src="/assets/js/scripts.js"></script>
         @yield('footer')
         <script>
-            function setProductImageHeight() {
+            function setProductSizes() {
                 $('.custom-product-image').each(function () {
                     var w = parseInt($(this).width());
                     $(this).css('height', w);
@@ -355,15 +355,26 @@
                     if (img_w >= img_h) {
                         $(this).find('img').css('width', w);
                         $(this).find('img').css('heigth', parseInt(w * (parseFloat(img_h) / parseFloat(img_w))));
-                    } else
+                    } else {
                         $(this).find('img').css('height', w);
                         $(this).find('img').css('width', parseInt(w * (parseFloat(img_h) / parseFloat(img_w))));
                     }
                 });
+
+                $('.custom-product-boxes').each(function () {
+                    var max_h = 0;
+                    $(this).find('.custom-product-box').each(function () {
+                        var h = parseInt($(this).height());
+                        if (h > max_h) {
+                            max_h = h;
+                        }
+                    });
+                    $(this).find('.custom-product-box').css('height', max_h);
+                });
             }
 
-            $(window).load(setProductImageHeight);
-            $(window).resize(setProductImageHeight);
+            $(window).load(setProductSizes);
+            $(window).resize(setProductSizes);
         </script>
     </body>
 

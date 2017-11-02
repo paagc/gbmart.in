@@ -90,9 +90,9 @@
                             <div class="sidebar-widget-body outer-top-xs">
                                 <div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
                                     <div class="item">
-                                        <div class="products special-product">
+                                        <div class="products special-product custom-product-boxes">
                                             @foreach($featured_products as $product)
-                                            <div class="product">
+                                            <div class="product custom-product-box">
                                                 <div class="product-micro">
                                                     <div class="row product-micro-row">
                                                         <div class="col col-xs-5">
@@ -185,10 +185,10 @@
                             <div class="tab-content outer-top-xs">
                                 <div class="tab-pane in active" id="all">
                                     <div class="product-slider">
-                                        <div class="owl-carousel home-owl-carousel custom-carousel owl-theme" data-item="4">
+                                        <div class="owl-carousel home-owl-carousel custom-carousel owl-theme custom-product-boxes" data-item="4">
 
                                             @foreach($new_products as $product)
-                                            <div class="item item-carousel">
+                                            <div class="item item-carousel custom-product-box">
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
@@ -249,10 +249,10 @@
                             <div class="tab-content outer-top-xs">
                                 <div class="tab-pane in active" id="all">
                                     <div class="product-slider">
-                                        <div class="owl-carousel home-owl-carousel custom-carousel owl-theme" data-item="4">
+                                        <div class="owl-carousel home-owl-carousel custom-carousel owl-theme custom-product-boxes" data-item="4">
 
                                             @foreach($bestseller_products as $product)
-                                            <div class="item item-carousel">
+                                            <div class="item item-carousel custom-product-box">
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">

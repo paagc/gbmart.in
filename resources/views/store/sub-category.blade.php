@@ -55,9 +55,9 @@
 							<div class="sidebar-widget-body outer-top-xs">
 								<div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
 									<div class="item">
-										<div class="products special-product">
+										<div class="products special-product custom-product-boxes">
 											@foreach($featured_products as $product)
-											<div class="product">
+											<div class="product custom-product-box">
 												<div class="product-micro">
 													<div class="row product-micro-row">
 														<div class="col col-xs-5">
@@ -116,10 +116,10 @@
 					<div id="myTabContent" class="tab-content category-list">
 						<div class="tab-pane active " id="grid-container">
 							<div class="category-product">
-								<div class="row">
+								<div class="row custom-product-boxes">
 									@if (count($products) > 0)
 									@foreach ($products as $product)
-									<div class="col-sm-6 col-md-4 wow fadeInUp">
+									<div class="col-sm-6 col-md-4 wow fadeInUp custom-product-box">
 										<div class="products">
 											<div class="product">		
 												<div class="product-image">

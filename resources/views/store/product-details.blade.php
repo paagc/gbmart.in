@@ -22,9 +22,9 @@
 					@if (count($hot_deal_products) > 0)
 					<div class="sidebar-widget hot-deals wow fadeInUp outer-bottom-xs">
 						<h3 class="section-title">Hot Deals</h3>
-						<div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
+						<div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss custom-product-boxes">
 							@foreach ($hot_deal_products as $product)
-							<div class="item">
+							<div class="item custom-product-box">
 								<div class="products">
 									<div class="hot-deal-wrapper">
 										<div class="image custom-product-image"> <img src="{{ $product->product_images[0]->url }}" alt=""> </div>
@@ -61,7 +61,7 @@
 									<div class="products special-product">
 
 										@foreach($featured_products as $product)
-										<div class="product">
+										<div class="product custom-product-box">
 											<div class="product-micro">
 												<div class="row product-micro-row">
 													<div class="col col-xs-5">
@@ -253,9 +253,9 @@
 						<div class="tab-content outer-top-xs">
 							<div class="tab-pane in active" id="all">
 								<div class="product-slider">
-									<div class="owl-carousel home-owl-carousel custom-carousel owl-theme" data-item="4">
+									<div class="owl-carousel home-owl-carousel custom-carousel owl-theme custom-product-boxes" data-item="4">
 										@foreach($related_products as $product)
-										<div class="item item-carousel">
+										<div class="item item-carousel custom-product-box">
 											<div class="products">
 												<div class="product">
 													<div class="product-image">

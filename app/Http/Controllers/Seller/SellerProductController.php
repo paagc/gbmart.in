@@ -182,7 +182,6 @@ class SellerProductController extends Controller
 			foreach($request->get('attributes') as $attribute => $values) {
 
 				foreach ($values as $value) {
-					print_r($attribute);
 					AttributeValue::create([
 						'seller_product_id' => $seller_product->id,
 						'attribute_id' => $attribute,
@@ -204,5 +203,88 @@ class SellerProductController extends Controller
 			$seller_product->save();
 		}
 		return redirect('/seller/seller-products');
+	}
+
+	public function getEdit($seller_product_id, Request $request) {
+		$seller_product = SellerProduct::find($seller_product_id);
+		return view('seller.seller-products-edit', [ 'seller_product' => $seller_product ]);
+	}
+
+	public function postEdit($seller_product_id, Request $request) {
+		$updated_seller_product = [
+			'seller_price' => 0,
+			'delivery_charge' => 0,
+			'is_in_stock' => false,
+			'is_cod_available' => false,
+			'is_online_payment_available' => false
+		];
+		$seller_product = SellerProduct::find($seller_product_id);
+
+		if (is_null($seller_product)) {
+			Session::flash('error', 'Invalid product.');
+			return back()->withInput();
+		}
+
+		if ($request->has('seller_price') && is_numeric((int) ($request->get('seller_price')))) {
+			$updated_seller_product['seller_price'] = $request->get('seller_price');
+		} else {
+			Session::flash('error', 'Seller price is invalid.');
+			return redirect()->back()->withInput();
+		}
+
+		if ($request->has('delivery_charge') && is_numeric((int) ($request->get('delivery_charge')))) {
+			$updated_seller_product['delivery_charge'] = $request->get('delivery_charge');
+		} else {
+			Session::flash('error', 'Delivery charge is invalid.');
+			return redirect()->back()->withInput();
+		}
+
+		if ($request->has('is_in_stock') && $request->get('is_in_stock') == "true") {
+			$updated_seller_product['is_in_stock'] = true;
+		}
+
+		if ($request->has('is_cod_available') && $request->get('is_cod_available') == "true") {
+			$updated_seller_product['is_cod_available'] = true;
+		}
+
+		if ($request->has('is_online_payment_available') && $request->get('is_online_payment_available') == "true") {
+			$updated_seller_product['is_online_payment_available'] = true;
+		}
+
+		$seller_product->fill($updated_seller_product);
+
+		foreach ($seller_product->attribute_values as $attribute_value) {
+			$attribute_value->status = "INACTIVE";
+			$attribute_value->save();
+		}
+
+		if ($request->has('attributes') && is_array($request->get('attributes'))) {
+			foreach($request->get('attributes') as $attribute => $values) {
+				foreach ($values as $value) {
+					if (!is_null($value)) {
+						$attribute_value = AttributeValue::where('attribute_id', $attribute)->where('value', $value)->first();
+						if (is_null($attribute_value)) {
+							AttributeValue::create([
+								'seller_product_id' => $seller_product->id,
+								'attribute_id' => $attribute,
+								'value' => $value,
+								'status' => 'ACTIVE'
+							]);
+						} else {
+							if ($attribute_value->status == 'ACTIVE') {
+
+							} else {
+								$attribute_value->status = "ACTIVE";
+								$attribute_value->save();
+							}
+						}
+					}
+				}
+			}
+		}
+
+
+		Session::flash('success', 'Product successfully updated.');
+		return view('seller.seller-products-edit', [ 'seller_product' => $seller_product ]);
 	}
 }

@@ -32,7 +32,7 @@ class HomeController extends Controller
 			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
 		}, 'product_images' => function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
-		} ])->orderBy('updated_at', 'desc')->limit(10)->get();
+		} ])->orderBy('updated_at', 'desc')->limit(4)->get();
 
 		$featured_products = Product::where('status', 'ACTIVE')->where('is_featured', true)->whereHas('seller_products', function ($query) {
 			$query->where('status', 'ACTIVE');
@@ -40,7 +40,7 @@ class HomeController extends Controller
 			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
 		}, 'product_images' => function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
-		} ])->orderBy('updated_at', 'desc')->limit(10)->get();
+		} ])->orderBy('updated_at', 'desc')->limit(6)->get();
 
 		$bestseller_products = Product::where('status', 'ACTIVE')->where('is_bestseller', true)->whereHas('seller_products', function ($query) {
 			$query->where('status', 'ACTIVE');

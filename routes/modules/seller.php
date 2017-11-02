@@ -24,5 +24,7 @@ Route::group(['middleware'=>['seller.auth'], 'prefix' => 'seller', 'namespace'=>
     Route::get('seller-products', 'SellerProductController@index');
     Route::get('seller-products/create', 'SellerProductController@create');
     Route::post('seller-products/create', 'SellerProductController@store');
+    Route::get('seller-products/{seller_product_id}/edit', 'SellerProductController@getEdit');
+    Route::post('seller-products/{seller_product_id}/edit', 'SellerProductController@postEdit');
     Route::get('seller-products/{seller_product_id}/status/{status}', 'SellerProductController@changeStatus');
 });

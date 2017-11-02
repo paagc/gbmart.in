@@ -47,7 +47,7 @@ class ProductDetailsController extends Controller
 			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
 		}, 'product_images' => function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
-		} ])->orderBy('updated_at', 'desc')->limit(10)->get();
+		} ])->orderBy('updated_at', 'desc')->limit(4)->get();
 
 		$featured_products = Product::where('status', 'ACTIVE')->where('is_featured', true)
 		->whereHas('category', function ($query) use ($category_name) {
@@ -60,7 +60,7 @@ class ProductDetailsController extends Controller
 			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
 		}, 'product_images' => function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
-		} ])->orderBy('updated_at', 'desc')->limit(10)->get();
+		} ])->orderBy('updated_at', 'desc')->limit(6)->get();
 
 		$related_products = Product::where('status', 'ACTIVE')
 		->whereHas('category', function ($query) use ($category_name) {

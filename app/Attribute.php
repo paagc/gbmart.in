@@ -18,6 +18,6 @@ class Attribute extends Model
     }
 
     protected function attribute_values() {
-    	return $this->hasMany('App\AttributeValue', 'product_id');
+    	return $this->hasMany('App\AttributeValue', 'attribute_id');
     }
 }

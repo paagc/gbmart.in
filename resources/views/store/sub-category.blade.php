@@ -26,7 +26,7 @@
 							<div class="sidebar-widget-body">
 								<ul>
 									@foreach($brands as $brand)
-									<div class="checkbox"> <label> <input type="checkbox" class="check-brand" data-value="{{ $brand }}" @if (array_key_exists($brand, $selected_brands)) checked @endif> {{ $brand }} </label> </div>
+									<div class="checkbox"> <label> <input type="checkbox" class="check-brand" data-value="{{ $brand }}" @if (in_array($brand, $selected_brands)) checked @endif> {{ $brand }} </label> </div>
 									@endforeach
 								</ul>
 							</div>

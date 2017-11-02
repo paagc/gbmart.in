@@ -35,6 +35,10 @@ class SubCategoryController extends Controller
 			$page = (int) $request->get('page');
 		}
 
+		if ($request->has('selected_brands') && is_array($request->get('selected_brands'))) {
+			$selected_brands = $request->get('selected_brands');
+		}
+
 		$sub_category = SubCategory::where('status', 'ACTIVE')->where('name', $sub_category_name)
 		->whereHas('category', function ($query) use ($category_name) {
 			$query->where('name', $category_name);
@@ -71,16 +75,26 @@ class SubCategoryController extends Controller
 		$price_min = $price_range_min;
 
 		if ($request->has('price_min') && is_numeric($request->get('price_min'))) {
-			$price_min = $request->get('price_min');
+			$price_min = (int) $request->get('price_min');
 		}
 
 		if ($request->has('price_max') && is_numeric($request->get('price_max'))) {
-			$price_max = $request->get('price_max');
+			$price_max = (int) $request->get('price_max');
 		}
 
 		if (count($selected_brands) > 0) {
 			$products = $products->whereIn('brand', $selected_brands);
 		}
+
+		$products = $products->whereHas('seller_products', function ($query) use ($price_range_min, $price_range_max, $price_min, $price_max) {
+			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
+			if ($price_min != $price_range_min && $price_min > 0) {
+				$query->where('seller_price', '>=', $price_min);
+			}
+			if ($price_max != $price_range_max && $price_range_max > 0) {
+				$query->where('seller_price', '<=', $price_max);
+			}
+		});
 
 		$products = $products->with([ 'seller_products' => function ($query) use ($price_range_min, $price_range_max, $price_min, $price_max) {
 			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');

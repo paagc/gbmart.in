@@ -49,7 +49,9 @@ class SubCategoryController extends Controller
 			$query->where('status', 'ACTIVE');
 		})->orderBy('updated_at', 'desc');
 
-		$brands = $products->groupBy('brand')->pluck('brand');
+
+		$brands = clone $products;
+		$brands = $brands->groupBy('brand')->pluck('brand');
 
 		$tproducts = $products->get();
 		foreach ($tproducts as $product) {

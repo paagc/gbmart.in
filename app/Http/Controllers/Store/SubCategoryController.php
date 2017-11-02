@@ -47,11 +47,13 @@ class SubCategoryController extends Controller
 			$query->where('name', $sub_category_name);
 		})->whereHas('seller_products', function ($query) {
 			$query->where('status', 'ACTIVE');
-		})->orderBy('updated_at', 'desc');
+		});
 
 
 		$brands = clone $products;
 		$brands = $brands->groupBy('brand')->pluck('brand');
+
+		$products = $products->orderBy('updated_at', 'desc');
 
 		$tproducts = $products->get();
 		foreach ($tproducts as $product) {

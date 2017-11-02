@@ -49,7 +49,7 @@ class SubCategoryController extends Controller
 			$query->where('status', 'ACTIVE');
 		})->orderBy('updated_at', 'desc');
 
-		$brands = $products->pluck('brand');
+		$brands = $products->groupBy('brand')->pluck('brand');
 
 		$tproducts = $products->get();
 		foreach ($tproducts as $product) {

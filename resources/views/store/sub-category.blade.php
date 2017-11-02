@@ -249,17 +249,17 @@
 				url += "?";
 				if (selected_brands.length > 0) {
 					for (var i = 0; i < selected_brands.length; i++) {
-						url += ((url.includes('&') ? "&" : "")) + "selected_brands[]=" + selected_brands[i];
+						url += ((url.split('?')[1].length > 0 ? "&" : "")) + "selected_brands[]=" + selected_brands[i];
 					}
 				}
 				if (price_min != price_range_min) {
-					url += ((url.includes('&') ? "&" : "")) + "price_min=" + price_min;
+					url += ((url.split('?')[1].length > 0 ? "&" : "")) + "price_min=" + price_min;
 				}
 				if (price_max != price_range_max) {
-					url += ((url.includes('&') ? "&" : "")) + "price_max=" + price_max;
+					url += ((url.split('?')[1].length > 0 ? "&" : "")) + "price_max=" + price_max;
 				}
 				if (page > 1) {
-					url += ((url.includes('&') ? "&" : "")) + "page=" + page;
+					url += ((url.split('?')[1].length > 0 ? "&" : "")) + "page=" + page;
 				}
 			}
 

@@ -251,7 +251,7 @@ class SellerProductController extends Controller
 			$updated_seller_product['is_online_payment_available'] = true;
 		}
 
-		$seller_product->fill($updated_seller_product);
+		$seller_product->update($updated_seller_product);
 
 		foreach ($seller_product->attribute_values as $attribute_value) {
 			$attribute_value->status = "INACTIVE";

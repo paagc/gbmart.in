@@ -73,7 +73,7 @@
 														<div class="col col-xs-7">
 															<div class="product-info">
 																<h3 class="name">
-																	<a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ $product->display_name }}</a>
+																	<a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ (strlen($product->display_name) > 20 ? substr($product->display_name, 0, 15) . "..." : $product->display_name) }}</a>
 																</h3>
 																<div class="rating rateit-small"></div>
 																<div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($product->seller_products[0]->seller_price, 2, '.', ',') }} </span> </div>
@@ -128,7 +128,7 @@
 													</div>	
 												</div>
 												<div class="product-info text-left">
-													<h3 class="name"><a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ $product->display_name }}</a></h3>
+													<h3 class="name"><a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ (strlen($product->display_name) > 20 ? substr($product->display_name, 0, 15) . "..." : $product->display_name) }}</a></h3>
 													<div class="rating rateit-small"></div>
 													<div class="description">{{ $product->description_small }}</div>
 

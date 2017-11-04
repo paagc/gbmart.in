@@ -19,7 +19,7 @@ Route::group(['prefix' => 'seller', 'namespace'=>'Seller'], function() {
     Route::post('register', 'AuthController@store');
 });
 
-Route::group(['middleware'=>['seller.auth'], 'prefix' => 'seller', 'namespace'=>'Seller'],function () {
+Route::group(['middleware'=>['seller.auth'], 'prefix' => 'seller', 'namespace'=>'Seller'], function () {
     Route::get('', 'DashboardController@getDashboard');
     Route::get('seller-products', 'SellerProductController@index');
     Route::get('seller-products/create', 'SellerProductController@create');
@@ -27,4 +27,7 @@ Route::group(['middleware'=>['seller.auth'], 'prefix' => 'seller', 'namespace'=>
     Route::get('seller-products/{seller_product_id}/edit', 'SellerProductController@getEdit');
     Route::post('seller-products/{seller_product_id}/edit', 'SellerProductController@postEdit');
     Route::get('seller-products/{seller_product_id}/status/{status}', 'SellerProductController@changeStatus');
+    Route::get('orders', 'OrderController@getAll');
+    Route::get('orders/status/{status}', 'OrderController@getWithStatus');
+    Route::get('orders/id/{order_id}/status-update/{status}', 'OrderController@updateStatus');
 });

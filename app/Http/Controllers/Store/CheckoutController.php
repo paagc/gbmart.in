@@ -131,7 +131,7 @@ class CheckoutController extends Controller
 					'city' => $address->city_town,
 					'state' => $address->state,
 					'postal_code' => $address->pin_code,
-					'extra' => '"' . implode('","', $item->options->all()) . '"',
+					'extra' => http_build_query($item->options->all(), '', ', '),
 					'count' => $item->qty,
 					'price' => $seller_product->seller_price,
 					'delivery_charge' => $seller_product->delivery_charge,

@@ -71,6 +71,7 @@
                             <li style="color:white;">Welcome, {{ Auth::user()->name }} </li>
                             <li><a href="/logout"><i class="icon fa fa-sign-out"></i>Log out</a></li>
                             @else
+                            <li><a href="/store/checkout"><i class="icon fa fa-check"></i>Checkout</a></li>
                             <li><a href="/login"><i class="icon fa fa-lock"></i>Login/Register</a></li>
                             @endif
                         </ul>

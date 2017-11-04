@@ -25,7 +25,7 @@
 								<th>Count</th>
 								<th>Price</th>
 								<th>Delivery Charge</th>
-								<th>Remark</th>
+								<th>Payment Method</th>
 								<th>Placed at</th>
 							</tr>
 						</thead>
@@ -38,7 +38,7 @@
 								<td>{{ $order->count }}</td>
 								<td>{{ $order->price }}</td>
 								<td>{{ $order->delivery_charge }}</td>
-								<td>{{ $order->order_logs()->where('status', 'DELIVERED')->first()->remarks }}</td>
+								<td>{{ $order->payment_method }}</td>
 								<td>{{ $order->created_at }}</td>
 							</tr>
 							@empty

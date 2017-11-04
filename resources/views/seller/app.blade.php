@@ -83,6 +83,73 @@
           <li @if(Route::current()->uri == "seller/seller-products" || Route::current()->uri == "seller/seller-products/create") class="active" @endif>
             <a href="/seller/seller-products"><i class="fa fa-tags"></i> <span>Your Products</span></a>
           </li>
+          <li class="treeview {{{Request::is('seller/orders')||Request::is('seller/orders/status/pending')||Request::is('seller/orders/status/approved')|| Request::is('seller/orders/status/packed') || Request::is('seller/orders/status/shipped') || Request::is('seller/orders/status/delivered') || Request::is('seller/orders/status/cancelled') || Request::is('seller/orders/status/rejected') ? 'active' : ''}}}">
+            <a href="#">
+              <i class="fa fa-files-o"></i>
+              <span>Order Management</span>
+              <span class="pull-right-container">
+                <span class="caret"></span>
+              </span>
+            </a>
+            <ul class="treeview-menu menu-open">
+              <li class="{{{Request::is('seller/orders') ? 'active' : ''}}}">
+                <a href="/seller/orders">
+                  <i class="icon-tasks"></i>
+                  All
+                  <b class="badge badge-error pull-right"></b>
+                </a>
+              </li>
+              <li class="{{{Request::is('seller/orders/status/pending') ? 'active' : ''}}}">
+                <a href="/seller/orders/status/pending">
+                  <i class="icon-tasks"></i>
+                  Pending Orders
+                  <b class="badge badge-error pull-right"></b>
+                </a>
+              </li>
+              <li class="{{{Request::is('seller/orders/status/approved') ? 'active' : ''}}}">
+                <a href="/seller/orders/status/approved">
+                  <i class="icon-tasks"></i>
+                  Approved Orders
+                  <b class="badge badge-error pull-right"></b>
+                </a>
+              </li>
+              <li class="{{{Request::is('seller/orders/status/packed') ? 'active' : ''}}}">
+                <a href="/seller/orders/status/packed">
+                  <i class="icon-tasks"></i>
+                  Packed Orders
+                  <b class="badge badge-error pull-right"></b>
+                </a>
+              </li>
+              <li class="{{{Request::is('seller/orders/status/shipped') ? 'active' : ''}}}">
+                <a href="/seller/orders/status/shipped">
+                  <i class="icon-tasks"></i>
+                  Shipped Orders
+                  <b class="badge badge-error pull-right"></b>
+                </a>
+              </li>
+              <li class="{{{Request::is('seller/orders/status/delivered') ? 'active' : ''}}}">
+                <a href="/seller/orders/status/delivered">
+                  <i class="icon-inbox"></i>
+                  Delivered Orders
+                  <b class="badge badge-success pull-right"></b>
+                </a>
+              </li>
+              <li class="{{{Request::is('seller/orders/status/cancelled') ? 'active' : ''}}}">
+                <a href="/seller/orders/status/cancelled">
+                  <i class="icon-tasks"></i>
+                  Cancelled Orders
+                  <b class="badge badge-error pull-right"></b>
+                </a>
+              </li>
+              <li class="{{{Request::is('seller/orders/status/rejected') ? 'active' : ''}}}">
+                <a href="/seller/orders/status/rejected">
+                  <i class="icon-tasks"></i>
+                  Rejected Orders
+                  <b class="badge badge-error pull-right"></b>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </section>
     </aside>

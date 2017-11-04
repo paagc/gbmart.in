@@ -132,18 +132,28 @@
 												Select your Payment Method
 											</h4>
 										</div>
+										<?php 
+										$is_cod_option_available = false;
+										foreach ($cart_items as $index => $item) {
+											if ($item['seller_product']->is_cod_available) {
+												$is_cod_option_available = true;
+											}
+										}
+										?>
 										<div id="collapseOne" class="panel-collapse collapse in">
 											<div class="panel-body">
 												<div class="row">
+													@if($is_cod_option_available)
 													<div class="col-md-12">
 														<div class="radio">
 															<input type="radio" name="payment_method" value="COD"> 
 															<label> Cash on delivery (COD)</label>
 														</div>
 													</div>
+													@endif
 													<div class="col-md-12">
 														<div class="radio">
-															<input type="radio" name="payment_method" value="ONLINE"> 
+															<input type="radio" name="payment_method" value="ONLINE" @if(!$is_cod_option_available) checked @endif> 
 															<label> Card Payment / Internet Banking / Wallets</label>
 														</div>
 													</div>

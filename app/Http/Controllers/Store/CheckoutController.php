@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Store;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 use Auth;
 use Session;
@@ -13,6 +14,7 @@ use App\User;
 use App\Order;
 use App\SellerProduct;
 use App\Address;
+use App\Mail\OrderPlaced;
 
 class CheckoutController extends Controller
 {
@@ -156,5 +158,15 @@ class CheckoutController extends Controller
 		}
 
 		return back();
+	}
+
+	public function testMail() {
+		$user = User::where('email', 'ajaykpradhan61@gmail.com')->find();
+
+		if(!is_null($user)) {
+			Mail::to($user)->send(new OrderPlaced([]));
+		}
+
+		return "Testing mail";
 	}
 }

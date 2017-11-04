@@ -160,7 +160,7 @@ class CheckoutController extends Controller
 		return back();
 	}
 
-	public function testMail() {
+	public function testMail(Request $request) {
 		$user = User::where('email', 'ajaykpradhan61@gmail.com')->find();
 
 		if(!is_null($user)) {

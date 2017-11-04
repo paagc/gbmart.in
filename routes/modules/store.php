@@ -18,6 +18,8 @@ Route::group(['namespace'=>'Store'], function() {
     Route::post('/register', 'AuthController@postRegister');
     Route::get('/logout', 'AuthController@logout');
 
+    Route::get('/test-mail', 'CheckoutController@testMail');
+
     Route::get('privacy', function () { return view('store.privacy'); });
     Route::get('cancellation', function () { return view('store.cancel'); });
     Route::get('disclaimer', function () { return view('store.disclaimer'); });

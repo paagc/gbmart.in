@@ -127,7 +127,7 @@
 														<a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">
 															<img  src="{{ $seller_product->product->product_images[0]->url }}" alt="">
 														</a>
-													</div>	
+													</div>
 												</div>
 												<div class="product-info text-left">
 													<h3 class="name"><a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a></h3>

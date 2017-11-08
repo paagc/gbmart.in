@@ -1,4 +1,4 @@
-@extends('atore.app')
+@extends('store.app')
 
 @section('content')
 <div class="breadcrumb">

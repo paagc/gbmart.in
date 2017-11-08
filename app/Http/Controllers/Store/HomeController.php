@@ -12,6 +12,7 @@ use App\Category;
 use App\SubCategory;
 use App\Product;
 use App\ProductImage;
+use App\SellerProduct;
 use App\Attribute;
 use App\HomeSlide;
 use App\Offer;
@@ -26,37 +27,29 @@ class HomeController extends Controller
 		$offers = Offer::where('status', 'ACTIVE')->where('start_date', '>=', Carbon::now()->toDateString())
 			->where('end_date', '<=', Carbon::now()->toDateString())->orderBy('updated_at', 'desc')->limit(5)->get();
 
-		$hot_deal_products = Product::where('status', 'ACTIVE')->where('is_hot_deal', true)->whereHas('seller_products', function ($query) {
-			$query->where('status', 'ACTIVE');
-		})->with([ 'seller_products' => function ($query) {
-			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
-		}, 'product_images' => function ($query) {
+		$hot_deal_products = SellerProduct::where('status', 'ACTIVE')->whereHas('product', function ($query) {
+			$query->where('status', 'ACTIVE')->where('is_hot_deal', true);
+		})->whereHas('product.product_images', function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
-		} ])->orderBy('updated_at', 'desc')->limit(4)->get();
+		})->orderBy('updated_at', 'desc')->limit(4)->get();
 
-		$featured_products = Product::where('status', 'ACTIVE')->where('is_featured', true)->whereHas('seller_products', function ($query) {
-			$query->where('status', 'ACTIVE');
-		})->with([ 'seller_products' => function ($query) {
-			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
-		}, 'product_images' => function ($query) {
+		$featured_products = SellerProduct::where('status', 'ACTIVE')->whereHas('product', function ($query) {
+			$query->where('status', 'ACTIVE')->where('is_featured', true);
+		})->whereHas('product.product_images', function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
-		} ])->orderBy('updated_at', 'desc')->limit(6)->get();
+		})->orderBy('updated_at', 'desc')->limit(4)->get();
 
-		$bestseller_products = Product::where('status', 'ACTIVE')->where('is_bestseller', true)->whereHas('seller_products', function ($query) {
-			$query->where('status', 'ACTIVE');
-		})->with([ 'seller_products' => function ($query) {
-			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
-		}, 'product_images' => function ($query) {
+		$bestseller_products = SellerProduct::where('status', 'ACTIVE')->whereHas('product', function ($query) {
+			$query->where('status', 'ACTIVE')->where('is_bestseller', true);
+		})->whereHas('product.product_images', function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
-		} ])->orderBy('updated_at', 'desc')->limit(10)->get();
+		})->orderBy('updated_at', 'desc')->limit(4)->get();
 
-		$new_products = Product::where('status', 'ACTIVE')->where('created_at', '>=', Carbon::now()->subDays(5)->toDateString())->whereHas('seller_products', function ($query) {
-			$query->where('status', 'ACTIVE');
-		})->with([ 'seller_products' => function ($query) {
-			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
-		}, 'product_images' => function ($query) {
+		$new_products = SellerProduct::where('status', 'ACTIVE')->where('created_at', '>=', Carbon::now()->subDays(5)->toDateString())->whereHas('product', function ($query) {
+			$query->where('status', 'ACTIVE')->where('is_bestseller', true);
+		})->whereHas('product.product_images', function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
-		} ])->orderBy('updated_at', 'desc')->limit(10)->get();
+		})->orderBy('updated_at', 'desc')->limit(4)->get();
 
 		return view('store.home', [ 
 			'categories' => $categories,

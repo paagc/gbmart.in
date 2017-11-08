@@ -21,6 +21,10 @@
 					<form class="register-form outer-top-xs" role="form" action="/seller/register" method="POST">
 						{{ csrf_field() }}
 						<input type="hidden" name="type" value="seller">
+
+						@if(Session::has('error'))
+						<p style="text-align: center; color: red;">{{ Session::get('error') }}</p>
+						@endif
 						<div class="form-group row">
 							<div class="col-sm-6 col-md-6">
 								<label class="info-title" for="exampleInputEmail2">Email Address <span>*</span></label>

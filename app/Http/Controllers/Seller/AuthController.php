@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Auth;
+use Session;
 use App\User;
 use App\Role;
 
@@ -70,6 +71,14 @@ class AuthController extends Controller
 	        'mobile_number' => 'required',
 	        'password' => 'required|confirmed|min:6'
 		]);
+
+		$existingUser = User::where('email', $input->get('email'))->whereOr('mobile_number', $input->get('mobile_number'))->first();
+
+		if (!is_null($existingUser)) {
+			Session::flash('error', 'User already exists with this email ID or mobile number.');
+			return back();
+		}
+
 		$seller = $input->all();
 		$seller['status'] = 'PENDING';
 		$seller['password'] = bcrypt($seller['password']);

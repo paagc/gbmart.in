@@ -114,6 +114,8 @@ class SubCategoryController extends Controller
 			$query->where('status', 'ACTIVE')->where('name', $category_name);
 		})->orderBy('updated_at', 'desc')->limit(6)->get();
 
+		dd($seller_products);
+
 		if (!is_null($sub_category)) {
 			return view('store.sub-category', [ 
 				'sub_category' => $sub_category,

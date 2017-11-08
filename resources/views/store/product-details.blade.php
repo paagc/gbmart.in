@@ -30,7 +30,7 @@
 										<div class="image custom-product-image"> <img src="{{ $seller_product->product->product_images[0]->url }}" alt=""> </div>
 									</div>
 									<div class="product-info text-left m-t-20">
-										<h3 class="name"><a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a></h3>
+										<h3 class="name"><a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a></h3>
 										<div class="rating rateit-small"></div>
 										<div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($seller_product->seller_price, 2, '.', ',') }}</span> 
 											<span class="price-before-discount"><span class="fa fa-inr"></span>{{ number_format($seller_product->product->original_price, 2, '.', ',') }}</span> 
@@ -40,7 +40,6 @@
 										<div class="action">
 											<div class="add-cart-button btn-group">
 												<button seller-product-id="{{ $seller_product->id }}" class="btn btn-primary icon seller-product" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
-												<button seller-product-id="{{ $seller_product->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</button>
 												<button seller-product-id="{{ $seller_product->id }}" class="btn btn-primary cart-btn buy-now" type="button">Buy now</button>
 											</div>
 										</div>
@@ -66,12 +65,12 @@
 												<div class="row product-micro-row">
 													<div class="col col-xs-5">
 														<div class="product-image">
-															<div class="image custom-product-image"> <a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}"> <img src="{{ $seller_product->product->product_images[0]->url }}" alt=""> </a> </div>
+															<div class="image custom-product-image"> <a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}"> <img src="{{ $seller_product->product->product_images[0]->url }}" alt=""> </a> </div>
 														</div>
 													</div>
 													<div class="col col-xs-7">
 														<div class="product-info">
-															<h3 class="name"><a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a></h3>
+															<h3 class="name"><a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a></h3>
 															<div class="rating rateit-small"></div>
 															<div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($seller_product->seller_price, 2, '.', ',') }} </span> </div>
 														</div>
@@ -260,13 +259,13 @@
 												<div class="product">
 													<div class="product-image">
 														<div class="image"> 
-															<a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}">
+															<a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">
 																<img src="{{ $seller_product->product->product_images[0]->url }}" alt="">
 															</a> 
 														</div>
 													</div>
 													<div class="product-info text-left">
-														<h3 class="name"><a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a></h3>
+														<h3 class="name"><a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a></h3>
 														<div class="rating rateit-small"></div>
 														<div class="description"></div>
 														<div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($seller_product->seller_price, 2, '.', ',') }} </span>

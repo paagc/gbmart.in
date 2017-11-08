@@ -72,7 +72,6 @@
                                             <div class="action">
                                                 <div class="add-cart-button btn-group">
                                                     <button seller-product-id="{{ $seller_product->id }}" class="btn btn-primary icon seller-product" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </buuton>
-                                                    <button seller-product-id="{{ $seller_product->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</button>
                                                     <button seller-product-id="{{ $seller_product->id }}" class="btn btn-primary cart-btn buy-now" type="button">Buy now</button>
                                                 </div>
                                             </div>

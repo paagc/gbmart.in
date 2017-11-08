@@ -54,6 +54,15 @@ class SubCategoryController extends Controller
 
 		$brands = clone $seller_products;
 		$brands = $brands->with('product')->get()->pluck('product.brand');
+		$brand_list = $brands;
+		$brands = [];
+
+		foreach ($brand_list as $brand) {
+			if (!in_array($brand, $brands)) {
+				array_push($brands, $brand);
+			}
+		}
+		sort($brands);
 
 		$seller_products = $seller_products->orderBy('updated_at', 'desc');
 

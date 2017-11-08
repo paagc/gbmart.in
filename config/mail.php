@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'localhost'),
+    'host' => env('MAIL_HOST', 'smtp-relay.sendinblue.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 465),
+    'port' => env('MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => 'sales@gbmart.in',
+    'username' => 'gajubisen6@gmail.com',
 
-    'password' => 'gbmart123',
+    'password' => 'faPqdGbN3ACrXR6v',
 
     /*
     |--------------------------------------------------------------------------

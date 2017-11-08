@@ -202,12 +202,12 @@
 																		<tr>
 																			<td class="romove-item">{{ $index + 1 }}</td>
 																			<td class="cart-image">
-																				<a class="entry-thumbnail" href="/store/{{ $item['seller_product']->product->category->name }}/{{ $item['seller_product']->product->sub_category->name }}/{{ $item['seller_product']->product->name }}">
+																				<a class="entry-thumbnail" href="/store/{{ $item['seller_product']->product->category->name }}/{{ $item['seller_product']->product->sub_category->name }}/{{ $item['seller_product']->product->name }}-{{ $item['seller_product']->id }}">
 																					<img src="{{ $item['seller_product']->product->product_images[0]->url }}" alt="">
 																				</a>
 																			</td>
 																			<td class="cart-product-name-info">
-																				<h4 class='cart-product-description'><a href="/store/{{ $item['seller_product']->product->category->name }}/{{ $item['seller_product']->product->sub_category->name }}/{{ $item['seller_product']->product->name }}">{{ $item['seller_product']->product->display_name }}</a></h4>
+																				<h4 class='cart-product-description'><a href="/store/{{ $item['seller_product']->product->category->name }}/{{ $item['seller_product']->product->sub_category->name }}/{{ $item['seller_product']->product->name }}-{{ $item['seller_product']->id }}">{{ $item['seller_product']->product->display_name }}</a></h4>
 																			</td>
 																			<td class="cart-product-quantity">
 																				<div class="cart-quantity">

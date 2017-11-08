@@ -59,9 +59,9 @@
                                     
                                         
                                         <div class="product-info text-left m-t-20">
-                                            <h3 class="name"><a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a></h3>
+                                            <h3 class="name"><a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a></h3>
                                             <div class="rating rateit-small"></div>
-                                            <div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($seller_product->product->seller_products[0]->seller_price, 2, '.', ',') }}</span> 
+                                            <div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($seller_product->seller_price, 2, '.', ',') }}</span> 
                                                 
                                                 <span class="price-before-discount"><span class="fa fa-inr"></span>{{ number_format($seller_product->product->original_price, 2, '.', ',') }}</span> </div>
                                             
@@ -71,9 +71,9 @@
                                         <div class="cart clearfix animate-effect">
                                             <div class="action">
                                                 <div class="add-cart-button btn-group">
-                                                    <button seller-product-id="{{ $seller_product->product->seller_products[0]->id }}" class="btn btn-primary icon seller-product" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </buuton>
-                                                    <button seller-product-id="{{ $seller_product->product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</button>
-                                                    <button seller-product-id="{{ $seller_product->product->seller_products[0]->id }}" class="btn btn-primary cart-btn buy-now" type="button">Buy now</button>
+                                                    <button seller-product-id="{{ $seller_product->id }}" class="btn btn-primary icon seller-product" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </buuton>
+                                                    <button seller-product-id="{{ $seller_product->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</button>
+                                                    <button seller-product-id="{{ $seller_product->id }}" class="btn btn-primary cart-btn buy-now" type="button">Buy now</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -98,7 +98,7 @@
                                                         <div class="col col-xs-5">
                                                             <div class="product-image">
                                                                 <div class="image custom-product-image"> 
-                                                                    <a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}"> 
+                                                                    <a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}"> 
                                                                         <img src="{{ $seller_product->product->product_images[0]->url }}" alt=""> 
                                                                     </a> 
                                                                 </div>
@@ -108,10 +108,10 @@
                                                         <div class="col col-xs-7">
                                                             <div class="product-info">
                                                                 <h3 class="name">
-                                                                    <a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a>
+                                                                    <a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a>
                                                                 </h3>
                                                                 <div class="rating rateit-small"></div>
-                                                                <div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($seller_product->product->seller_products[0]->seller_price, 2, '.', ',') }} </span> </div>
+                                                                <div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($seller_product->seller_price, 2, '.', ',') }} </span> </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -192,15 +192,15 @@
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
-                                                            <div class="image custom-product-image"> <a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}">
+                                                            <div class="image custom-product-image"> <a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">
                                                                 <img src="{{ $seller_product->product->product_images[0]->url }}" alt=""></a> 
                                                             </div>
                                                         </div>
                                                         <div class="product-info text-left">
-                                                            <h3 class="name"><a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a></h3>
+                                                            <h3 class="name"><a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a></h3>
                                                             <div class="rating rateit-small"></div>
                                                             <div class="description"></div>
-                                                            <div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($seller_product->product->seller_products[0]->seller_price, 2, '.', ',') }} </span>
+                                                            <div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($seller_product->seller_price, 2, '.', ',') }} </span>
                                                                 <span class="price-before-discount"><span class="fa fa-inr"></span>{{ number_format($seller_product->product->original_price, 2, '.', ',') }}</span> 
                                                             </div>
                                                         </div>
@@ -208,11 +208,11 @@
                                                             <div class="action">
                                                                 <ul class="list-unstyled">
                                                                     <li class="add-cart-button btn-group">
-                                                                        <a href="#" seller-product-id="{{ $seller_product->product->seller_products[0]->id }}" data-toggle="tooltip" class="btn btn-primary icon seller-product" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </a>
-                                                                        <a href="#" seller-product-id="{{ $seller_product->product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</a>
+                                                                        <a href="#" seller-product-id="{{ $seller_product->id }}" data-toggle="tooltip" class="btn btn-primary icon seller-product" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </a>
+                                                                        <a href="#" seller-product-id="{{ $seller_product->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</a>
                                                                     </li>
                                                                     <li product-id="{{ $seller_product->product->id }}" class="lnk wishlist add-wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="#" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                                                    <li class="lnk"> <a seller-product-id="{{ $seller_product->product->seller_products[0]->id }}" href="#" data-toggle="tooltip" class="add-to-cart buy-now" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> </li>
+                                                                    <li class="lnk"> <a seller-product-id="{{ $seller_product->id }}" href="#" data-toggle="tooltip" class="add-to-cart buy-now" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -256,16 +256,16 @@
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
-                                                            <div class="image custom-product-image"> <a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}">
+                                                            <div class="image custom-product-image"> <a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">
                                                                 <img src="{{ $seller_product->product->product_images[0]->url }}" alt=""></a> 
                                                             </div>
                                                         </div>
                                                         <div class="product-info text-left">
-                                                            <h3 class="name"><a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a></h3>
+                                                            <h3 class="name"><a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a></h3>
                                                             <div class="rating rateit-small"></div>
                                                             <div class="description"></div>
                                                             <div class="product-price"> 
-                                                                <span class="price"><span class="fa fa-inr"></span>{{ number_format($seller_product->product->seller_products[0]->seller_price, 2, '.', ',') }} </span>
+                                                                <span class="price"><span class="fa fa-inr"></span>{{ number_format($seller_product->seller_price, 2, '.', ',') }} </span>
                                                                 <span class="price-before-discount"><span class="fa fa-inr"></span>{{ number_format($seller_product->product->original_price, 2, '.', ',') }}</span> 
                                                             </div>
                                                         </div>
@@ -273,14 +273,14 @@
                                                             <div class="action">
                                                                 <ul class="list-unstyled">
                                                                     <li class="add-cart-button btn-group">
-                                                                        <a href="#" seller-product-id="{{ $seller_product->product->seller_products[0]->id }}" data-toggle="tooltip" class="btn btn-primary icon seller-product" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </a>
-                                                                        <a href="#" seller-product-id="{{ $seller_product->product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</a>
+                                                                        <a href="#" seller-product-id="{{ $seller_product->id }}" data-toggle="tooltip" class="btn btn-primary icon seller-product" type="button" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </a>
+                                                                        <a href="#" seller-product-id="{{ $seller_product->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</a>
                                                                     </li>
                                                                     <li class="lnk wishlist add"> 
                                                                         <a product-id="{{ $seller_product->product->id }}" data-toggle="tooltip" class="add-to-cart add-wishlist" href="#" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> 
                                                                     </li>
                                                                     <li class="lnk"> 
-                                                                        <a  seller-product-id="{{ $seller_product->product->seller_products[0]->id }}" data-toggle="tooltip" class="add-to-cart buy-now" href="#" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> 
+                                                                        <a  seller-product-id="{{ $seller_product->id }}" data-toggle="tooltip" class="add-to-cart buy-now" href="#" title="Buy now"> <i class="fa fa-shopping-bag" aria-hidden="true"></i> </a> 
                                                                     </li>
                                                                 </ul>
                                                             </div>

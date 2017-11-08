@@ -56,15 +56,15 @@
 								<div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
 									<div class="item">
 										<div class="products special-product custom-product-boxes">
-											@foreach($featured_products as $product)
+											@foreach($featured_products as $seller_product)
 											<div class="product custom-product-box">
 												<div class="product-micro">
 													<div class="row product-micro-row">
 														<div class="col col-xs-5">
 															<div class="product-image">
 																<div class="image custom-product-image"> 
-																	<a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}"> 
-																		<img src="{{ $product->product_images[0]->url }}" alt=""> 
+																	<a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}"> 
+																		<img src="{{ $seller_product->product->product_images[0]->url }}" alt=""> 
 																	</a> 
 																</div>
 															</div>
@@ -73,10 +73,10 @@
 														<div class="col col-xs-7">
 															<div class="product-info">
 																<h3 class="name">
-																	<a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ (strlen($product->display_name) > 20 ? substr($product->display_name, 0, 15) . "..." : $product->display_name) }}</a>
+																	<a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a>
 																</h3>
 																<div class="rating rateit-small"></div>
-																<div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($product->seller_products[0]->seller_price, 2, '.', ',') }} </span> </div>
+																<div class="product-price"> <span class="price"><span class="fa fa-inr"></span>{{ number_format($seller_product->seller_price, 2, '.', ',') }} </span> </div>
 															</div>
 														</div>
 													</div>
@@ -117,25 +117,27 @@
 						<div class="tab-pane active " id="grid-container">
 							<div class="category-product">
 								<div class="row custom-product-boxes">
-									@if (count($products) > 0)
-									@foreach ($products as $product)
+									@if (count($seller_products) > 0)
+									@foreach ($seller_products as $seller_product)
 									<div class="col-sm-6 col-md-4 wow fadeInUp custom-product-box">
 										<div class="products">
 											<div class="product">		
 												<div class="product-image">
 													<div class="image custom-product-image">
-														<a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}"><img  src="{{ $product->product_images[0]->url }}" alt=""></a>
+														<a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">
+															<img  src="{{ $seller_product->product->product_images[0]->url }}" alt="">
+														</a>
 													</div>	
 												</div>
 												<div class="product-info text-left">
-													<h3 class="name"><a href="/store/{{ $product->category->name }}/{{ $product->sub_category->name }}/{{ $product->name }}">{{ (strlen($product->display_name) > 20 ? substr($product->display_name, 0, 15) . "..." : $product->display_name) }}</a></h3>
+													<h3 class="name"><a href="/store/{{ $seller_product->product->category->name }}/{{ $seller_product->product->sub_category->name }}/{{ $seller_product->product->name }}-{{ $seller_product->id }}">{{ (strlen($seller_product->product->display_name) > 20 ? substr($seller_product->product->display_name, 0, 15) . "..." : $seller_product->product->display_name) }}</a></h3>
 													<div class="rating rateit-small"></div>
-													<div class="description">{{ $product->description_small }}</div>
+													<div class="description">{{ $seller_product->product->description_small }}</div>
 
 													<div class="product-price">	
 														<span class="price fa fa-inr">
-															{{ number_format($product->seller_products[0]->seller_price, 2, '.', ',') }}				</span>
-															<span class="price-before-discount fa fa-inr">{{ number_format($product->original_price, 2, '.', ',') }}</span>
+															{{ number_format($seller_product->seller_price, 2, '.', ',') }}				</span>
+															<span class="price-before-discount fa fa-inr">{{ number_format($seller_product->product->original_price, 2, '.', ',') }}</span>
 
 														</div>
 
@@ -144,10 +146,10 @@
 														<div class="action">
 															<ul class="list-unstyled">
 																<li class="add-cart-button btn-group">
-																	<button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary icon seller-product" data-toggle="dropdown" type="button">
+																	<button seller-product-id="{{ $seller_product->id }}" class="btn btn-primary icon seller-product" data-toggle="dropdown" type="button">
 																		<i class="fa fa-shopping-cart"></i>													
 																	</button>
-																	<button seller-product-id="{{ $product->seller_products[0]->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</button>
+																	<button seller-product-id="{{ $seller_product->id }}" class="btn btn-primary cart-btn seller-product" type="button">Add to cart</button>
 
 																</li>
 
@@ -158,7 +160,7 @@
 																</li>
 
 																<li class="lnk">
-																	<a seller-product-id="{{ $product->seller_products[0]->id }}" class="add-to-cart buy-now" title="Buy now">
+																	<a seller-product-id="{{ $seller_product->id }}" class="add-to-cart buy-now" title="Buy now">
 																		<i class="fa fa-shopping-bag"></i>
 																	</a>
 																</li>

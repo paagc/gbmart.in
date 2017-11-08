@@ -44,30 +44,26 @@ class SubCategoryController extends Controller
 			$query->where('name', $category_name);
 		})->first();
 
-		$products = Product::where('status', 'ACTIVE')
-		->whereHas('category', function ($query) use ($category_name) {
+		$seller_products = SellerProduct::where('status', 'ACTIVE')
+		->whereHas('product.category', function ($query) use ($category_name) {
 			$query->where('name', $category_name);
-		})->whereHas('sub_category', function ($query) use ($sub_category_name) {
+		})->whereHas('product.sub_category', function ($query) use ($sub_category_name) {
 			$query->where('name', $sub_category_name);
-		})->whereHas('seller_products', function ($query) {
-			$query->where('status', 'ACTIVE');
 		});
 
 
-		$brands = clone $products;
-		$brands = $brands->groupBy('brand')->pluck('brand');
+		$brands = clone $seller_products;
+		$brands = $brands->with('product')->get()->pluck('product.brand');
 
-		$products = $products->orderBy('updated_at', 'desc');
+		$seller_products = $seller_products->orderBy('updated_at', 'desc');
 
-		$tproducts = $products->get();
-		foreach ($tproducts as $product) {
-			foreach ($product->seller_products as $seller_product) {
-				if ($seller_product->status = 'ACTIVE' && $seller_product->seller_price < $price_range_min) {
-					$price_range_min = $seller_product->seller_price;
-				}
-				if ($seller_product->status = 'ACTIVE' && $seller_product->seller_price > $price_range_max) {
-					$price_range_max = $seller_product->seller_price;
-				}
+		$tseller_products = $seller_products->get();
+		foreach ($tseller_products as $seller_product) {
+			if ($seller_product->seller_price < $price_range_min) {
+				$price_range_min = $seller_product->seller_price;
+			}
+			if ($seller_product->seller_price > $price_range_max) {
+				$price_range_max = $seller_product->seller_price;
 			}
 		}
 
@@ -82,54 +78,46 @@ class SubCategoryController extends Controller
 			$price_max = (int) $request->get('price_max');
 		}
 
-		if (count($selected_brands) > 0) {
-			$products = $products->whereIn('brand', $selected_brands);
-		}
+		$seller_products = $seller_products->with(['product' => function ($query) use ($selected_brands, $price_min, $price_max, $price_range_min, $price_range_max) {
 
-		$products = $products->whereHas('seller_products', function ($query) use ($price_range_min, $price_range_max, $price_min, $price_max) {
-			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
-			if ($price_min != $price_range_min && $price_min > 0) {
-				$query->where('seller_price', '>=', $price_min);
-			}
-			if ($price_max != $price_range_max && $price_range_max > 0) {
-				$query->where('seller_price', '<=', $price_max);
-			}
-		});
+			$query->where('status', 'ACTIVE');
 
-		$products = $products->with([ 'seller_products' => function ($query) use ($price_range_min, $price_range_max, $price_min, $price_max) {
-			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
-			if ($price_min != $price_range_min && $price_min > 0) {
-				$query->where('seller_price', '>=', $price_min);
+			if (count($selected_brands) > 0) {
+				$query->whereIn('brand', $selected_brands);
 			}
-			if ($price_max != $price_range_max && $price_range_max > 0) {
-				$query->where('seller_price', '<=', $price_max);
-			}
-		}, 'product_images' => function ($query) {
-			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
 		} ]);
 
-		$count = $products->count();
+		
+		if ($price_min != $price_range_min && $price_min > 0) {
+			$seller_products = $seller_products->where('seller_price', '>=', $price_min);
+		}
+		if ($price_max != $price_range_max && $price_range_max > 0) {
+			$seller_products = $seller_products->where('seller_price', '<=', $price_max);
+		}
+
+		$seller_products = $seller_products->whereHas('product.product_images', function ($query) {
+			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
+		});
+
+		$count = $seller_products->count();
 		$page_count = ($count / $page_size) + ((($count % $page_size) > 0) ? 1 : 0);
 
-		$products = $products->skip(($page - 1) * $page_size)->limit($page_size)->get();
+		$seller_products = $seller_products->skip(($page - 1) * $page_size)->limit($page_size)->get();
 
-		$featured_products = Product::where('status', 'ACTIVE')->where('is_featured', true)
-		->whereHas('category', function ($query) use ($category_name) {
-			$query->where('name', $category_name);
-		})->whereHas('sub_category', function ($query) use ($sub_category_name) {
-			$query->where('name', $sub_category_name);
-		})->whereHas('seller_products', function ($query) {
-			$query->where('status', 'ACTIVE');
-		})->with([ 'seller_products' => function ($query) {
-			$query->where('status', 'ACTIVE')->orderBy('seller_price', 'asc');
-		}, 'product_images' => function ($query) {
+		$featured_products = SellerProduct::where('status', 'ACTIVE')->whereHas('product', function ($query) {
+			$query->where('status', 'ACTIVE')->where('is_featured', true);
+		})->whereHas('product.product_images', function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
-		} ])->orderBy('updated_at', 'desc')->limit(6)->get();
+		})->whereHas('product.sub_category', function ($query) use ($sub_category_name) {
+			$query->where('status', 'ACTIVE')->where('name', $sub_category_name);
+		})->whereHas('product.sub_category.category', function ($query) use ($category_name) {
+			$query->where('status', 'ACTIVE')->where('name', $category_name);
+		})->orderBy('updated_at', 'desc')->limit(6)->get();
 
 		if (!is_null($sub_category)) {
 			return view('store.sub-category', [ 
 				'sub_category' => $sub_category,
-				'products' => $products,
+				'seller_products' => $seller_products,
 				'featured_products' => $featured_products,
 				'page' => $page,
 				'page_size' => $page_size,

@@ -43,5 +43,5 @@ Route::group(['namespace'=>'Store'], function() {
     Route::get('/store/cart/remove/{seller_product_id}', 'CartController@removeFromCart');
     Route::get('/store/cart/buy-now/{seller_product_id}', 'CartController@buyNow');
     Route::get('/store/{category_name}/{sub_category_name}', 'SubCategoryController@getProducts');
-    Route::get('/store/{category_name}/{sub_category_name}/{product_name}', 'ProductDetailsController@getProductDetails');
+    Route::get('/store/{category_name}/{sub_category_name}/{product_name_seller_product_id}', 'ProductDetailsController@getProductDetails');
 });

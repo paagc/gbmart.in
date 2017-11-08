@@ -45,11 +45,11 @@ class SubCategoryController extends Controller
 		})->first();
 
 		$seller_products = SellerProduct::where('status', 'ACTIVE')
-		->whereHas('product.category', function ($query) use ($category_name) {
+		->with([ 'product.category' => function ($query) use ($category_name) {
 			$query->where('name', $category_name);
-		})->whereHas('product.sub_category', function ($query) use ($sub_category_name) {
+		}, 'product.sub_category' => function ($query) use ($sub_category_name) {
 			$query->where('name', $sub_category_name);
-		});
+		} ]);
 
 
 		$brands = clone $seller_products;
@@ -95,9 +95,9 @@ class SubCategoryController extends Controller
 			$seller_products = $seller_products->where('seller_price', '<=', $price_max);
 		}
 
-		$seller_products = $seller_products->whereHas('product.product_images', function ($query) {
+		$seller_products = $seller_products->with([ 'product.product_images' => function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
-		});
+		} ]);
 
 		$count = $seller_products->count();
 		$page_count = ($count / $page_size) + ((($count % $page_size) > 0) ? 1 : 0);

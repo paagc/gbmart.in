@@ -72,10 +72,17 @@ class AuthController extends Controller
 	        'password' => 'required|confirmed|min:6'
 		]);
 
-		$existingUser = User::where('email', $input->get('email'))->whereOr('mobile_number', $input->get('mobile_number'))->first();
+		$existingUserWithEmail = User::where('email', $input->get('email'))->first();
 
-		if (!is_null($existingUser)) {
-			Session::flash('error', 'User already exists with this email ID or mobile number.');
+		if (!is_null($existingUserWithEmail)) {
+			Session::flash('error', 'User already exists with this email ID.');
+			return back();
+		}
+
+		$existingUserWithMobileNumber = User::where('mobile_number', 'like', '%' . $input->get('mobile_number') . '%')->first();
+
+		if (!is_null($existingUserWithMobileNumber)) {
+			Session::flash('error', 'User already exists with this mobile number.');
 			return back();
 		}
 

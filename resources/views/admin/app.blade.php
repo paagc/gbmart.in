@@ -172,6 +172,9 @@
           <li class="{{{Request::is('admin/gift-coupon') || Request::is('admin/gift-coupon/create') ? 'active' : ''}}}">
             <a href="/admin/gift-coupon"> <span>Gift Coupons</span></a>
           </li>
+          <li class="{{{Request::is('admin/google-merchant-products') ? 'active' : ''}}}">
+            <a href="/admin/google-merchant-products"> <span>Google Shopping Content</span></a>
+          </li>
         </ul>
       </section>
     </aside>

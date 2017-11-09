@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "gbmart-test",
+  "private_key_id": "b86fe627b08a422da93a5e6cbce27ca0bfb45e91",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC/V0D5kN5TP+Ua\nBAPqYqXushh9bUSPoyn/PuvGndKN3aio9uV+OkiIGjIPeO/u/69RDpsmp6/n26rT\nIN7H0Sas7iqIX0zn+DJPXsbB7Jrh+A1xP8UNGyATHMOlpx11z5tD0MPvU5NCkPdd\ne3L+jsUfW5g8KxFAiA588Spd0bBTqW92tFanH81u9J3Xmo3mIYfyh/9nhKytmG/z\nkMXlqTAgg8SsutU9YNPKfAo3OxWqvt3OrlKB2kyvkha/RjUTCwNwSpA1KLMoXVSP\nWxxYtykDmN4o/3oah6sbDfA6YoxaajJp43pRushX1aAJG/atKQOVJiKwMg9ubsNG\ncofkE3lbAgMBAAECggEACHRitsRWdpI+XXxrmd87BXA8Jx/9ZWVodSgCw2IfjCI3\nvM46t22m3SYJ1pIu8+i7W+xhIapLhQYOpx6ZiXXDQjqR3uMVzbLeB5DLXS/xwLtf\ns1nbK1LqrhLZeEfemYvks0XrFSJPFvll3MJtgzRWydBtH8zStH8ZOMnFPU5cfrh3\nLmifMCIki1dyMRgzpPnxrlskbWU9g51H41Pq58SF+CEI2ek29WTrIRsp467NLy4p\nEIToel2dSmUlxOIJM4cNpJTxeB5KuOLKzYSPKqyS9KKyyu3qvR4UrbWExMItDtvo\njGO3Nhq4yJ/EDQsLizjCK75phDJr0XWfMhnvBmuyiQKBgQDeNFC1k2ojlDT38oW1\naiR0zLxyum4UGaRMW0Hsa3TBcAUOht2mpBNiw/ep5YDs137LfWDMgE0sSdnN2YEu\nGtj4efU3wZ/j4t6qD+LPO+pAMH5IWI8FZqcxcYRtgx+3CqKrVnEijHJhQ4lKE15t\n/VrLiSHoWrLNFQs8qTPhl/n26QKBgQDccT7Qyr99bvT3fLOnr1fDIZjLw1JOL16L\n4tHA6hmFsK+os2Qj+xoIfKRCt8V8njUh1MZqJlGWj8pVej6pgeAMf1IdQphWpQ6Z\nQu0YNlPcFz+0vnIMB9TS973VFTVxEwyyQ48FSrudwV81hKoi9KUIXj0Tz2U86IDr\nujb2TM1LowKBgQDYHW/GOntH4XTnFxUezf5pL1u2Bkbb+9iFf1iN1jF3ljkE2P0p\nf3lvXQQ7VQFg2XLz/ZyxKbRld+qDwKFYszoF6bArq4GURmqkYtEJF9AM4F1iheeM\nrDu+5haT4K1u/MQb+vYMUSdKHEKiLlZwibLONTEqaVRwDKCiPjs8lfDDSQKBgQCb\n/QqtJnsgYG653iUmyF3694Au1/Ua3Ew0AnnY4A7VWnTClMaM63e9f62ghHgbubvx\nR6ZroNflCbTsjYdf3UZUsZfCmsg/r6bH7uLlWjQ3LsBmvsjnGHeSHbrX2J0reYZn\ncoT3Aq4GcLpVnZ3jBGjvpffkV8LUudXYeLnByhEPrwKBgFd2j6h+6eFGrkJNYP1T\nOrBtg0RdOnrWgqopAN89pIvpyH34x8xHpxMfpNJ3C/f5Dpxak+LWqCBZc07eFCV3\nyasR+0oTi9CTgGQckZwcRGDzEnQDjL2taeA/HRAYXBmVUx52/9jQgBRWNlSfIcvf\nwmlY3AZOXcA9uW8Ab0OVLpQc\n-----END PRIVATE KEY-----\n",
+  "client_email": "gbmart-test@gbmart-test.iam.gserviceaccount.com",
+  "client_id": "100257217901392029010",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gbmart-test%40gbmart-test.iam.gserviceaccount.com"
+}

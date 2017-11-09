@@ -164,7 +164,7 @@ class CheckoutController extends Controller
 		$user = User::where('email', 'ajaykpradhan61@gmail.com')->first();
 
 		if(!is_null($user)) {
-			Mail::to($user)->send(new OrderPlaced([]));
+			$res = Mail::to($user)->send(new OrderPlaced([]));
 		}
 
 		return "Testing mail";

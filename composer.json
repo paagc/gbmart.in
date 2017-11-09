@@ -11,6 +11,8 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
+        "pulkitjalan/google-apiclient": "^3.1",
+        "webup/laravel-sendinblue": "^1.1",
         "zizaco/entrust": "dev-master"
     },
     "require-dev": {

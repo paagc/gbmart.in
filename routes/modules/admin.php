@@ -70,4 +70,7 @@ Route::group(['middleware'=>['admin.auth'], 'prefix' => 'admin', 'namespace'=>'A
     Route::get('orders/delivered', 'OrderManagementController@deliveredOrders');
     Route::get('orders/cancelled', 'OrderManagementController@cancelledOrders');
     Route::get('orders/rejected', 'OrderManagementController@rejectedOrders');
+
+    Route::get('google-merchant-products', 'GoogleMerchantController@show');
+    Route::post('google-merchant-products', 'GoogleMerchantController@save');
 });

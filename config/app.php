@@ -179,6 +179,8 @@ return [
 
         Zizaco\Entrust\EntrustServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Webup\LaravelSendinBlue\SendinBlueServiceProvider::class,
+        PulkitJalan\Google\GoogleServiceProvider::class,
 
     ],
 
@@ -230,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Google' => PulkitJalan\Google\Facades\Google::class,
     ],
 
 ];

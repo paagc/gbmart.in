@@ -18,6 +18,7 @@ class GoogleMerchantController extends Controller
 		$client->setApplicationName(env('GOOGLE_APPLICATION_NAME'));
 		$client->setClientId(env('GOOGLE_CLIENT_ID'));
 		$client->setClientSecret(env('GOOGLE_CLIENT_SECRET'));
+		$client->setAccessToken('GOOGLE_DEVELOPER_KEY');
 		$client->setRedirectUri($request->fullUrl());
 		$client->setScopes('https://www.googleapis.com/auth/content');
 
@@ -29,7 +30,6 @@ class GoogleMerchantController extends Controller
 		  $_SESSION['oauth_access_token'] = $token;
 		  $this->getProducts($request);
 		} else {
-			dd($client->createAuthUrl());
 		  return redirect($client->createAuthUrl());
 		}
 	}

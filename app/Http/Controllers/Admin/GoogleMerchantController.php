@@ -28,6 +28,7 @@ class GoogleMerchantController extends Controller
 		} elseif (isset($_GET['code'])) {
 		  $token = $client->authenticate($_GET['code']);
 		  $_SESSION['oauth_access_token'] = $token;
+		  $request->session()->put('oauth_access_token', $token);
 		  $this->getProducts($request);
 		} else {
 		  return redirect($client->createAuthUrl());

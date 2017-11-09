@@ -36,6 +36,7 @@ class GoogleMerchantController extends Controller
 	}
 
 	public function getProducts(Request $request) {
+		dd($request->session()->all());
 		$shopping_content = Google::make('ShoppingContent');
 
 		$existingProducts = $shopping_content->products->listProducts('114635174');

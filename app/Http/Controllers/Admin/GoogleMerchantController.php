@@ -22,13 +22,11 @@ class GoogleMerchantController extends Controller
 		$client->setRedirectUri($request->fullUrl());
 		$client->setScopes('https://www.googleapis.com/auth/content');
 
-		if (isset($_SESSION['oauth_access_token'])) {
-		  $client->setAccessToken($_SESSION['oauth_access_token']);
-		  $this->getProducts($request);
-		} elseif (isset($_GET['code'])) {
-		  $token = $client->authenticate($_GET['code']);
+		
+		if ($request->has('code')) {
+		  $token = $client->authenticate($request->get('code'));
 		  $_SESSION['oauth_access_token'] = $token;
-		  $request->session()->put('oauth_access_token', $token);
+		  session('oauth_access_token', $token);
 		  $this->getProducts($request);
 		} else {
 		  return redirect($client->createAuthUrl());
@@ -36,7 +34,7 @@ class GoogleMerchantController extends Controller
 	}
 
 	public function getProducts(Request $request) {
-		dd($request->session()->all());
+		dd(session('oauth_access_token'));
 		$shopping_content = Google::make('ShoppingContent');
 
 		$existingProducts = $shopping_content->products->listProducts('114635174');

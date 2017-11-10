@@ -50,7 +50,11 @@ class GoogleMerchantController extends Controller
 		$existingProducts = $existingProducts->resources;
 
 		$inputProducts = [];
-		$seller_products = SellerProduct::where('status', 'ACTIVE')->with([ 'product' => function($query) {
+		$seller_products = SellerProduct::where('status', 'ACTIVE')->whereHas('product', function($query) {
+			$query->where('status', 'ACTIVE');
+		})->whereHas('product.product_images', function($query) {
+			$query->where('status', 'ACTIVE');
+		})->with([ 'product' => function($query) {
 			$query->where('status', 'ACTIVE');
 		}, 'product.product_images' => function($query) {
 			$query->where('status', 'ACTIVE');

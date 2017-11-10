@@ -2,11 +2,11 @@
 
 @section('content_header')
 <h1>
-	Products
+	Google Shopping Content
 </h1>
 <ol class="breadcrumb">
 	<li><a href="/admin">Home</a></li>
-	<li class="active">Products</li>
+	<li class="active">Products in Google Shopping Content</li>
 </ol>
 @endsection
 
@@ -15,114 +15,113 @@
 	<div class="col-md-12">
 		<div class="box">
 			<div class="box-header with-border">
-				<a href="/admin/products/create" class="btn btn-success pull-right">Add New Product</a>
+				<h3>Existing Products In Google Shopping Content</h3>
 			</div>
 
-			<div class="box-body">
+			<div class="box-body" style="height: 300px; overflow-y: scroll;">
 				<table class="table table-bordered">
-					<tbody>
+					<thead>
 						<tr>
-							<!-- <th>#</th> -->
 							<th>ID</th>
-							<th>Display Name</th>
-							<th>Slug Name</th>
-							<tH>Brand</th>
-							<th>Category</th>
-							<th>Sub Categeory</th>
-							<th>Is Featured</th>
-							<th>Status</th>
-							<th>Actions</th>
+							<th>Name</th>
+							<th>Description</th>
+							<th>Link</th>
+							<th>Condition</th>
+							<th>Price</th>
+							<th>Availability</th>
+							<th>Image Link</th>
+							<th>Brand</th>
 						</tr>
+					</thead>
+					<tbody style="height: 400px; overflow-y: scroll;">
+						@foreach($existingProducts as $product)
 						<tr>
-							<form action="/admin/products" method="GET">
-								<th></th>
-								<th>
-									<div class="form-group">
-										<input type="text" name="display_name" class="form-control" placeholder="" @if(app('request')->has('display_name')) value="{{ app('request')->get('display_name') }}" @endif>
-									</div>
-								</th>
-								<th>
-									<div class="form-group">
-										<input type="text" name="name" class="form-control" placeholder="" @if(app('request')->has('name')) value="{{ app('request')->get('name') }}" @endif>
-									</div>
-								</th>
-								<th>
-									<div class="form-group">
-										<input type="text" name="brand" class="form-control" placeholder="" @if(app('request')->has('brand')) value="{{ app('request')->get('brand') }}" @endif>
-									</div>
-								</th>
-								<th>
-									<div class="form-group">
-										<select name="category_name" class="form-control">
-											<option></option>
-											@foreach($categories as $category)
-											<option value="{{ $category->name }}" @if(app('request')->has('category_name') && app('request')->get('category_name') == $category->name) selected @endif>{{ $category->display_name }}</option>
-											@endforeach
-										</select>
-									</div>
-								</th>
-								<th>
-									<div class="form-group">
-										<select name="sub_category_name" class="form-control">
-											<option></option>
-											@foreach($sub_categories as $sub_category)
-											<option value="{{ $sub_category->name }}" @if(app('request')->has('sub_category_name') && app('request')->get('sub_category_name') == $sub_category->name) selected @endif>{{ $sub_category->display_name }}</option>
-											@endforeach
-										</select>
-									</div>
-								</th>
-								<th>
-									<div class="form-group">
-										<input type="checkbox" name="is_featured" placeholder="" value="YES" @if(app('request')->has('is_featured') && app('request')->get('is_featured')) checked @endif>
-									</div>
-								</th>
-								<th>
-									<div class="form-group">
-										<select name="status" class="form-control">
-											<option></option>
-											<option value="ACTIVE" @if(app('request')->has('status') && app('request')->get('status') == 'ACTIVE') selected @endif>ACTIVE</option>
-											<option value="INACTIVE" @if(app('request')->has('status') && app('request')->get('status') == 'INACTIVE') selected @endif>INACTIVE</option>
-										</select>
-									</div>
-								</th>
-								<th>
-									<button type="submit" class="btn btn-primary">Filter</button>
-								</th>
-							</form>
-						</tr>
-						@if(count($products) == 0)
-						<tr>
-							<td colspan="6">No records found.</td>
-						</tr>
-						@endif
-						@foreach($products as $index => $product)
-						<tr>
-							<td>{{ $product->id }}</td>
-							<td>{{ $product->display_name }}</td>
-							<td>{{ $product->name }}</td>
+							<td>{{ $product->offerId }}</td>
+							<td style="width: 100px;">{{ $product->title }}</td>
+							<td style="width: 200px;">{{ $product->description }}</td>
+							<td style="width: 100px; word-break: break-all;"><a href="{{ $product->link }}" style="width: 100px; word-break: break-all;">{{ $product->link }}</a></td>
+							<td>{{ $product->condition }}</td>
+							<td>{{ $product->price->value }}</td>
+							<td>{{ $product->availability }}</td>
+							<td style="width: 100px; word-break: break-all;"><a href="{{ $product->imageLink }}" style="width: 100px; word-break: break-all;">{{ $product->imageLink }}</a></td>
 							<td>{{ $product->brand }}</td>
-							<td>{{ $product->category->display_name }}</td>
-							<td>{{ $product->sub_category->display_name }}</td>
-							<td>{{ ($product->is_featured ? "YES" : "NO") }}</td>
-							<td>{{ $product->status }}</td>
-							<td>
-								@if($product->status == 'ACTIVE')
-								<a class="btn btn-xs btn-danger" href="/admin/products/{{ $product->id }}/status/INACTIVE" title="Deactivate"><i class="fa fa-window-close"></i></a>
-								@endif
-								@if($product->status == 'INACTIVE')
-								<a class="btn btn-xs btn-success" href="/admin/products/{{ $product->id }}/status/ACTIVE" title="Activate"><i class="fa fa-check-square"></i></a>
-								@endif
-								<a href="/admin/products/{{$product->id}}/edit" title="Edit" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></a>
-							</td>
 						</tr>
 						@endforeach
 					</tbody>
 				</table>
 			</div>
-			<div class="box-footer clearfix">
-				{{ $products->appends(app('request')->all())->render() }}
-			</div>
 		</div>
+		<form method="POST" action="/admin/google-merchant-products">
+			{{ csrf_field() }}
+			<input type="hidden" name="access_token" value="{{ $google_access_token }}">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3>Products In GBMart</h3>
+				</div>
+
+				<div class="box-body" style="height: 300px; overflow-y: scroll;">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<td><input type="checkbox" class="check-products" checked></td>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Description</th>
+								<th>Link</th>
+								<th>Condition</th>
+								<th>Price</th>
+								<th>Availability</th>
+								<th>Image Link</th>
+								<th>Brand</th>
+							</tr>
+						</thead>
+						<tbody style="height: 400px; overflow-y: scroll;">
+							@foreach($inputProducts as $product)
+							<tr>
+								<td><input type="checkbox" class="check-product" name="productIds[]" value="{{ $product['offerId'] }}" checked></td>
+								<td>{{ $product['offerId'] }}</td>
+								<td style="width: 100px;">{{ $product['title'] }}</td>
+								<td style="width: 200px;">{{ $product['description'] }}</td>
+								<td style="width: 100px; word-break: break-all;"><a href="{{ $product['link'] }}" style="width: 100px; word-break: break-all;">{{ $product['link'] }}</a></td>
+								<td>{{ $product['condition'] }}</td>
+								<td>{{ $product['price.value'] }}</td>
+								<td>{{ $product['availability'] }}</td>
+								<td style="width: 100px; word-break: break-all;"><a href="{{ $product['imageLink'] }}" style="width: 100px; word-break: break-all;">{{ $product['imageLink'] }}</a></td>
+								<td>{{ $product['brand'] }}</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+				<div class="box-footer">
+					<button type="submit" class="btn btn-info">Submit</button>
+				</div>
+			</div>
+		</form>
 	</div>
 </div>
+@endsection
+
+@section('footer')
+<script>
+	$(document).ready(function () {
+		$('input.check-products').change(function () {
+			var checked = $(this).prop('checked');
+			$('input.check-product').each(function () {
+				$(this).prop('checked', checked);
+			});
+		});
+
+		$('input.check-product').change(function () {
+			var checked = true;
+			$('input.check-product').each(function () {
+				var thisChecked = $(this).prop('checked');
+				if (!thisChecked) {
+					checked = thisChecked;
+				}
+			});
+			$('input.check-products').prop('checked', checked);
+		});
+	});
+</script>
 @endsection

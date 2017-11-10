@@ -112,8 +112,16 @@ class GoogleMerchantController extends Controller
 		$existingProducts = $shopping_content->products->listProducts($this->merchant_id);
 		$existingProducts = $existingProducts->resources;
 
+		$entries = [];
+
 		foreach ($existingProducts as $product) {
-			$shopping_content->products->delete($this->merchant_id, $product->id);
+			// $shopping_content->products->delete($this->merchant_id, $product->id);
+			$entry = new \Google_Service_ShoppingContent_ProductsCustomBatchRequestEntry();
+			$entry->setBatchId(count($entries) + 1);
+			$entry->setMerchantId($this->merchant_id);
+			$entry->setMethod('delete');
+			$entry->setProductId($product->id);
+			array_push($entries, $entry);
 		}
 
 		$inputProducts = [];
@@ -136,33 +144,50 @@ class GoogleMerchantController extends Controller
 			}
 
 			if (strlen($googleProductCategory) > 0) {
-				array_push($inputProducts, [
-					'offerId' => $seller_product->id,
-					'title' => $seller_product->product->display_name,
-					'description' => $seller_product->product->description_small,
-					'link' => 'https://www.gbmart.in' . '/store/' . $seller_product->product->category->name . '/' . $seller_product->product->sub_category->name . '/' . $seller_product->product->name . '-' . $seller_product->id . '',
-					'condition' => 'new',
-					'price.currency' => 'INR',
-					'price.value' => $seller_product->seller_price,
-					'availability' => ($seller_product->is_in_stock ? 'in stock' : 'out of stock'),
-					'imageLink' => $seller_product->product->product_images[0]->url,
-					'brand' => $seller_product->product->brand,
-					'googleProductCategory' => $googleProductCategory,
-					'destinations' => [
-						0 => [
-							'destinationName' => 'Shopping',
-							'intention' => 'required'
-						]
-					]
-				]);
+				$product = new \Google_Service_ShoppingContent_Product();
+				$product->setOfferId($seller_product->id);
+				$product->setTitle($seller_product->product->display_name);
+				$product->setDescription($seller_product->product->description_small);
+				$product->setLink('https://www.gbmart.in' . '/store/' . $seller_product->product->category->name . '/' . $seller_product->product->sub_category->name . '/' . $seller_product->product->name . '-' . $seller_product->id . '');
+				$product->setCondition('new');
+				$price = new \Google_Service_ShoppingContent_Price();
+				$price->setCurrency('INR');
+				$price->setValue($seller_product->seller_price);
+				$product->setPrice($price);
+				$product->setAvailability(($seller_product->is_in_stock ? 'in stock' : 'out of stock'));
+				$product->setImageLink($seller_product->product->product_images[0]->url);
+				$product->setBrand($seller_product->product->brand);
+				$product->setGoogleProductCategory($googleProductCategory);
+				$destinations = [];
+				$destination = new \Google_Service_ShoppingContent_ProductDestination();
+				$destination->setDestinationName('Shopping');
+				$destination->setIntention('required');
+				array_push($destinations, $destination);
+				$product->setDestinations($destinations);
+				$product->setContentLanguage('en');
+				$product->setChannel('online');
+				$product->setTargetCountry('IN');
+
+				array_push($inputProducts, $product);
 			}
 		}
 
 		foreach($inputProducts as $product) {
-			$insert_data = json_encode($product);
-			$shopping_content->products->inser($this->merchant_id, $insert_data);
+			// $shopping_content->products->insert($this->merchant_id, $insert_data);
+			$entry = new \Google_Service_ShoppingContent_ProductsCustomBatchRequestEntry();
+			$entry->setBatchId(count($entries) + 1);
+			$entry->setMerchantId($this->merchant_id);
+			$entry->setMethod('insert');
+			$entry->setProduct($product);
+			array_push($entries, $entry);
 		}
 
+		$data = new \Google_Service_ShoppingContent_ProductsCustomBatchRequest();
+		$data->setEntries($entries);
+
+		$res = $shopping_content->products->custombatch($data);
+
+		Session::flash('success', 'Your products have been updated. It may take upto 2 hours to reflect.');
 		return redirect('/admin/google-merchant-products?access_token=' . $token['access_token']);
 	}
 }

@@ -15,6 +15,9 @@
 	<div class="col-md-12">
 		<div class="box">
 			<div class="box-header with-border">
+				@if (Session::has('success'))
+				<h4 class="text-center text-green">{{ Session::get('success') }}</h4>
+				@endif
 				<h3>Existing Products In Google Shopping Content</h3>
 			</div>
 
@@ -57,6 +60,7 @@
 			<div class="box">
 				<div class="box-header with-border">
 					<h3>Products In GBMart</h3>
+					<h5>Note: While updating, above products will be deleted, and below selected products will be inserted.</h5>
 				</div>
 
 				<div class="box-body" style="height: 300px; overflow-y: scroll;">

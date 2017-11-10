@@ -25,7 +25,6 @@ class GoogleMerchantController extends Controller
 		$client->setScopes('https://www.googleapis.com/auth/content');
 
 		if(session()->has('oauth_access_token')) {
-			dd(session());
 			$client->setAccessToken(session()->get('oauth_access_token'));
 			$this->getProducts($client, $request);
 		} elseif ($request->has('code')) {

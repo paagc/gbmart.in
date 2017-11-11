@@ -18,22 +18,22 @@ class OrderLog extends Model
 
         static::created(function($order_log) {
         	if ($order_log->status == 'PENDING') {
-	        	SMSTrait::send($order_log->order->customer->mobile_number, 'Order (#' . $order_log->order_id . ') for ' . $order_log->order->seller_product->product->display_name ' has been placed. Waiting for confimation.');
+	        	SMSTrait::send($order_log->order->customer->mobile_number, 'Order (#' . $order_log->order_id . ') for ' . $order_log->order->seller_product->product->display_name . ' has been placed. Waiting for confimation.');
 	        }
             if ($order_log->status == 'REJECTED') {
-                SMSTrait::send($order_log->order->customer->mobile_number, 'Order (#' . $order_log->order_id . ') for ' . $order_log->order->seller_product->product->display_name ' has been rejected.');   
+                SMSTrait::send($order_log->order->customer->mobile_number, 'Order (#' . $order_log->order_id . ') for ' . $order_log->order->seller_product->product->display_name . ' has been rejected.');   
             }
             if ($order_log->status == 'APPROVED') {
-                SMSTrait::send($order_log->order->customer->mobile_number, 'Order (#' . $order_log->order_id . ') for ' . $order_log->order->seller_product->product->display_name ' has been confirmed.');   
+                SMSTrait::send($order_log->order->customer->mobile_number, 'Order (#' . $order_log->order_id . ') for ' . $order_log->order->seller_product->product->display_name . ' has been confirmed.');   
             }
             if ($order_log->status == 'PACKED') {
-                SMSTrait::send($order_log->order->customer->mobile_number, 'Order (#' . $order_log->order_id . ') for ' . $order_log->order->seller_product->product->display_name ' has been packed and soon will be shipped.');   
+                SMSTrait::send($order_log->order->customer->mobile_number, 'Order (#' . $order_log->order_id . ') for ' . $order_log->order->seller_product->product->display_name . ' has been packed and soon will be shipped.');   
             }
             if ($order_log->status == 'SHIPPED') {
-                SMSTrait::send($order_log->order->customer->mobile_number, 'Order (#' . $order_log->order_id . ') for ' . $order_log->order->seller_product->product->display_name ' has been shipped and soon will reach you.');   
+                SMSTrait::send($order_log->order->customer->mobile_number, 'Order (#' . $order_log->order_id . ') for ' . $order_log->order->seller_product->product->display_name . ' has been shipped and soon will reach you.');   
             }
             if ($order_log->status == 'DELIVERED') {
-                SMSTrait::send($order_log->order->customer->mobile_number, 'Order (#' . $order_log->order_id . ') for ' . $order_log->order->seller_product->product->display_name ' has been delivered. Thank you for shopping with us.');   
+                SMSTrait::send($order_log->order->customer->mobile_number, 'Order (#' . $order_log->order_id . ') for ' . $order_log->order->seller_product->product->display_name . ' has been delivered. Thank you for shopping with us.');   
             }
         });
     }

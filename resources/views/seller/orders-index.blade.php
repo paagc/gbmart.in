@@ -101,11 +101,13 @@
 														<tr>
 															<th>Status</th>
 															<th>Date & Time</th>
+															<th>Remarks</th>
 														</tr>
 														@foreach($order->order_logs()->orderBy('created_at', 'desc')->get() as $log)
 														<tr>
 															<td>{{ $log->status }}</td>
 															<td>{{ date('d-m-y h:i:sa', strtotime($log->created_at) + 19800) }}</td>
+															<td>{{ $log->remarks }}</td>
 														</tr>
 														@endforeach
 													</table>

@@ -6,93 +6,208 @@
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
 				<li><a href="/">Home</a></li>
-				<li class='active'>Checkout</li>
+				
+				<li class='active'>My Account</li>
 			</ul>
-		</div>
-	</div>
-</div>
+		</div><!-- /.breadcrumb-inner -->
+	</div><!-- /.container -->
+</div><!-- /.breadcrumb -->
+<div class="body-content outer-top-xs">
+	<div class='container'>
+		<div class='row single-product'>
 
-<div class="body-content">
-	<div class="container">
-		<div class="checkout-box ">
-			<div class="row">
-				<div class="col-md-4" style="border-right: 1px solid #555555;">
-					<div class="row">
-						<h3>User Information</h3>
-						<h4>
-							Name: {{ $user->name }}
-						</h4>
-						<h4>
-							Email: {{ $user->email }}
-						</h4>
-						<h4>
-							Mobile Number: {{ $user->mobile_number }}
-						</h4>
-					</div>
-					<div class="row">
-						<h3>Addresses</h3>
-						@foreach($user->addresses as $address)
-						<h4>
-							<i class="fa fa-arrow-right"></i> {{ $address->line_1 . ", " . $address->line_2 . ", " . $address->city_town . ", " . $address->state .  ", " . $address->pin_code }}
-						</h4>
-						@endforeach
-						@if(count($user->addresses) == 0)
-						<h4>No address found</h4>
-						@endif
-					</div>
-				</div>
-				<div class="col-md-8">
-					<div class="row" style="padding-left: 25px;">
-						<h3>Order History</h3>
-						@if(count($orders) == 0)
-						<h4>No orders found</h4>
-						@else
-						<table class="table">
-							<thead>
-								<tr>
-									<th class="cart-romove item">#</th>
-									<th class="cart-description item">Image</th>
-									<th class="cart-product-name item">Product Name</th>
-									<th class="cart-qty item">Quantity</th>
-									<th class="cart-sub-total item">Amount</th>
-									<th class="cart-qty item">Date</th>
-									<th class="cart-total last-item">Status</th>
-								</tr>
-							</thead>
 
-							<tbody>
-								@foreach($orders as $order)
-								<tr>
-									<td class="romove-item">{{ $order->id }}</td>
-									<td class="cart-image">
-										<a class="entry-thumbnail" href="/store/{{ $order->product->category->name }}/{{ $order->product->sub_category->name }}/{{ $order->product->name }}">
-											<img src="{{ $order->product->product_images[0]->url }}" alt="" style="max-height: 100px; max-width: 100px;">
-										</a>
-									</td>
-									<td class="cart-product-name-info">
-										<h4 class='cart-product-description'><a href="/store/{{ $order->product->category->name }}/{{ $order->product->sub_category->name }}/{{ $order->product->name }}">{{ $order->product->display_name }}</a></h4>
-									</td>
-									<td class="cart-product-quantity">
-										<div class="cart-quantity">
-											{{ $order->count }}
-										</div>
-									</td>
-									<td class="cart-product-sub-total"><span class="cart-sub-total-price">Rs. {{ number_format($order->total_amount, 2, '.', ',') }}</span></td>
-									<td class="cart-product-grand-total">
-										<span class="cart-grand-total-price">
-											{{ date('d-m-y H:i', strtotime($order->created_at)) }}
-										</span>
-									</td>
-									<td>{{ $order->status }}</td>
-								</tr>
-								@endforeach
-							</tbody>
-						</table>
-						@endif
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+			<div class='col-md-12'>
+
+
+
+				<div class="product-tabs inner-bottom-xs  wow fadeInUp">
+					<div class="row">
+						<div class="col-sm-3">
+							<ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
+								<li class="active"><a data-toggle="tab" href="#description">My Orders</a></li>
+								<li><a data-toggle="tab" href="#review">Account Settings</a></li>
+								<li><a data-toggle="tab" href="#tags">Change Password</a></li>
+							</ul><!-- /.nav-tabs #product-tabs -->
+						</div>
+						<div class="col-sm-9">
+
+							<div class="tab-content">
+
+								<div id="description" class="tab-pane in active">
+									<div class="product-tab">
+										<p class="text">My cart division will come here</p>
+									</div>	
+								</div><!-- /.tab-pane -->
+
+								<div id="review" class="tab-pane">
+									<div class="product-tab">
+
+
+
+										<div class="product-add-review">
+											<h4 class="title">My Details</h4>
+
+
+											<div class="review-form">
+												<div class="form-container">
+													<form role="form" class="cnt-form">
+
+														<div class="row">
+
+
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="exampleInputReview">Name <span class="astk">*</span></label>
+																	<input type="text" class="form-control txt" id="exampleInputName" placeholder="">
+																</div><!-- /.form-group -->
+															</div>
+
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="exampleInputReview">Contact Number <span class="astk">*</span></label>
+																	<input type="text" class="form-control txt" id="exampleInputName" placeholder="">
+																</div><!-- /.form-group -->
+															</div>
+
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="exampleInputReview">E-Mail  <span class="astk">*</span></label>
+																	<input type="text" class="form-control txt" id="exampleInputName" placeholder="">
+																</div><!-- /.form-group -->
+															</div>
+
+															<div class="col-md-6">
+																<div class="form-group">
+																	<label for="exampleInputReview">Address <span class="astk">*</span></label>
+																	<input type="text" class="form-control txt" id="exampleInputName" placeholder="">
+																</div><!-- /.form-group -->
+															</div>
+														</div><!-- /.row -->
+
+														<div class="action text-right">
+															<button class="btn btn-primary btn-upper">SUBMIT REVIEW</button>
+														</div><!-- /.action -->
+
+													</form><!-- /.cnt-form -->
+												</div><!-- /.form-container -->
+											</div><!-- /.review-form -->
+
+										</div><!-- /.product-add-review -->										
+
+									</div><!-- /.product-tab -->
+								</div><!-- /.tab-pane -->
+
+								<div id="tags" class="tab-pane">
+									<div class="product-tag">
+
+										<div class="review-form">
+											<div class="form-container">
+												<form role="form" class="cnt-form">
+
+													<div class="row">
+														<div class="col-sm-12">
+															<div class="col-sm-12"><div class="form-group">
+																<label for="exampleInputName">Old Password <span class="astk">*</span></label>
+																<input type="text" class="form-control txt" id="exampleInputName" placeholder="">
+															</div></div><!-- /.form-group -->
+															<div class="col-sm-6"><div class="form-group">
+																<label for="exampleInputName">New Password <span class="astk">*</span></label>
+																<input type="text" class="form-control txt" id="exampleInputName" placeholder="">
+															</div></div><!-- /.form-group -->
+															<div class="col-sm-6"><div class="form-group">
+																<label for="exampleInputName">Conform New Password <span class="astk">*</span></label>
+																<input type="text" class="form-control txt" id="exampleInputName" placeholder="">
+															</div></div><!-- /.form-group -->
+														</div>
+
+
+													</div><!-- /.row -->
+
+													<div class="action text-right">
+														<button class="btn btn-primary btn-upper">Update Password</button>
+													</div><!-- /.action -->
+												</form><!-- /.cnt-form -->
+											</div><!-- /.form-container -->
+										</div><!-- /.review-form -->
+									</div><!-- /.product-tab -->
+								</div><!-- /.tab-pane -->
+							</div><!-- /.tab-content -->
+						</div><!-- /.col -->
+					</div><!-- /.row -->
+				</div><!-- /.product-tabs -->	
+			</div><!-- /.col -->
+			<div class="clearfix"></div>
+		</div><!-- /.row -->
+		<!-- ============================================== BRANDS CAROUSEL ============================================== -->
+		<div id="brands-carousel" class="logo-slider wow fadeInUp">
+
+			<div class="logo-slider-inner">	
+				<div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
+					<div class="item m-t-15">
+						<a href="#" class="image">
+							<img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt="">
+						</a>	
+					</div><!--/.item-->
+
+					<div class="item m-t-10">
+						<a href="#" class="image">
+							<img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt="">
+						</a>	
+					</div><!--/.item-->
+
+					<div class="item">
+						<a href="#" class="image">
+							<img data-echo="assets/images/brands/brand3.png" src="assets/images/blank.gif" alt="">
+						</a>	
+					</div><!--/.item-->
+
+					<div class="item">
+						<a href="#" class="image">
+							<img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt="">
+						</a>	
+					</div><!--/.item-->
+
+					<div class="item">
+						<a href="#" class="image">
+							<img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt="">
+						</a>	
+					</div><!--/.item-->
+
+					<div class="item">
+						<a href="#" class="image">
+							<img data-echo="assets/images/brands/brand6.png" src="assets/images/blank.gif" alt="">
+						</a>	
+					</div><!--/.item-->
+
+					<div class="item">
+						<a href="#" class="image">
+							<img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt="">
+						</a>	
+					</div><!--/.item-->
+
+					<div class="item">
+						<a href="#" class="image">
+							<img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt="">
+						</a>	
+					</div><!--/.item-->
+
+					<div class="item">
+						<a href="#" class="image">
+							<img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt="">
+						</a>	
+					</div><!--/.item-->
+
+					<div class="item">
+						<a href="#" class="image">
+							<img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt="">
+						</a>	
+					</div><!--/.item-->
+				</div><!-- /.owl-carousel #logo-slider -->
+			</div><!-- /.logo-slider-inner -->
+
+		</div><!-- /.logo-slider -->
+		<!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	
+	</div><!-- /.container -->
+</div><!-- /.body-content -->
 @endsection

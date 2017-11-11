@@ -131,7 +131,7 @@
 													@if($order->status == 'PENDING' || $order->status == 'APPROVED' || $order->status == 'PACKED' || $order->status == 'SHIPPED')
 													<div class="row">
 														<div class="col-md-4 pull-right">
-															<input type="text" class="form-control order-remarks" minlength="5" maxlength="25">
+															<input type="text" class="form-control order-remarks" placeholder="Remarks..." minlength="5" maxlength="25">
 														</div>
 													</div>
 													@endif

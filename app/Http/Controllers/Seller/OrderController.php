@@ -15,6 +15,7 @@ use App\Attribute;
 use App\SellerProduct;
 use App\AttributeValue;
 use App\Order;
+use App\OrderLog;
 
 class OrderController extends Controller
 {
@@ -39,6 +40,12 @@ class OrderController extends Controller
 	}
 
 	public function updateStatus($order_id, $status, Request $request) {
+		$remarks = "";
+
+		if ($request->has('remarks')) {
+			$remarks = urldecode($request->get('remarks'));
+		}
+
 		$status = strtoupper($status);
 		$order = Order::find($order_id);
 		if (!is_null($order)) {
@@ -54,8 +61,17 @@ class OrderController extends Controller
 			}
 			if ($order->status != $curretn_status) {
 				$order->save();
+				$this->updateLog($order, $remarks);
 			}
 		}
 		return back();
+	}
+
+	public function updateLog($order, $remarks) {
+		$log = OrderLog::create([
+			'order_id' => $order->id,
+			'status' => $order->status,
+			'remarks' => $remarks
+		]);
 	}
 }

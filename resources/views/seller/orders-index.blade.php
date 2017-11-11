@@ -126,6 +126,9 @@
 													@elseif($order->status == 'SHIPPED')
 													<button type="button" class="btn btn-success pull-right change-status" order-id="{{ $order->id }}" status="shipped">Mark as Shipped</button>
 													@endif
+													@if($order->status == 'PENDING' || $order->status == 'APPROVED' || $order->status == 'PACKED' || $order->status == 'SHIPPED')
+													<input type="text" class="form-control order-remarks" minlength="5" maxlength="25">
+													@endif
 												</div>
 											</div>
 										</div>
@@ -163,7 +166,12 @@
 		$('.change-status').click(function () {
 			var orderId = $(this).attr('order-id');
 			var status = $(this).attr('status');
-			window.location.href = "/seller/orders/id/" + orderId + "/status-update/" + status;
+			var url = "/seller/orders/id/" + orderId + "/status-update/" + status;
+			var remarks = $('input.order-remarks').val();
+			if (remarks && remarks.length > 4) {
+				url += '?remarks=' + encodeURI(remarks);
+			}
+			window.location.href = url;
 		});
 	});
 </script>

@@ -129,7 +129,11 @@
 													<button type="button" class="btn btn-success pull-right change-status" order-id="{{ $order->id }}" status="shipped">Mark as Shipped</button>
 													@endif
 													@if($order->status == 'PENDING' || $order->status == 'APPROVED' || $order->status == 'PACKED' || $order->status == 'SHIPPED')
-													<input type="text" class="form-control order-remarks" minlength="5" maxlength="25">
+													<div class="row">
+														<div class="col-md-4 pull-right">
+															<input type="text" class="form-control order-remarks" minlength="5" maxlength="25">
+														</div>
+													</div>
 													@endif
 												</div>
 											</div>

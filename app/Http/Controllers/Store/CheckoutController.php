@@ -12,6 +12,7 @@ use Cart;
 use Validator;
 use App\User;
 use App\Order;
+use App\OrderLog;
 use App\SellerProduct;
 use App\Address;
 use App\Mail\OrderPlaced;
@@ -125,7 +126,7 @@ class CheckoutController extends Controller
 				$subtotal += $item->qty * $seller_product->seller_price;
 				$total += $item->qty * $seller_product->seller_price + $seller_product->delivery_charge;
 
-				Order::create([
+				$order = Order::create([
 					'customer_id' => Auth::user()->id,
 					'product_id' => $seller_product->product->id,
 					'seller_product_id' => $seller_product->id,
@@ -141,6 +142,12 @@ class CheckoutController extends Controller
 					'payment_method' => $payment_method,
 					'payment_reference' => $payment_reference,
 					'status' => $status
+				]);
+
+				OrderLog::create([
+					'order_id' => $order->id,
+					'status' => $status,
+					'remarks' => 'Order placed'
 				]);
 			}
 		}
@@ -165,6 +172,7 @@ class CheckoutController extends Controller
 
 		if(!is_null($user)) {
 			$res = Mail::to($user)->send(new OrderPlaced([]));
+			dd($res);
 		}
 
 		return "Testing mail";

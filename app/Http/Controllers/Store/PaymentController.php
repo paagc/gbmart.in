@@ -10,6 +10,7 @@ use Session;
 use Cart;
 use App\User;
 use App\Order;
+use App\OrderLog;
 use App\SellerProduct;
 use App\Address;
 use App\Traits\SMSTrait;
@@ -123,6 +124,12 @@ class PaymentController extends Controller
 				foreach($orders as $order) {
 					$order->status = "PENDING";
 					$order->save();
+
+					OrderLog::create([
+						'order_id' => $order->id,
+						'status' => $order->status,
+						'remarks' => 'Payment completed.'
+					]);
 				}
 				if (count($orders) == 1) {
 					SMSTrait::send(Auth::user()->mobile_number, "Your order for " . (strlen($orders[0]->product->display_name) > 20 ? substr($orders[0]->product->display_name, 0, 15) . '...' : $orders[0]->product->display_name) . "  has been placed. Order Ref.: " . $payment_reference);
@@ -134,6 +141,12 @@ class PaymentController extends Controller
 				foreach($orders as $order) {
 					$order->status = "FAILED";
 					$order->save();
+
+					OrderLog::create([
+						'order_id' => $order->id,
+						'status' => $order->status,
+						'remarks' => 'Payment failed.'
+					]);
 				}
 			}
 		}

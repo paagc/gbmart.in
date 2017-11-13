@@ -101,11 +101,13 @@
 														<tr>
 															<th>Status</th>
 															<th>Date & Time</th>
+															<th>Remarks</th>
 														</tr>
 														@foreach($order->order_logs()->orderBy('created_at', 'desc')->get() as $log)
 														<tr>
 															<td>{{ $log->status }}</td>
 															<td>{{ date('d-m-y h:i:sa', strtotime($log->created_at) + 19800) }}</td>
+															<td>{{ $log->remarks }}</td>
 														</tr>
 														@endforeach
 													</table>
@@ -125,6 +127,13 @@
 													<button type="button" class="btn btn-success pull-right change-status" order-id="{{ $order->id }}" status="shipped">Mark as Shipped</button>
 													@elseif($order->status == 'SHIPPED')
 													<button type="button" class="btn btn-success pull-right change-status" order-id="{{ $order->id }}" status="shipped">Mark as Shipped</button>
+													@endif
+													@if($order->status == 'PENDING' || $order->status == 'APPROVED' || $order->status == 'PACKED' || $order->status == 'SHIPPED')
+													<div class="row">
+														<div class="col-md-4 pull-right">
+															<input type="text" class="form-control order-remarks" placeholder="Remarks..." minlength="5" maxlength="25">
+														</div>
+													</div>
 													@endif
 												</div>
 											</div>
@@ -163,7 +172,12 @@
 		$('.change-status').click(function () {
 			var orderId = $(this).attr('order-id');
 			var status = $(this).attr('status');
-			window.location.href = "/seller/orders/id/" + orderId + "/status-update/" + status;
+			var url = "/seller/orders/id/" + orderId + "/status-update/" + status;
+			var remarks = $('input.order-remarks').val();
+			if (remarks && remarks.length > 4) {
+				url += '?remarks=' + encodeURI(remarks);
+			}
+			window.location.href = url;
 		});
 	});
 </script>

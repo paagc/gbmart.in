@@ -85,6 +85,8 @@
 														<dd>{{ $order->extra }}</dd>
 														<dt>Customer Name</dt>
 														<dd>{{ $order->customer->name }}</dd>
+														<dt>Customer Mobile Number</dt>
+														<dd>{{ $order->customer->mobile_number }}</dd>
 														<dt>Shipping Address</dt>
 														<dd>{{ $order->address }}</dd>
 														<dt>Shipping City/Town</dt>

@@ -3,5 +3,64 @@
 		<title>GBMart</title>
 		<link>https://www.gbmart.in</link>
 		<description>This is a sample feed containing the required and recommended attributes for a variety of different products</description>
+
+
+		<item>
+			<g:id>1</g:id>
+			<g:title><![CDATA[xc vxc]]></g:title>
+			<g:description><![CDATA[jsdbkbsddlvsnl]]></g:description>
+			<g:link><![CDATA[https://www.gbmart.in/store/appliances/mobile/xc-vxc-1]]></g:link>
+			<g:image_link><![CDATA[http://localhost:9000/storage/2_image_xL00W.png]]></g:image_link>
+			<g:condition>new</g:condition>
+			<g:availability>in stock</g:availability>
+			<g:price>320 INR</g:price>
+			<g:shipping>
+				<g:country>IN</g:country>
+				<g:service>Standard</g:service>
+				<g:price>50 INR</g:price>
+			</g:shipping>
+			<g:brand>z c</g:brand>
+			<g:mpn></g:mpn>
+			<g:google_product_category><![CDATA[Electronics > Communications > Telephony > Mobile Phones]]></g:google_product_category>
+		</item>
+
+		<item>
+			<g:id>2</g:id>
+			<g:title><![CDATA[Marvel]]></g:title>
+			<g:description><![CDATA[Its just marvelous]]></g:description>
+			<g:link><![CDATA[https://www.gbmart.in/store/appliances/mobile/marvel-2]]></g:link>
+			<g:image_link><![CDATA[http://localhost:9000/storage/3_image_nI9WB.jpg]]></g:image_link>
+			<g:condition>new</g:condition>
+			<g:availability>in stock</g:availability>
+			<g:price>30000 INR</g:price>
+			<g:shipping>
+				<g:country>IN</g:country>
+				<g:service>Standard</g:service>
+				<g:price>200 INR</g:price>
+			</g:shipping>
+			<g:brand>DC Comics</g:brand>
+			<g:mpn></g:mpn>
+			<g:google_product_category><![CDATA[Electronics > Communications > Telephony > Mobile Phones]]></g:google_product_category>
+		</item>
+
+		<item>
+			<g:id>3</g:id>
+			<g:title><![CDATA[cvsdv ds]]></g:title>
+			<g:description><![CDATA[Welcom to the punch.]]></g:description>
+			<g:link><![CDATA[https://www.gbmart.in/store/appliances/mobile/cvsdv-ds-3]]></g:link>
+			<g:image_link><![CDATA[http://localhost:9000/storage/4_image_PNm5A.jpg]]></g:image_link>
+			<g:condition>new</g:condition>
+			<g:availability>in stock</g:availability>
+			<g:price>3600 INR</g:price>
+			<g:shipping>
+				<g:country>IN</g:country>
+				<g:service>Standard</g:service>
+				<g:price>100 INR</g:price>
+			</g:shipping>
+			<g:brand>DC Comics</g:brand>
+			<g:mpn></g:mpn>
+			<g:google_product_category><![CDATA[Electronics > Communications > Telephony > Mobile Phones]]></g:google_product_category>
+		</item>
+
 	</channel>
 </rss>

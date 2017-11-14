@@ -33,7 +33,7 @@
 							@forelse ($packed_orders as $index => $order)
 							<tr>
 								<td>{{ $index+1 }}</td>
-								<td>{{ $order->seller_product->seller->name }}</td>
+								<td>{{ $order->seller_product->seller->name }} ({{ $order->seller_product->seller->mobile_number }})</td>
 								<td>{{ $order->seller_product->product->name }}</td>
 								<td>{{ $order->count }}</td>
 								<td>{{ $order->price }}</td>

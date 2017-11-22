@@ -47,4 +47,12 @@ class MyAccountController extends Controller
 	public function password(Request $request) {
 		return view('store.account-password');
 	}
+
+	public function changePassword(Request $request) {
+		dd($request);
+		$old_password = "";
+		$new_password = "";
+
+		return back();
+	}
 }

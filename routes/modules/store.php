@@ -42,6 +42,7 @@ Route::group(['namespace'=>'Store'], function() {
     Route::get('/store/my-account/orders', 'MyAccountController@orders')->middleware('store.auth');
     Route::get('/store/my-account/user', 'MyAccountController@user')->middleware('store.auth');
     Route::get('/store/my-account/password', 'MyAccountController@password')->middleware('store.auth');
+    Route::post('/store/my-account/change-password', 'MyAccountController@changePassword')->middleware('store.auth');
     Route::get('/store/cart/add/{seller_product_id}', 'CartController@addToCart');
     Route::get('/store/cart/remove/{seller_product_id}', 'CartController@removeFromCart');
     Route::get('/store/cart/buy-now/{seller_product_id}', 'CartController@buyNow');

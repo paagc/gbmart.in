@@ -39,21 +39,21 @@
 
 										<div class="review-form">
 											<div class="form-container">
-												<form role="form" class="cnt-form">
-
+												<form action="/store/my-account/change-password" method="POST">
+													{{ csrf_field() }}
 													<div class="row">
 														<div class="col-sm-12">
 															<div class="col-sm-12"><div class="form-group">
 																<label for="exampleInputName">Old Password <span class="astk">*</span></label>
-																<input type="text" class="form-control txt" id="exampleInputName" placeholder="">
+																<input type="text" class="form-control txt" id="exampleInputName" name="old_password" placeholder="">
 															</div></div><!-- /.form-group -->
 															<div class="col-sm-6"><div class="form-group">
 																<label for="exampleInputName">New Password <span class="astk">*</span></label>
-																<input type="text" class="form-control txt" id="exampleInputName" placeholder="">
+																<input type="text" class="form-control txt" id="exampleInputName" name="new_password" placeholder="">
 															</div></div><!-- /.form-group -->
 															<div class="col-sm-6"><div class="form-group">
 																<label for="exampleInputName">Conform New Password <span class="astk">*</span></label>
-																<input type="text" class="form-control txt" id="exampleInputName" placeholder="">
+																<input type="text" class="form-control txt" id="exampleInputName" name="new_password_confirm" placeholder="">
 															</div></div><!-- /.form-group -->
 														</div>
 

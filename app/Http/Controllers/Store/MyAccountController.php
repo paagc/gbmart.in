@@ -26,12 +26,25 @@ class MyAccountController extends Controller
 {
 	public function view(Request $request) {
 		// dd($request);
-		$user = Auth::user();
-		$orders = Order::where('customer_id', $user->id)->whereNotIn('status', [ 'INITIATED', 'FAILED' ])->orderBy('created_at', 'desc')->get();
+		// $user = Auth::user();
+		// $orders = Order::where('customer_id', $user->id)->whereNotIn('status', [ 'INITIATED', 'FAILED' ])->orderBy('created_at', 'desc')->get();
 
-		return view('store.account', [
-			'user' => $user,
-			'orders' => $orders
-		]);
+		// return view('store.account', [
+		// 	'user' => $user,
+		// 	'orders' => $orders
+		// ]);
+		return redirect('/store/my-account/orders');
+	}
+
+	public function orders(Request $request) {
+		return view('store.account-orders');
+	}
+
+	public function user(Request $request) {
+		return view('store.account-user');
+	}
+
+	public function password(Request $request) {
+		return view('store.account-password');
 	}
 }

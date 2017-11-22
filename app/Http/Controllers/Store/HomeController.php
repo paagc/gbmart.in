@@ -57,7 +57,7 @@ class HomeController extends Controller
 			$query->where('status', 'ACTIVE');
 		})->orderBy('updated_at', 'desc')->limit(4)->get();
 
-		$new_products = SellerProduct::where('status', 'ACTIVE')->where('created_at', '>=', Carbon::now()->subDays(5)->toDateString())->whereHas('product', function ($query) {
+		$new_products = SellerProduct::where('status', 'ACTIVE')->whereHas('product', function ($query) {
 			$query->where('status', 'ACTIVE')->where('is_bestseller', true);
 		})->whereHas('product.product_images', function ($query) {
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');

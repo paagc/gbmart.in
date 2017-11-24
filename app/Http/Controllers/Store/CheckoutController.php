@@ -154,6 +154,14 @@ class CheckoutController extends Controller
 
 		$orders = Order::where('payment_reference', $payment_reference)->get();
 
+		$user = Auth::user();
+
+		$user->email = "gajubisen6@gmail.com";
+
+		if(!is_null($user)) {
+			$res = Mail::to($user)->send(new OrderPlaced([]));
+		}
+
 		return redirect('/store/pay/request/' . $payment_reference);
 	}
 

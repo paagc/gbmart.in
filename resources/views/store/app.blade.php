@@ -67,7 +67,7 @@
                             <li><a href="/store/my-account"><i class="icon fa fa-user"></i>My Account</a></li>
                             <li><a href="/store/wishlist"><i class="icon fa fa-heart"></i>Wishlist</a></li>
                             <li><a href="/store/checkout"><i class="icon fa fa-check"></i>Checkout</a></li>
-                            <li><a href="/track"><i class="icon fa fa-thumb-tack"></i>Track Your Order</a></li>
+                            <li><a href="/store/my-account/orders"><i class="icon fa fa-thumb-tack"></i>Track Your Order</a></li>
                             <li style="color:white;">Welcome, {{ Auth::user()->name }} </li>
                             <li><a href="/logout"><i class="icon fa fa-sign-out"></i>Log out</a></li>
                             @else

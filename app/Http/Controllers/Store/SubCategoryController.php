@@ -108,7 +108,7 @@ class SubCategoryController extends Controller
 		});
 
 		$count = $seller_products->count();
-		$page_count = ($count / $page_size) + ((($count % $page_size) > 0) ? 1 : 0);
+		$page_count = ((int) ($count / $page_size)) + ((($count % $page_size) > 0) ? 1 : 0);
 
 		$seller_products = $seller_products->skip(($page - 1) * $page_size)->limit($page_size)->get();
 
@@ -140,5 +140,56 @@ class SubCategoryController extends Controller
 		} else {
 			return abort(404);
 		}
+	}
+
+	function filter(Request $request) {
+		$page = 1;
+		$page_size = 12;
+		$page_count = 1;
+		$order = 'popularity';
+		$search_text = "";
+
+		if ($request->has('page') && is_numeric($request->get('page'))) {
+			$page = (int) $request->get('page');
+		}
+
+		if ($request->has('search_text')) {
+			$search_text = $request->get('search_text');
+		}
+
+		$seller_products = SellerProduct::where('status', 'ACTIVE')->whereHas('product', function ($query) use ($search_text) {
+			$query->where('status', 'ACTIVE')->where('is_featured', true);
+			if (strlen($search_text) > 0) {
+				$query->where('display_name', 'like', '%' . $search_text . '%');
+			}
+		})->whereHas('product.product_images', function ($query) {
+			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
+		})->whereHas('product.sub_category', function ($query) {
+			$query->where('status', 'ACTIVE');
+		})->whereHas('product.sub_category.category', function ($query) {
+			$query->where('status', 'ACTIVE');
+		});
+
+		if ($order == 'price_low_to_high') {
+			$seller_products = $seller_products->orderBy('seller_price', 'asc');
+		} else if ($order == 'price_high_to_low') {
+			$seller_products = $seller_products->orderBy('seller_price', 'desc');
+		} else {
+			$seller_products = $seller_products->orderBy('updated_at', 'desc');
+		}
+
+		$count = $seller_products->count();
+		$page_count = ((int) ($count / $page_size)) + ((($count % $page_size) > 0) ? 1 : 0);
+
+		$seller_products = $seller_products->skip(($page - 1) * $page_size)->limit($page_size)->get();
+
+		return view('store.filter', [
+			'page' => $page,
+			'page_size' => $page_size,
+			'page_count' => $page_count,
+			'order' => $order,
+			'search_text' => $search_text,
+			'seller_products' => $seller_products
+		]);
 	}
 }

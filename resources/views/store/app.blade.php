@@ -20,7 +20,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
 
-
+<meta name="google-site-verification" content="Y0bUWQUbv6K23ztk31iZztpukWQSGX5Nkr2F8Z5j2W0" />
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/blue.css">
     <link rel="stylesheet" href="/assets/css/owl.carousel.css">

@@ -376,6 +376,15 @@
 
             $(window).load(setProductSizes);
             $(window).resize(setProductSizes);
+
+            $(document).ready(function () {
+                $('a.search-button').click(function () {
+                    var search_text = $('input.search-field').val();
+                    if (search_text && search_text.length > 0) {
+                        window.location.href = "/store/filter?search_text=" + search_text;
+                    }
+                });
+            });
         </script>
     </body>
 

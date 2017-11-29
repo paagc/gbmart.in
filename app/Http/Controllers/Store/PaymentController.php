@@ -145,8 +145,8 @@ class PaymentController extends Controller {
 
 			$all = '';
 			$checksumsequence= array("amount","bankid","buyerAddress","buyerCity","buyerCountry","buyerEmail","buyerFirstName","buyerLastName","buyerPhoneNumber","buyerPincode","buyerState","currency","debitorcredit","merchantIdentifier","merchantIpAddress","mode","orderId","product1Description","product2Description","product3Description","product4Description","productDescription","productInfo","purpose","returnUrl","shipToAddress","shipToCity","shipToCountry","shipToFirstname","shipToLastname","shipToPhoneNumber","shipToPincode","shipToState","showMobile","txnDate","txnType","zpPayOption");
-			foreach($parameters as $key => $value) {
-				if($key != 'checksum') {
+			foreach ($parameters as $key => $value) {
+				if ($key != 'checksum' && $value != "") {
 					$all .= $key;
 					$all .="=";
 					if ($key == 'returnUrl') {
@@ -207,7 +207,10 @@ class PaymentController extends Controller {
 				}
 			}
 
-			$parameters['checksum'] = $all;
+			$hash = hash_hmac('sha256', $all, $this->zaakpay_merchent_identifier);
+			$checksum = $hash;
+
+			$parameters['checksum'] = $checksum;
 			// dd($all);
 
 			if ($status == "PENDING" && $payment_method == "COD") {

@@ -18,7 +18,9 @@ use App\Traits\SMSTrait;
 class PaymentController extends Controller {
 	
 	// protected $ebs_secret_key = "0b6f61afae9669a3e8de59aeaae61b9e";
-	protected $zaakpay_merchent_identifier = "b19e8f103bce406cbd3476431b6b7973";
+	protected $zaakpay_merchent_identifier = "ebc4c5362f04417f924b54c8e53af5b2";
+
+	protected $zaakpay_secret_key = "52a7969871834d6dbc0ae30dc3f1feb1";
 
 	// protected $parameters = [
 	// 	"channel" => "0",
@@ -70,8 +72,8 @@ class PaymentController extends Controller {
 		"currency" => 'INR',
 		"debitorcredit" => '',
 		"merchantIdentifier" => '',
-		"merchantIpAddress" => '',
-		"mode" => '1',
+		"merchantIpAddress" => '166.62.30.150',
+		"mode" => '0',
 		"orderId" => '',
 		"product1Description" => '',
 		"product2Description" => '',
@@ -113,8 +115,8 @@ class PaymentController extends Controller {
 			$parameters['buyerFirstName'] = Auth::user()->name;
 			$parameters['buyerEmail'] = Auth::user()->email;
 			$parameters['buyerPhoneNumber'] = Auth::user()->mobile_number;
-			$parameters['txnDate'] = date('d-M-y');
-			$parameters['merchantIpAddress'] = "127.0.0.1";
+			$parameters['txnDate'] = date('Y-m-d');
+			// $parameters['merchantIpAddress'] = "127.0.0.1";
 
 			foreach($orders as $index => $order) {
 				if ($index == 0) {
@@ -128,9 +130,11 @@ class PaymentController extends Controller {
 				$parameters['amount'] += $order->total_amount;
 			}
 
+			// For Zaakpay, it takes paise, instead of rupees
+			$parameters['amount'] = $parameters['amount'] * 100; 
 
 			// For testing
-			$parameters['amount'] = 1;
+			// $parameters['amount'] = 100;
 
 			// $hashData = $this->ebs_secret_key;
 			// ksort($parameters);
@@ -207,7 +211,7 @@ class PaymentController extends Controller {
 				}
 			}
 
-			$hash = hash_hmac('sha256', $all, $this->zaakpay_merchent_identifier);
+			$hash = hash_hmac('sha256', $all, $this->zaakpay_secret_key);
 			$checksum = $hash;
 
 			$parameters['checksum'] = $checksum;
@@ -222,6 +226,7 @@ class PaymentController extends Controller {
 				}
 				return redirect('/')->with('message', 'Your order is successful.');
 			} else if ($status == "INITIATED" && $payment_method == "ONLINE") {
+				// dd($parameters);
 				return view('store.pay-request', [ 'parameters' => $parameters ]);
 			} else {
 				return abort(400);
@@ -232,9 +237,8 @@ class PaymentController extends Controller {
 	}
 
 	public function response($payment_reference, Request $request) {
-		dd($request);
-		if ($request->has('ResponseCode')) {
-			if ($request->get('ResponseCode') == '0') {
+		if ($request->has('responseCode')) {
+			if ($request->get('responseCode') == '100') {
 				Cart::destroy();
 				$orders = Order::where('payment_reference', $payment_reference)->get();
 				foreach($orders as $order) {

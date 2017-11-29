@@ -73,7 +73,7 @@ class PaymentController extends Controller {
 		"debitorcredit" => '',
 		"merchantIdentifier" => '',
 		"merchantIpAddress" => '166.62.30.150',
-		"mode" => '0',
+		"mode" => '1',
 		"orderId" => '',
 		"product1Description" => '',
 		"product2Description" => '',

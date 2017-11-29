@@ -68,7 +68,7 @@
               </a>
             </li>
             <li>
-              <a href="/admin/logout" class="btn btn-info btn-flat">Sign out</a>
+              <a href="/seller/logout" class="btn btn-info btn-flat">Sign out</a>
             </li>
           </ul>
         </div>

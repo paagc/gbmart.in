@@ -14,7 +14,7 @@ class Attribute extends Model
     ];
 
     protected function product() {
-    	return $this->belongsTo('App\Product', 'product_id');
+    	return $this->belongsTo(Product::class, 'product_id');
     }
 
     protected function attribute_values() {

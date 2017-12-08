@@ -149,6 +149,7 @@ class CheckoutController extends Controller
 					'status' => $status,
 					'remarks' => 'Order placed'
 				]);
+
 			}
 		}
 

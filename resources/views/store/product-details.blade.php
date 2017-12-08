@@ -181,14 +181,14 @@
 									</div>
 								</div>
 
-								@if(count($attributes) > 0 && count($main_product->product->attribute_values) > 0)
+								@if(count($attributes) > 0 && count($main_product->attribute_values) > 0)
 								<div class="quantity-container info-container">
 									<div class="row">
 										@foreach($attributes as $attribute)
 										<div class="col-sm-4">
 											<label>{{ $attribute->name }}</label>
 											<select class="form-control" name="cat1" seller-product-option="{{ $attribute->name }}" required>
-												@foreach($main_product->product->attribute_values as $attribute_value)
+												@foreach($main_product->attribute_values as $attribute_value)
 												@if($attribute->id == $attribute_value->attribute_id && $attribute_value->status == 'ACTIVE')
 												<option>{{ $attribute_value->value }}</option>
 												@endif

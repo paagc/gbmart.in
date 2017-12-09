@@ -43,6 +43,18 @@ foreach ($route_partials as $partial) {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['before' => 'force.ssl','middleware' => 'guestAccessOnly'], function () {
+
+    Route::get('password/email', 'Auth\PasswordController@getEmail');
+});
+Route::group(['before' => 'force.ssl','middleware' => ['ValidatePasswordReset', 'guestAccessOnly']], function () {
+
+    Route::post('password/email', 'Auth\PasswordController@postEmail');
+});
+Route::group(['before' => 'force.ssl','middleware' => ['passwordReset']], function () {
+    Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+    Route::post('password/reset', 'Auth\PasswordController@postReset')->name('password.reset');
+});
 
 // Route::get('/', function () {
 //     return view('store.home');

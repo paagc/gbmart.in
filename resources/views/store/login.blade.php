@@ -59,6 +59,7 @@
 						</div>
 
 						<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
+						<a href="{{url('password/email')}}">Forgot Password?</a>
 					</form>					
 				</div>
 

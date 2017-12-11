@@ -30,6 +30,6 @@ class SellerProduct extends Model
     }
 
     public function attribute_values() {
-        return $this->hasMany('App\AttributeValue', 'seller_product_id');
+        return $this->hasMany(AttributeValue::class, 'seller_product_id');
     }
 }

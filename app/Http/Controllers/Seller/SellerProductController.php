@@ -37,9 +37,9 @@ class SellerProductController extends Controller
 			$query->where('status', 'ACTIVE')->orderBy('id', 'asc');
 		})->orderBy('id', 'asc')->get();
 
-		$seller_products = SellerProduct::where('id','>',0);
+//		$seller_products = SellerProduct::where('id','>',0);
 
-		$seller_products = SellerProduct::where('seller_id', Auth::user()->id);
+		$seller_products = SellerProduct::where('seller_id', \Auth::user()->id);
 
 		// $seller_products = SellerProduct::whereHas('product', function ($query) {
 		// 	$query->whereHas('category', function ($query) {

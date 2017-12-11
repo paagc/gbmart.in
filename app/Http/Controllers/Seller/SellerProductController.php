@@ -24,7 +24,7 @@ class SellerProductController extends Controller
      */
 	public function index(Request $request) {
 		$page = 1;
-		$page_size = 15;
+		$page_size = 1000;
 
 		$categories = Category::where('status', 'ACTIVE')->get();
 		$sub_categories = SubCategory::whereHas('category', function ($query) {

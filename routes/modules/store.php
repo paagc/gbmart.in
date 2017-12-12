@@ -41,6 +41,7 @@ Route::group(['namespace'=>'Store'], function() {
     Route::get('/store/wishlist/remove/{product_id}', 'WishlistController@remove')->middleware('store.auth');
     Route::get('/store/my-account', 'MyAccountController@view')->middleware('store.auth');
     Route::get('/store/my-account/orders', 'MyAccountController@orders')->middleware('store.auth');
+    Route::get('/store/my-account/addresses', 'MyAccountController@addresses')->middleware('store.auth');
     Route::get('/store/my-account/user', 'MyAccountController@user')->middleware('store.auth');
     Route::get('/store/my-account/password', 'MyAccountController@password')->middleware('store.auth');
     Route::post('/store/my-account/change-password', 'MyAccountController@changePassword')->middleware('store.auth');

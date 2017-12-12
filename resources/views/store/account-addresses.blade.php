@@ -6,7 +6,6 @@
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
                     <li><a href="/">Home</a></li>
-
                     <li class='active'>My Account</li>
                 </ul>
             </div><!-- /.breadcrumb-inner -->
@@ -24,10 +23,11 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
-                                    <li class="active"><a href="/store/my-account/orders">My Orders</a></li>
+                                    <li><a href="/store/my-account/orders">My Orders</a></li>
                                     <li><a href="/store/my-account/user">Account Settings</a></li>
                                     <li><a href="/store/my-account/password">Change Password</a></li>
-                                    <li><a href="{{url('store/my-account/addresses')}}">Addresses</a></li>
+                                    <li class="active"><a href="{{url('store/my-account/addresses')}}">Addresses</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-sm-9">
@@ -40,26 +40,54 @@
                                                 <thead>
                                                 <tr>
                                                     <th>
-                                                        Product
+                                                        Line 1
                                                     </th>
                                                     <th>
-                                                        Price
+                                                        Line 2
                                                     </th>
                                                     <th>
-                                                        Order Date
+                                                        City
+                                                    </th>
+                                                    <th>
+                                                        State
+                                                    </th>
+                                                    <th>
+                                                        Pin code
                                                     </th>
                                                     <th>
                                                         Status
                                                     </th>
+                                                    <th>
+                                                        Action
+                                                    </th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                @foreach(\Auth::user()->orders as $order)
+                                                @foreach($addresses as $address)
                                                     <tr>
-                                                        <td>{{$order->product->name}}</td>
-                                                        <td>{{$order->price}}</td>
-                                                        <td>{{$order->created_at->format('d-m-Y')}}</td>
-                                                        <td>{{$order->status}}</td>
+                                                        <td>{{$address->line_1}}</td>
+                                                        <td>{{$address->line_2}}</td>
+                                                        <td>{{$address->city_town}}</td>
+                                                        <td>{{$address->state}}</td>
+                                                        <td>{{$address->pin_code}}</td>
+                                                        <td>
+                                                            @if($address->status=='ACTIVE')
+                                                                Default Address
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                           {{-- if($address->status!='ACTIVE')
+                                                                <button class="btn btn-xs btn-success">Set Default
+                                                                </button>
+                                                                <button class="btn btn-xs btn-danger"
+                                                                        onclick="deleteAddress({{$address->id}});">
+                                                                    Delete
+                                                                </button>
+                                                            endif
+                                                            <button class="btn btn-xs btn-info"
+                                                                    onclick="editAddress({{$address->id}});">Edit
+                                                            </button>--}}
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
@@ -144,4 +172,15 @@
             <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
         </div><!-- /.container -->
     </div><!-- /.body-content -->
+
+    <script>
+        var addresses ={!! $addresses !!};
+
+
+        function editAddress(id) {
+alert('Work In Progress');
+        }
+
+    </script>
+
 @endsection

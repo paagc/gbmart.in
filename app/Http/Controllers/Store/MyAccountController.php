@@ -36,8 +36,13 @@ class MyAccountController extends Controller
 		return redirect('/store/my-account/orders');
 	}
 
-	public function orders(Request $request) {
+	public function orders() {
 		return view('store.account-orders');
+	}
+	public function addresses() {
+	    $addresses=\Auth::user()->addresses()->orderBy('status','DESC')->get();
+//dd($addresses);
+		return view('store.account-addresses',compact('addresses'));
 	}
 
 	public function user(Request $request) {

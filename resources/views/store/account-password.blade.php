@@ -28,7 +28,8 @@
 								<li><a href="/store/my-account/orders">My Orders</a></li>
 								<li><a href="/store/my-account/user">Account Settings</a></li>
 								<li class="active"><a href="/store/my-account/password">Change Password</a></li>
-							</ul><!-- /.nav-tabs #product-tabs -->
+								<li><a href="{{url('store/my-account/addresses')}}">Addresses</a></li>
+							</ul>
 						</div>
 						<div class="col-sm-9">
 

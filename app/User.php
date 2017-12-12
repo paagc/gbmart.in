@@ -36,12 +36,12 @@ class User extends Authenticatable
 
     public function addresses()
     {
-        return $this->hasMany('App\Address', 'user_id');
+        return $this->hasMany(Address::class, 'user_id');
     }
 
     public function orders()
     {
-        return $this->hasMany('App\Order', 'customer_id');
+        return $this->hasMany(Order::class, 'customer_id');
     }
 
     public function wishlist()

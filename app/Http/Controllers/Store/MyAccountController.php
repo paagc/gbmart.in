@@ -41,7 +41,9 @@ class MyAccountController extends Controller
 	}
 
 	public function user(Request $request) {
-		return view('store.account-user');
+	    $me=\Auth::user();
+        $activeAddress=$me->addresses()->where('status','ACTIVE')->first();
+		return view('store.account-user',compact('me','activeAddress'));
 	}
 
 	public function password(Request $request) {

@@ -27,6 +27,7 @@ class CartController extends Controller
 		$total = 0;
 
 		$cart_items = [];
+
 		foreach(Cart::content()  as $item) {
 			$seller_product = SellerProduct::find($item->id);
 			if (!is_null($seller_product)) {

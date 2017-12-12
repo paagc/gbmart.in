@@ -30,6 +30,7 @@ Route::group(['namespace'=>'Store'], function() {
     Route::get('terms-and-conditions', function () { return view('store.terms'); });
 
     Route::get('/store/cart', 'CartController@get');
+    Route::get('/store/update-cart', 'CheckoutController@updateCart');
     Route::get('/store/checkout', 'CheckoutController@get')->middleware('store.auth');
 	Route::post('/store/checkout', 'CheckoutController@post')->middleware('store.auth');
 	Route::get('/store/checkout/delete-address/{address_id}', 'CheckoutController@deleteAddress')->middleware('store.auth');

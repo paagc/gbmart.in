@@ -29,6 +29,7 @@ Route::group(['middleware'=>['admin.auth'], 'prefix' => 'admin', 'namespace'=>'A
 
     Route::get('products', 'ProductController@index');
     Route::get('products/create', 'ProductController@create');
+    Route::get('products/updateXmlData', 'ProductController@updateXmlData');
     Route::post('products/create', 'ProductController@store');
     Route::get('products/{id}/edit', 'ProductController@edit');
     Route::put('products/{id}/edit', 'ProductController@update');

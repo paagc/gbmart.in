@@ -15,11 +15,11 @@ class GoogleMerchantUpdate {
 				$query->where('status', 'ACTIVE');
 			}, 'product.product_images' => function($query) {
 				$query->where('status', 'ACTIVE');
-			} ])->whereHas('product.category', function($query) {
+			} ])->orderBy('id', 'asc')->get();/*->whereHas('product.category', function($query) {
 				$query->where('status', 'ACTIVE');
 			})->whereHas('product.sub_category', function($query) {
 				$query->where('status', 'ACTIVE');
-			})->orderBy('id', 'asc')->get();
+			})*/
 
 			$feedXmlStr = "";
 			$feedXmlStr = $feedXmlStr . "<?xml version=\"1.0\"?>";

@@ -133,7 +133,8 @@
 													@if($order->status == 'PENDING' || $order->status == 'APPROVED' || $order->status == 'PACKED' || $order->status == 'SHIPPED')
 													<div class="row">
 														<div class="col-md-4 pull-right">
-															<input type="text" class="form-control order-remarks" placeholder="Remarks..." minlength="5" maxlength="25">
+															<textarea name="" id="" style="max-width: 340px" class="form-control order-remarks" placeholder="Remarks..." cols="30" rows="3"></textarea>
+
 														</div>
 													</div>
 													@endif

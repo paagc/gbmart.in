@@ -7,7 +7,8 @@ class GoogleMerchantUpdate {
 	public static function run() {
 
 		try {
-			$seller_products = SellerProduct::where('status', 'ACTIVE')->orderBy('id', 'asc')->get();/*->whereHas('product', function($query) {
+
+			$seller_products = SellerProduct::where('status','!=', 'INACTIVE')->orderBy('id', 'asc')->get();/*->whereHas('product', function($query) {
 				$query->where('status', 'ACTIVE');
 			})->whereHas('product.product_images', function($query) {
 				$query->where('status', 'ACTIVE');

@@ -47,7 +47,7 @@
 					<h4 class="">Sign in</h4>
 					<p class="">Hello, Welcome to your account.</p>
 
-					<form class="register-form outer-top-xs" role="form" action="/login" method="POST">
+					<form class="register-form outer-top-xs" role="form" action="" method="POST">
 						{{ csrf_field() }}
 						<div class="form-group">
 							<label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>

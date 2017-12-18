@@ -40,7 +40,7 @@ foreach ($route_partials as $partial) {
 
     require_once $file;
 }
-
+Route::resource('/track', 'Store\TrackOrderController');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['before' => 'force.ssl','middleware' => 'guestAccessOnly'], function () {

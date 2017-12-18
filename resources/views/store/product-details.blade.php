@@ -363,7 +363,8 @@
         	});
 
         	var qr = decodeURI($.param(options));
-        	var href = '/store/cart/buy-now/' + $(this).attr('seller-product-id');;
+			console.log(qr);
+        	var href = '/store/cart/buy-now/' + $(this).attr('seller-product-id');
         	if (qr && qr.length > 0) {
 	            href += "?" + qr;
 	        }

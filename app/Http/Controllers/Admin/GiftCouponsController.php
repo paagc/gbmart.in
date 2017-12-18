@@ -111,7 +111,7 @@ class GiftCouponsController extends Controller
             'end_date' => 'required|date'
         ]);
         $input = $request->all();
-        
+
         $coupon = GiftCoupon::find($id)->update($input);
         return redirect('admin/gift-coupon');
     }

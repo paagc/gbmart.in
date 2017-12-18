@@ -2,58 +2,62 @@
 
 namespace App\Http\Controllers\Store;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\User;
 use Auth;
+use Illuminate\Http\Request;
 use Session;
 use Validator;
-use App\User;
 
 class AuthController extends Controller
 {
-	public function getLogin(Request $request) {
-		if (Auth::check() && Auth::user()->type == 'customer') {
-			return redirect('/');
-		} else {
-			return view('store.login');
-		}
-	}
+    public function getLogin(Request $request)
+    {
+        if (Auth::check() && Auth::user()->type == 'customer') {
+            return redirect('/');
+        } else {
+            return view('store.login');
+        }
+    }
 
-	public function postLogin(Request $request) {
-		$email = "";
-		$password = "";
-		$remember = false;
+    public function postLogin(Request $request)
+    {
+        $email = "";
+        $password = "";
+        $remember = false;
 
-		if ($request->has('email')) {
-			$email = $request->get('email');
-		}
+        if ($request->has('email')) {
+            $email = $request->get('email');
+        }
 
-		if ($request->has('password')) {
-			$password = $request->get('password');
-		}
+        if ($request->has('password')) {
+            $password = $request->get('password');
+        }
 
-		if ($request->has('remember')) {
-			$remember = $request->get('remember');
-		}
+        if ($request->has('remember')) {
+            $remember = $request->get('remember');
+        }
 
-		$user = User::where('email', $email)->where('status', 'ACTIVE')->where('type', 'customer')->first();
+        $user = User::where('email', $email)->where('status', 'ACTIVE')->where('type', 'customer')->first();
 
-		if (is_null($user)) {
-			Session::flash('error', 'Invalid user.');
-			return redirect()->back();
-		}
+        if (is_null($user)) {
+            Session::flash('error', 'Invalid user.');
+            return redirect()->back();
+        }
 
-		if (Auth::attempt([ 'email' => $email, 'password' => $password ], $remember)) {
-			return redirect('/');
-		} else {
-			Session::flash('error', 'Login unsuccessful.');
-			return redirect()->back();
-		}
-	}
+        if (Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
+            if ($request->get('goToCheckout'))
+                return redirect('store/checkout');
+            return redirect('/');
+        } else {
+            Session::flash('error', 'Login unsuccessful.');
+            return redirect()->back();
+        }
+    }
 
-	public function postRegister(Request $request) {
-		$validator =  Validator::make($request->all(), [
+    public function postRegister(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:6',
@@ -64,20 +68,21 @@ class AuthController extends Controller
         $input['type'] = 'customer';
         $input['status'] = 'ACTIVE';
 
-		if ($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $input['password'] =  bcrypt($input['password']);
+        $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
 
         Auth::login($user);
 
         return redirect('/');
-	}
+    }
 
-	public function logout() {
-		Auth::logout();
-		return redirect('/');
-	}
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
 }

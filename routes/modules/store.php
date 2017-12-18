@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['namespace'=>'Store'], function() {
+Route::group(['namespace' => 'Store'], function () {
     Route::get('/', 'HomeController@getHome');
     Route::get('/login', 'AuthController@getLogin');
     Route::post('/login', 'AuthController@postLogin');
@@ -20,20 +20,37 @@ Route::group(['namespace'=>'Store'], function() {
 
     Route::get('/test-mail', 'CheckoutController@testMail');
 
-    Route::get('privacy', function () { return view('store.privacy'); });
-    Route::get('cancellation', function () { return view('store.cancel'); });
-    Route::get('disclaimer', function () { return view('store.disclaimer'); });
-    Route::get('return-and-refund', function () { return view('store.return'); });
-    Route::get('shipping-and-delivery', function () { return view('store.ship'); });
-    Route::get('about-us', function () { return view('store.about'); });
-    Route::get('write-to-us', function () { return view('store.write'); });
-    Route::get('terms-and-conditions', function () { return view('store.terms'); });
+    Route::get('privacy', function () {
+        return view('store.privacy');
+    });
+    Route::get('cancellation', function () {
+        return view('store.cancel');
+    });
+    Route::get('disclaimer', function () {
+        return view('store.disclaimer');
+    });
+    Route::get('return-and-refund', function () {
+        return view('store.return');
+    });
+    Route::get('shipping-and-delivery', function () {
+        return view('store.ship');
+    });
+    Route::get('about-us', function () {
+        return view('store.about');
+    });
+    Route::get('write-to-us', function () {
+        return view('store.write');
+    });
+    Route::get('terms-and-conditions', function () {
+        return view('store.terms');
+    });
 
     Route::get('/store/cart', 'CartController@get');
+
     Route::get('/store/update-cart', 'CheckoutController@updateCart');
     Route::get('/store/checkout', 'CheckoutController@get')->middleware('store.auth');
-	Route::post('/store/checkout', 'CheckoutController@post')->middleware('store.auth');
-	Route::get('/store/checkout/delete-address/{address_id}', 'CheckoutController@deleteAddress')->middleware('store.auth');
+    Route::post('/store/checkout', 'CheckoutController@post')->middleware('store.auth');
+    Route::get('/store/checkout/delete-address/{address_id}', 'CheckoutController@deleteAddress')->middleware('store.auth');
     Route::get('/store/pay/request/{payment_reference}', 'PaymentController@request')->middleware('store.auth');
     Route::post('/store/pay/response/{payment_reference}', 'PaymentController@response');
     Route::get('/store/wishlist', 'WishlistController@getAll')->middleware('store.auth');

@@ -20,6 +20,7 @@ use App\Offer;
 class HomeController extends Controller
 {
 	public function getHome(Request $request) {
+
 		$categories = Category::with(['sub_categories' => function($query) { $query->where('status', 'ACTIVE')->orderBy('id', 'asc'); }])->whereHas('sub_categories', function ($query) { $query->where('status', 'ACTIVE'); })->where('status', 'ACTIVE')->orderBy('id', 'asc')->get();
 
 		$home_slides = HomeSlide::where('status', 'ACTIVE')->orderBy('updated_at', 'desc')->get();

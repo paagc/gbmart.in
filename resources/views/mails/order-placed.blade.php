@@ -118,21 +118,21 @@
             commercial purposes. </p>
         <p>
             The final invoice for the order placed will be issued to you by
-            XYZ (Bangalore)
+            Seller.
         </p>
         <p>
             All applicable taxes and levies as appearing on the website/mobile
-            application/ email are being charged and determined by XYZ (Bangalore)
+            application/ email are being charged and determined by GBMart
             and as informed to GB Mart at the time of listing or afterwards.
         </p>
         <p>
             The prices, applicable rates of taxes and the manner of levy of such taxes are
-            solely determined by XYZ (Bangalore) and GB Mart has no involvement
+            solely determined by Seller and GB Mart has no involvement
             in the same.
         </p>
         <p>
             The prices and their components may be subject to change at the
-            discretion of XYZ (Bangalore).
+            discretion of the Seller.
         </p>
         <p>
             For complete details please refer to our <a href="https://gbmart.in/terms-and-conditions" target="blank"

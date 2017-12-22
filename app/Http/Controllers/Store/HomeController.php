@@ -65,7 +65,7 @@ class HomeController extends Controller
 			$query->where('status', 'ACTIVE');
 		})->whereHas('product.sub_category.category', function ($query) {
 			$query->where('status', 'ACTIVE');
-		})->orderBy('updated_at', 'desc')->limit(4)->get();
+		})->orderBy('created_at', 'desc')->limit(4)->get();
 
 		return view('store.home', [ 
 			'categories' => $categories,

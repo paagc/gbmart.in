@@ -40,7 +40,6 @@
         {{--<img src="1.jpg" class="col-lg-12 col-xs-12" style="padding-left:0px; padding-right:0px;">--}}
     {{--</div>--}}
 
-
     <div class="col-lg-12">
 
         <p> Hi {{$user->name}},</p>

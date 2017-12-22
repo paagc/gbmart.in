@@ -16,7 +16,9 @@ class AuthController extends Controller
         if (Auth::check() && Auth::user()->type == 'customer') {
             return redirect('/');
         } else {
-            return view('store.login');
+            $cart = \Cart::content()->count();
+
+            return view('store.login', compact('cart'));
         }
     }
 
@@ -76,7 +78,8 @@ class AuthController extends Controller
         $user = User::create($input);
 
         Auth::login($user);
-
+        if ($request->get('goToCheckout'))
+            return redirect('store/checkout');
         return redirect('/');
     }
 

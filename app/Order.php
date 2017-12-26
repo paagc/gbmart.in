@@ -56,7 +56,7 @@ class Order extends Model
     }
 
     public function seller_product() {
-    	return $this->belongsTo('App\SellerProduct', 'seller_product_id');
+    	return $this->belongsTo(SellerProduct::class, 'seller_product_id');
     }
 
     public function order_logs() {

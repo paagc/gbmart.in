@@ -38,6 +38,8 @@ class HomeController extends Controller
 			$query->where('status', 'ACTIVE');
 		})->orderBy('updated_at', 'desc')->limit(4)->get();
 
+
+
 		$featured_products = SellerProduct::where('status', 'ACTIVE')->whereHas('product', function ($query) {
 			$query->where('status', 'ACTIVE')->where('is_featured', true);
 		})->whereHas('product.product_images', function ($query) {

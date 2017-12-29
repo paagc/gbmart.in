@@ -35,16 +35,19 @@ class OrderController extends Controller
 
     public function updateStatus($order_id, $status, Request $request)
     {
-        $remarks = "";
 
+        $remarks = "- -";
+        $expected_delivery = 'not updated';
         if ($request->has('remarks')) {
             $remarks = urldecode($request->get('remarks'));
         }
+        if ($request->has('expected_delivery'))
+            $expected_delivery = date("d-m-Y", strtotime(urldecode($request->get('expected_delivery'))));
 
         $status = strtoupper($status);
         $order = Order::find($order_id);
         if (!is_null($order)) {
-            $curretn_status = $order->status;
+            $current_status = $order->status;
             if ($order->status == 'PENDING' && ($status == 'APPROVED' || $status == 'REJECTED')) {
                 $order->status = $status;
             } else if ($order->status == 'APPROVED' && $status == 'PACKED') {
@@ -54,16 +57,20 @@ class OrderController extends Controller
             } else if ($order->status == 'SHIPPED' && $status == 'DELIVERED') {
                 $order->status = $status;
             }
-            if ($order->status != $curretn_status) {
+
+            if ($order->status != $current_status) {
                 $order->save();
                 $this->updateLog($order, $remarks);
-
                 $user = $order->customer;
                 \Mail::send('mails.order-status-update', compact('order'), function ($message) use ($user, $order) {
                     $message->to($user->email, $user->name)->bcc(['sales@gbmart.in',])
                         ->subject("Order {$order->status} ");
                 });
             }
+            $order->expected_delivery = $expected_delivery;
+            $order->save();
+
+
         }
         return back();
         //hey listen i can try coding with this but mac really don't know what the fuck is happening

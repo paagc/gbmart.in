@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('store.app')
 @section('content')
     <div class="breadcrumb">
         <div class="container">
@@ -20,71 +20,44 @@
                         <div class="">
 
 
-                            <center><h3>Order ID.:- 2154</h3></center>
+                            <center><h3>Order ID.:- {{$order->id}}</h3></center>
 
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Ajay Pradhan</th>
+                                    <th>{{$order->customer->name}}</th>
                                     <th>Contact Number</th>
-                                    <th>8123230294</th>
+                                    <th>{{$order->customer->mobile_number}}</th>
                                 </tr>
                                 <tr>
                                     <th>Order Placed Date</th>
-                                    <th>29-09-2017 and Time</th>
+                                    <th>{{$order->created_at->format('d-m-Y H:i a')}}</th>
                                     <th>Expected Delivery</th>
-                                    <th>05-Nov-2017</th>
+                                    <th>{{$order->expected_delivery}}</th>
                                 </tr>
                                 <tr>
                                     <th>Seller Name</th>
-                                    <th>GB MArt</th>
+                                    <th>{{$order->seller_product->seller->name}}</th>
                                     <th>Delivery Location</th>
-                                    <th>Bangalore</th>
+                                    <th>{{$order->city}}</th>
                                 </tr>
                                 <tr>
-                                    <th>Location</th>
                                     <th>Date</th>
                                     <th>Status</th>
                                     <th>Remarks</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Nanded-Mahrastra</td>
-                                    <td>30-09-2017 and Time</td>
-                                    <td>Approved</td>
-                                    <td>DTDC Courier</td>
-
-                                </tr>
-                                <tr>
-                                    <td>Nanded-Mahrastra</td>
-                                    <td>30-09-2017 and Time</td>
-                                    <td>Packing</td>
-                                    <td>DTDC Courier</td>
-
-                                </tr>
-                                <tr>
-                                    <td>Nanded-Mahrastra</td>
-                                    <td>30-09-2017 and Time</td>
-                                    <td>Shipping</td>
-                                    <td>DTDC Courier</td>
-
-                                </tr>
-                                <tr>
-                                    <td>Nanded-Mahrastra</td>
-                                    <td>30-09-2017 and Time</td>
-                                    <td>Dispached</td>
-                                    <td>DTDC Courier</td>
-
-                                </tr>
-                                <tr>
-                                    <td>Nanded-Mahrastra</td>
-                                    <td>30-09-2017 and Time</td>
-                                    <td>Delivered</td>
-                                    <td>DTDC Courier</td>
-
-                                </tr>
+                                @foreach($order->order_logs as $log)
+                                    <tr>
+                                        <td>{{$log->created_at->format('d-m-Y H:i a')}}</td>
+                                        <td>{{$log->status}}</td>
+                                        <td>{{$log->remarks}}</td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach
 
                                 </tbody>
                             </table>

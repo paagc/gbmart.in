@@ -16,6 +16,9 @@ class SellerProduct extends Model
         'is_online_payment_available',
         'status'
     ];
+    protected $appends = [
+        'url'
+    ];
 
     public function seller()
     {
@@ -24,7 +27,7 @@ class SellerProduct extends Model
 
     public function product()
     {
-        return $this->belongsTo('App\Product', 'product_id');
+        return $this->belongsTo(Product::class);
     }
 
     public function orders()
@@ -35,5 +38,10 @@ class SellerProduct extends Model
     public function attribute_values()
     {
         return $this->hasMany(AttributeValue::class, 'seller_product_id');
+    }
+
+    public function getUrlAttribute()
+    {
+        return url("store/{$this->product->category->name}/{$this->product->sub_category->name}/{$this->product->name}-{$this->id}");
     }
 }

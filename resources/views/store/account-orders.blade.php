@@ -51,6 +51,9 @@
                                                     <th>
                                                         Status
                                                     </th>
+                                                    <th>
+                                                        Track
+                                                    </th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -60,6 +63,7 @@
                                                         <td>{{$order->price}}</td>
                                                         <td>{{$order->created_at->format('d-m-Y')}}</td>
                                                         <td>{{$order->status}}</td>
+                                                        <td><a href="{{url("track/{$order->id}")}}">Track</a></td>
                                                     </tr>
                                                 @endforeach
                                                 </tbody>

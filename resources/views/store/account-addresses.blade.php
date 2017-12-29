@@ -36,6 +36,7 @@
 
                                     <div id="description" class="tab-pane in active">
                                         <div class="product-tab">
+                                            {{--<button class="btn btn-primary pull-right">Add New Address</button>--}}
                                             <table class="table table-striped">
                                                 <thead>
                                                 <tr>
@@ -76,17 +77,25 @@
                                                             @endif
                                                         </td>
                                                         <td>
-                                                           {{-- if($address->status!='ACTIVE')
-                                                                <button class="btn btn-xs btn-success">Set Default
-                                                                </button>
-                                                                <button class="btn btn-xs btn-danger"
-                                                                        onclick="deleteAddress({{$address->id}});">
-                                                                    Delete
-                                                                </button>
-                                                            endif
+                                                            @if($address->status!='ACTIVE')
+                                                                <a href="{{url("address/set-active/{$address->id}")}}"
+                                                                   class="btn btn-xs btn-success">Set Default</a>
+
+                                                                <form class="delete-address"
+                                                                      action="{{url("address/{$address->id}")}}"
+                                                                      method="post">
+                                                                    {{csrf_field()}}
+                                                                    <input type="hidden" name="_method" value="DELETE">
+                                                                    <button class="btn btn-xs btn-danger"
+                                                                            onclick="deleteAddress({{$address->id}});">
+                                                                        Delete
+                                                                    </button>
+                                                                </form>
+
+                                                            @endif
                                                             <button class="btn btn-xs btn-info"
                                                                     onclick="editAddress({{$address->id}});">Edit
-                                                            </button>--}}
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -173,13 +182,85 @@
         </div><!-- /.container -->
     </div><!-- /.body-content -->
 
+
+
+    <div id="edit-address" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Address</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-info">
+                        Note: This update of address is applicable for your next orders.
+                        This won't affect orders which are yet be delivered.
+                    </p>
+                    <form id="edit-address-form" action="#" method="post">
+                        {{csrf_field()}}
+                        <input type="hidden" name="_method" value="PATCH">
+                        <div class="form-group">
+                            <label for="line_1">Line One *</label>
+                            <input type="text" class="form-control" name="line_1" required id="line_1">
+                        </div>
+                        <div class="form-group">
+                            <label for="line_2">Line Two *</label>
+                            <input type="text" class="form-control" name="line_2" required id="line_2">
+                        </div>
+                        <div class="form-group">
+                            <label for="city_town">City *</label>
+                            <input type="text" class="form-control" name="city_town" required id="city_town">
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State *</label>
+                            <input type="text" class="form-control" name="state" required id="state">
+                        </div>
+                        <div class="form-group">
+                            <label for="pin_code">Pic Code *</label>
+                            <input type="text" class="form-control" name="pin_code" required id="pin_code">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Update</button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
     <script>
-        var addresses ={!! $addresses !!};
+                @php
+                    $addressesFormatted = $addresses->map(function ($address) {
+                        return [$address->id => $address];
+                        });
+                @endphp
+        var addresses ={!! json_encode($addressesFormatted[0]) !!};
 
 
         function editAddress(id) {
-alert('Work In Progress');
+            var sendTo = '{{url("address")}}/' + id;
+            $("#edit-address-form").attr('action', sendTo);
+            $('#line_1').val(addresses[id].line_1);
+            $('#line_2').val(addresses[id].line_2);
+            $('#city_town').val(addresses[id].city_town);
+            $('#state').val(addresses[id].state);
+            $('#pin_code').val(addresses[id].pin_code);
+            $("#edit-address").modal('show');
         }
+
+        $(document).ready(function () {
+            $(".delete-address").on('submit', function () {
+                return confirm('Are you sure want to delete this address? (this wont affect any orders on the way!!)') === true;
+            })
+        })
 
     </script>
 

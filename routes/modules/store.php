@@ -46,7 +46,8 @@ Route::group(['namespace' => 'Store'], function () {
     });
 
     Route::get('/store/cart', 'CartController@get');
-
+    Route::get('address/set-active/{id}', 'AddressController@setActive')->middleware('store.auth');
+    Route::resource('address', 'AddressController')->middleware('store.auth');
     Route::get('/store/update-cart', 'CheckoutController@updateCart');
     Route::get('/store/checkout', 'CheckoutController@get')->middleware('store.auth');
     Route::post('/store/checkout', 'CheckoutController@post')->middleware('store.auth');
@@ -57,6 +58,7 @@ Route::group(['namespace' => 'Store'], function () {
     Route::get('/store/wishlist/add/{product_id}', 'WishlistController@add')->middleware('store.auth');
     Route::get('/store/wishlist/remove/{product_id}', 'WishlistController@remove')->middleware('store.auth');
     Route::get('/store/my-account', 'MyAccountController@view')->middleware('store.auth');
+    Route::post('/store/my-account/update', 'MyAccountController@update')->middleware('store.auth');
     Route::get('/store/my-account/orders', 'MyAccountController@orders')->middleware('store.auth');
     Route::get('/store/my-account/addresses', 'MyAccountController@addresses')->middleware('store.auth');
     Route::get('/store/my-account/user', 'MyAccountController@user')->middleware('store.auth');

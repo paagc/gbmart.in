@@ -44,17 +44,18 @@
 
                                                 <div class="review-form">
                                                     <div class="form-container">
-                                                        <form role="form" class="cnt-form">
+                                                        <form role="form" class="cnt-form"
+                                                              action="{{url("store/my-account/update")}}" method="post">
+                                                            {{csrf_field()}}
 
                                                             <div class="row">
-
 
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label for="exampleInputReview">Name <span
                                                                                     class="astk">*</span></label>
                                                                         <input type="text" class="form-control txt"
-                                                                               value="{{$me->name}}" id=""
+                                                                               value="{{$me->name}}" id="" name="name"
                                                                                placeholder="">
                                                                     </div><!-- /.form-group -->
                                                                 </div>
@@ -64,7 +65,8 @@
                                                                         <label for="exampleInputReview">Contact Number
                                                                             <span class="astk">*</span></label>
                                                                         <input type="text" class="form-control txt"
-                                                                               value="{{$me->mobile_number}}" i
+                                                                               value="{{$me->mobile_number}}"
+                                                                               name="mobile_number"
                                                                                placeholder="">
                                                                     </div><!-- /.form-group -->
                                                                 </div>
@@ -74,6 +76,7 @@
                                                                         <label for="exampleInputReview">E-Mail <span
                                                                                     class="astk">*</span></label>
                                                                         <input type="text" class="form-control txt"
+                                                                               name="email"
                                                                                value="{{$me->email}}" placeholder="">
                                                                     </div><!-- /.form-group -->
                                                                 </div>

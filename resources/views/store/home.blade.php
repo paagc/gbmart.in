@@ -7,6 +7,9 @@
             max-height: 200px;
         }
     </style>
+    <script>
+        var moreSellersData = [];
+    </script>
 
     <div class="body-content outer-top-xs" id="top-banner-and-menu">
         <div class="container">
@@ -76,11 +79,13 @@
                                                                 class="fa fa-inr"></span>{{ number_format($seller_product->product->original_price, 2, '.', ',') }}</span>
                                                 </div>
 
-                                                @if($seller_product->product->seller_products->count()>0)
-                                                    <?php $moreSellerArray[$seller_product->id][$seller_product->seller_id] = ['details' => $seller_product->product->seller_products, 'image' => $seller_product->product->product_images[0]->url, 'url' => $seller_product->url]?>
+                                                @if($seller_product->product->seller_products->count()>1)
+                                                    <script>
+                                                        moreSellersData['sp_{{$seller_product->id}}'] ={!! json_encode(['details' => $seller_product->product->seller_products, 'image' => $seller_product->product->product_images[0]->url, 'url' => $seller_product->url]) !!};
+                                                    </script>
                                                     <div>
                                                         <a href="#"
-                                                           onclick="moreSellers({{$seller_product->id}})">{{$seller_product->product->seller_products->count()}}
+                                                           onclick="moreSellers('sp_{{$seller_product->id}}')">{{$seller_product->product->seller_products->count()}}
                                                             more sellers</a></div>
                                                 @endif
                                             </div>
@@ -139,11 +144,13 @@
                                                                         <span class="price">
                                                                             <span class="fa fa-inr"></span>{{ number_format($seller_product->seller_price, 2, '.', ',') }} </span>
 
-                                                                        @if($seller_product->product->seller_products->count()>0)
-                                                                            <?php $moreSellerArray[$seller_product->id][$seller_product->seller_id] = ['details' => $seller_product->product->seller_products, 'image' => $seller_product->product->product_images[0]->url, 'url' => $seller_product->url]?>
+                                                                        @if($seller_product->product->seller_products->count()>1)
+                                                                            <script>
+                                                                                moreSellersData['sp_{{$seller_product->id}}'] ={!! json_encode(['details' => $seller_product->product->seller_products, 'image' => $seller_product->product->product_images[0]->url, 'url' => $seller_product->url]) !!};
+                                                                            </script>
                                                                             <div>
                                                                                 <a href="#"
-                                                                                   onclick="moreSellers({{$seller_product->id}})">{{$seller_product->product->seller_products->count()}}
+                                                                                   onclick="moreSellers('sp_{{$seller_product->id}}')">{{$seller_product->product->seller_products->count()}}
                                                                                     more sellers</a></div>
                                                                         @endif
                                                                     </div>
@@ -244,11 +251,13 @@
                                                                                 class="fa fa-inr"></span>{{ number_format($seller_product->seller_price, 2, '.', ',') }} </span>
                                                                     <span class="price-before-discount"><span
                                                                                 class="fa fa-inr"></span>{{ number_format($seller_product->product->original_price, 2, '.', ',') }}</span>
-                                                                    @if($seller_product->product->seller_products->count()>0)
-                                                                        <?php $moreSellerArray[$seller_product->id][$seller_product->seller_id] = ['details' => $seller_product->product->seller_products, 'image' => $seller_product->product->product_images[0]->url, 'url' => $seller_product->url]?>
+                                                                    @if($seller_product->product->seller_products->count()>1)
+                                                                        <script>
+                                                                            moreSellersData['sp_{{$seller_product->id}}'] ={!! json_encode(['details' => $seller_product->product->seller_products, 'image' => $seller_product->product->product_images[0]->url, 'url' => $seller_product->url]) !!};
+                                                                        </script>
                                                                         <div>
                                                                             <a href="#"
-                                                                               onclick="moreSellers({{$seller_product->id}})">{{$seller_product->product->seller_products->count()}}
+                                                                               onclick="moreSellers('sp_{{$seller_product->id}}')">{{$seller_product->product->seller_products->count()}}
                                                                                 more sellers</a></div>
                                                                     @endif
                                                                 </div>
@@ -346,11 +355,14 @@
                                                                                 class="fa fa-inr"></span>{{ number_format($seller_product->seller_price, 2, '.', ',') }} </span>
                                                                     <span class="price-before-discount"><span
                                                                                 class="fa fa-inr"></span>{{ number_format($seller_product->product->original_price, 2, '.', ',') }}</span>
-                                                                    @if($seller_product->product->seller_products->count()>0)
-                                                                        <?php $moreSellerArray[$seller_product->id][$seller_product->seller_id] = ['details' => $seller_product->product->seller_products, 'image' => $seller_product->product->product_images[0]->url, 'url' => $seller_product->url]?>
+                                                                    @if($seller_product->product->seller_products->count()>1)
+                                                                        <script>
+                                                                            moreSellersData['sp_{{$seller_product->id}}'] ={!! json_encode(['details' => $seller_product->product->seller_products, 'image' => $seller_product->product->product_images[0]->url, 'url' => $seller_product->url]) !!};
+                                                                        </script>
+
                                                                         <div>
                                                                             <a href="#"
-                                                                               onclick="moreSellers({{$seller_product->id}})">{{$seller_product->product->seller_products->count()}}
+                                                                               onclick="moreSellers('sp_{{$seller_product->id}}')">{{$seller_product->product->seller_products->count()}}
                                                                                 more sellers</a></div>
                                                                     @endif
                                                                 </div>
@@ -415,12 +427,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit Address</h4>
+                    <h4 class="modal-title">All Sellers</h4>
                 </div>
                 <div class="modal-body">
-                    <p class="text-info">
-                        More Sellers
-                    </p>
                     <div id="htmlData">
 
                     </div>
@@ -441,23 +450,23 @@
 
 
     <script>
-        var moreSellersData = {!! json_encode($moreSellerArray) !!}
 
-                function moreSellers(id) {
-            console.log(moreSellersData.id);
+
+        function moreSellers(id) {
+            console.log(moreSellersData[id]);
             var htmlData = ''
-            moreSellersData.id.forEach(function (v) {
-                htmlData += '<a href="' + v.url + '"><div class="media">' +
-                        '<div class="media-left">' +
-                        '<img src="' + v.image + '" class="media-object" style="width:60px">' +
-                        '</div>' +
-                        '<div class="media-body">' +
-                        '<h4 class="media-heading">' + v.details[0].product.name + '</h4>' +
-                        '<p>Price Offering ' + v.details[0].seller_price + '</p>' +
-                        '<p>Delivery Charges ' + v.details[0].delivery_charge + '</p>' +
-                        '</div>' +
-                        '</div></a>';
-            });
+            var v = moreSellersData[id];
+            htmlData += '<a href="' + v.url + '"><div class="media">' +
+                    '<div class="media-left">' +
+                    '<img src="' + v.image + '" class="media-object" style="width:60px">' +
+                    '</div>' +
+                    '<div class="media-body">' +
+                    '<h4 class="media-heading">' + v.details[0].product.name + '</h4>' +
+                    '<p>Price Offering <span class="fa fa-inr"></span>' + v.details[0].seller_price + '</p>' +
+                    '<p>Delivery Charges <span class="fa fa-inr"></span>' + v.details[0].delivery_charge + '</p>' +
+                    '</div>' +
+                    '</div></a>';
+
             $("#htmlData").html(htmlData);
             $("#htmlData-modal").modal('show');
 

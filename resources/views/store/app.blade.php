@@ -98,11 +98,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 top-search-holder">
 
                     <div class="search-area">
-                        <form>
+                        <form method="get" action="{{url("store/filter")}}">
                             <div class="control-group">
 
-                                <input class="search-field" placeholder="Search here..."/>
-                                <a class="search-button" href="#"></a>
+                                <input name="search" class="search-field" placeholder="Search here..."/>
+                                <button class="search-button" type="submit"></button>
+                                {{--<a class="" href="#"></a>--}}
                             </div>
                         </form>
                     </div>
@@ -411,7 +412,7 @@
         $('a.search-button').click(function () {
             var search_text = $('input.search-field').val();
             if (search_text && search_text.length > 0) {
-                window.location.href = "/store/filter?search_text=" + search_text;
+                window.location.href = "/store/filter?search=" + search_text;
             }
         });
     });

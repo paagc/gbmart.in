@@ -23,9 +23,13 @@ class SubCategoryController extends Controller
         $price_max = 0;
         $brands = [];
         $selected_brands = [];
+        $sort_by_price = 'low-to-high';
 
         if ($request->has('page') && is_numeric($request->get('page'))) {
             $page = (int)$request->get('page');
+        }
+        if ($request->has('sort_by_price')) {
+            $sort_by_price = $request->get('sort_by_price');
         }
 
         if ($request->has('selected_brands') && is_array($request->get('selected_brands'))) {
@@ -96,8 +100,13 @@ class SubCategoryController extends Controller
             $seller_products = $seller_products->where('seller_price', '<=', $price_max);
         }
 
-        $seller_products = $seller_products->whereHas('product.product_images', function ($query) {
-            $query->where('status', 'ACTIVE')->orderBy('id', 'asc');
+        $seller_products = $seller_products->whereHas('product.product_images', function ($query) use ($sort_by_price) {
+            if ($sort_by_price == "low-to-high")
+                $query->where('status', 'ACTIVE')->orderBy('seller_price', 'ASC');
+            else if ($sort_by_price == "high-to-low")
+                $query->where('status', 'ACTIVE')->orderBy('id', 'DESC');
+            else
+                $query->where('status', 'ACTIVE')->orderBy('id', 'ASC');
         });
 
         $count = $seller_products->count();
@@ -128,7 +137,8 @@ class SubCategoryController extends Controller
                 'price_min' => $price_min,
                 'price_max' => $price_max,
                 'brands' => $brands,
-                'selected_brands' => $selected_brands
+                'selected_brands' => $selected_brands,
+                'sort_by_price' => $sort_by_price,
             ]);
         } else {
             return abort(404);

@@ -180,6 +180,31 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="panel panel-default checkout-step-06">
+                                    <div class="panel-heading">
+                                        <h4 class="unicase-checkout-title">
+                                            <a href="#">
+                                                <span>3</span>Have a Gift Coupon?
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseSix" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <div class="panel-heading">
+                                                <h4 class="unicase-checkout-title">
+                                                    Enter Coupon Code
+                                                </h4>
+                                            </div>
+                                          
+                                     
+                                            <div id="collapseOne" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    <form action=""></form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="panel panel-default checkout-step-06">
                                     <div class="panel-heading">

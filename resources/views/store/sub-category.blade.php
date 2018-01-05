@@ -34,6 +34,22 @@
                                         @endforeach
                                     </ul>
                                 </div>
+                                <div class="widget-header">
+                                    <h4 class="widget-title">Prices</h4>
+                                </div>
+                                <div class="sidebar-widget-body">
+                                    <ul>
+                                        <li><label class="radio-label" for=""><input class="price-radio" name="lh"
+                                                                                     @if($sort_by_price=="low-to-high") checked="checked"
+                                                                                     @endif value="low-to-high"
+                                                                                     type="radio"> &nbsp;Low to
+                                                High</label></li>
+                                        <li><label class="radio-label" for=""><input
+                                                        @if($sort_by_price=="high-to-low") checked="checked"
+                                                        @endif class="price-radio" name="lh" type="radio"
+                                                        value="high-to-low"> &nbsp;High to Low</label></li>
+                                    </ul>
+                                </div>
                             </div>
 
                             <div class="sidebar-widget wow fadeInUp">
@@ -267,6 +283,8 @@
                 var selected_brands = [];
                 var price_min = {{ $price_min }}, price_max = {{ $price_max }}, price_range_min = {{ $price_range_min }}, price_range_max = {{ $price_range_max }};
                 var page = {{ $page }};
+                var sort_by_price = $('input[name="lh"]:checked').val();
+                console.log(sort_by_price);
                 $('.check-brand').each(function () {
                     if ($(this).prop('checked') == true) {
                         selected_brands.push($(this).attr('data-value'));
@@ -277,23 +295,24 @@
                     price_min = parseInt(price_values[0]);
                     price_max = parseInt(price_values[1]);
                 }
-                if (selected_brands.length > 0 || price_min != price_range_min || price_max != price_range_max) {
-                    url += "?";
-                    if (selected_brands.length > 0) {
-                        for (var i = 0; i < selected_brands.length; i++) {
-                            url += ((url.split('?')[1].length > 0 ? "&" : "")) + "selected_brands[]=" + selected_brands[i];
-                        }
-                    }
-                    if (price_min != price_range_min) {
-                        url += ((url.split('?')[1].length > 0 ? "&" : "")) + "price_min=" + price_min;
-                    }
-                    if (price_max != price_range_max) {
-                        url += ((url.split('?')[1].length > 0 ? "&" : "")) + "price_max=" + price_max;
-                    }
-                    if (page > 1) {
-                        url += ((url.split('?')[1].length > 0 ? "&" : "")) + "page=" + page;
+
+                url += "?";
+                if (selected_brands.length > 0) {
+                    for (var i = 0; i < selected_brands.length; i++) {
+                        url += ((url.split('?')[1].length > 0 ? "&" : "")) + "selected_brands[]=" + selected_brands[i];
                     }
                 }
+                if (price_min != price_range_min) {
+                    url += ((url.split('?')[1].length > 0 ? "&" : "")) + "price_min=" + price_min;
+                }
+                if (price_max != price_range_max) {
+                    url += ((url.split('?')[1].length > 0 ? "&" : "")) + "price_max=" + price_max;
+                }
+                if (page > 1) {
+                    url += ((url.split('?')[1].length > 0 ? "&" : "")) + "page=" + page;
+                }
+                url += ((url.split('?')[1].length > 0 ? "&" : "")) + "sort_by_price=" + sort_by_price;
+
 
                 window.location.href = url;
             }

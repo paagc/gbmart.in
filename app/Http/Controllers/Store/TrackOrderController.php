@@ -22,10 +22,8 @@ class TrackOrderController extends Controller
         if ($order)
             if ($order->customer->email == $request->get('email'))
                 return view('store.track-details', compact('order'));
-            else
-                \Alert::error("Details didn't Match", 'ooops!');
-        else
-            \Alert::error("Order Not Found!!", 'ooops!');
+
+
 
         return back();
     }

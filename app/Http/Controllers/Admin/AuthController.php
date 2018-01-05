@@ -39,14 +39,14 @@ class AuthController extends Controller
 		$user = User::where('email', $email)->where('status', 'ACTIVE')->where('type', 'admin')->first();
 
 		if (is_null($user)) {
-			Session::flash('error', 'Invalid user.');
+			\Session::flash('error', 'Invalid user.');
 			return redirect()->back();
 		}
 
 		if (Auth::attempt([ 'email' => $email, 'password' => $password ], $remember)) {
 			return redirect('/admin');
 		} else {
-			Session::flash('error', 'Login unsuccessful.');
+			\Session::flash('error', 'Login unsuccessful.');
 			return redirect()->back();
 		}
 	}

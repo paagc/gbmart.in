@@ -41,7 +41,7 @@ class AuthController extends Controller
 		$user = User::where('email', $email)->where('status', 'ACTIVE')->where('type', 'seller')->first();
 
 		if (is_null($user)) {
-			Session::flash('error', 'Invalid user.');
+			\Session::flash('error', 'Invalid user.');
 			return redirect()->back();
 		}
 
@@ -75,14 +75,14 @@ class AuthController extends Controller
 		$existingUserWithEmail = User::where('email', $input->get('email'))->first();
 
 		if (!is_null($existingUserWithEmail)) {
-			Session::flash('error', 'User already exists with this email ID.');
+			\Session::flash('error', 'User already exists with this email ID.');
 			return back();
 		}
 
 		$existingUserWithMobileNumber = User::where('mobile_number', 'like', '%' . $input->get('mobile_number') . '%')->first();
 
 		if (!is_null($existingUserWithMobileNumber)) {
-			Session::flash('error', 'User already exists with this mobile number.');
+			\Session::flash('error', 'User already exists with this mobile number.');
 			return back();
 		}
 

@@ -43,7 +43,7 @@ class AuthController extends Controller
         $user = User::where('email', $email)->where('status', 'ACTIVE')->where('type', 'customer')->first();
 
         if (is_null($user)) {
-            Session::flash('error', 'Invalid user.');
+            \Session::flash('error', 'Invalid user.');
             return redirect()->back();
         }
 
@@ -52,7 +52,7 @@ class AuthController extends Controller
                 return redirect('store/checkout');
             return redirect('/');
         } else {
-            Session::flash('error', 'Login unsuccessful.');
+            \Session::flash('error', 'Login unsuccessful.');
             return redirect()->back();
         }
     }

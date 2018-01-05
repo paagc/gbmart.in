@@ -191,7 +191,7 @@ class GoogleMerchantController extends Controller
 
 		$res = $shopping_content->products->custombatch($data);
 
-		Session::flash('success', 'Your products have been updated. It may take upto 2 hours to reflect.');
+		\Session::flash('success', 'Your products have been updated. It may take upto 2 hours to reflect.');
 		return redirect('/admin/google-merchant-products?access_token=' . $token['access_token']);
 	}
 }

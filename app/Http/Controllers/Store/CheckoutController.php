@@ -116,7 +116,7 @@ class CheckoutController extends Controller
         }
 
         if (count($payment_type_mismatch_seller_products) > 0) {
-            Session::flash('payment_type_mismatch_seller_products', $payment_type_mismatch_seller_products);
+            \Session::flash('payment_type_mismatch_seller_products', $payment_type_mismatch_seller_products);
             return back();
         }
 

@@ -79,24 +79,24 @@ class SubCategoryController extends Controller
 		$category = Category::find($category_id);
 
 		if (is_null($category)) {
-			Session::flash('error', 'Category selected is invalid.');
+			\Session::flash('error', 'Category selected is invalid.');
 			return redirect()->back()->withInput();
 		}
 
 		if (strlen($display_name) < 3) {
-			Session::flash('error', 'Name is too small.');
+			\Session::flash('error', 'Name is too small.');
 			return redirect()->back()->withInput();
 		}
 
 		if (strlen($name) < 3) {
-			Session::flash('error', 'Slug name created too small.');
+			\Session::flash('error', 'Slug name created too small.');
 			return redirect()->back()->withInput();
 		}
 
 		$existingSubCategory = SubCategory::where('name', $name)->first();
 
 		if(!is_null($existingSubCategory)) {
-			Session::flash('error', 'Slug name created already exists. Try to change the name.');
+			\Session::flash('error', 'Slug name created already exists. Try to change the name.');
 			return redirect()->back()->withInput();
 		}
 
@@ -107,7 +107,7 @@ class SubCategoryController extends Controller
 			'status' => $status
 		]);
 
-		Session::flash('success', 'Sub category successfully created.');
+		\Session::flash('success', 'Sub category successfully created.');
 		return redirect()->back();
 	}
 

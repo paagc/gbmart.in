@@ -135,21 +135,21 @@ class SellerProductController extends Controller
 		if ($request->has('product_id') && is_numeric((int) ($request->get('product_id')))) {
 			$product_id = $request->get('product_id');
 		} else {
-			Session::flash('error', 'Product is required.');
+			\Session::flash('error', 'Product is required.');
 			return redirect()->back()->withInput();
 		}
 
 		if ($request->has('seller_price') && is_numeric((int) ($request->get('seller_price')))) {
 			$seller_price = $request->get('seller_price');
 		} else {
-			Session::flash('error', 'Seller price is invalid.');
+			\Session::flash('error', 'Seller price is invalid.');
 			return redirect()->back()->withInput();
 		}
 
 		if ($request->has('delivery_charge') && is_numeric((int) ($request->get('delivery_charge')))) {
 			$delivery_charge = $request->get('delivery_charge');
 		} else {
-			Session::flash('error', 'Delivery charge is invalid.');
+			\Session::flash('error', 'Delivery charge is invalid.');
 			return redirect()->back()->withInput();
 		}
 
@@ -192,7 +192,7 @@ class SellerProductController extends Controller
 			}
 		}
 
-		Session::flash('success', 'Product successfully created.');
+		\Session::flash('success', 'Product successfully created.');
 		return redirect('/seller/seller-products');
 	}
 
@@ -221,21 +221,21 @@ class SellerProductController extends Controller
 		$seller_product = SellerProduct::find($seller_product_id);
 
 		if (is_null($seller_product)) {
-			Session::flash('error', 'Invalid product.');
+			\Session::flash('error', 'Invalid product.');
 			return back()->withInput();
 		}
 
 		if ($request->has('seller_price') && is_numeric((int) ($request->get('seller_price')))) {
 			$updated_seller_product['seller_price'] = $request->get('seller_price');
 		} else {
-			Session::flash('error', 'Seller price is invalid.');
+			\Session::flash('error', 'Seller price is invalid.');
 			return redirect()->back()->withInput();
 		}
 
 		if ($request->has('delivery_charge') && is_numeric((int) ($request->get('delivery_charge')))) {
 			$updated_seller_product['delivery_charge'] = $request->get('delivery_charge');
 		} else {
-			Session::flash('error', 'Delivery charge is invalid.');
+			\Session::flash('error', 'Delivery charge is invalid.');
 			return redirect()->back()->withInput();
 		}
 
@@ -284,7 +284,7 @@ class SellerProductController extends Controller
 		}
 
 
-		Session::flash('success', 'Product successfully updated.');
+		\Session::flash('success', 'Product successfully updated.');
 		return view('seller.seller-products-edit', [ 'seller_product' => $seller_product ]);
 	}
 }

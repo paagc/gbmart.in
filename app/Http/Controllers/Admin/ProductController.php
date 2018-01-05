@@ -117,28 +117,28 @@ class ProductController extends Controller
         if ($request->has('sub_category_id') && is_numeric((int)($request->get('sub_category_id')))) {
             $sub_category_id = $request->get('sub_category_id');
         } else {
-            Session::flash('error', 'Sub cagetory is required.');
+            \Session::flash('error', 'Sub cagetory is required.');
             return redirect()->back()->withInput();
         }
 
         if ($request->has('display_name') && strlen($request->get('display_name')) > 2) {
             $display_name = $request->get('display_name');
         } else {
-            Session::flash('error', 'Product name is required and atleast 3 characters long.');
+            \Session::flash('error', 'Product name is required and atleast 3 characters long.');
             return redirect()->back()->withInput();
         }
 
         if ($request->has('brand') && strlen($request->get('brand')) > 2) {
             $brand = $request->get('brand');
         } else {
-            Session::flash('error', 'Brand name is required and atleast 3 characters long.');
+            \Session::flash('error', 'Brand name is required and atleast 3 characters long.');
             return redirect()->back()->withInput();
         }
 
         if ($request->has('original_price') && is_numeric((int)($request->get('original_price')))) {
             $original_price = $request->get('original_price');
         } else {
-            Session::flash('error', 'Price is required.');
+            \Session::flash('error', 'Price is required.');
             return redirect()->back()->withInput();
         }
 
@@ -157,21 +157,21 @@ class ProductController extends Controller
         if ($request->hasFile('images') && count($request->file('images') > 0)) {
             $images = $request->file('images');
         } else {
-            Session::flash('error', 'Atlest one product image is required.');
+            \Session::flash('error', 'Atlest one product image is required.');
             return redirect()->back()->withInput();
         }
 
         if ($request->has('description_small') && strlen($request->get('description_small')) > 10 && strlen($request->get('description_small')) <= 200) {
             $description_small = $request->get('description_small');
         } else {
-            Session::flash('error', 'Small description is required, atleast 10 characters long and not more than 200 characters.');
+            \Session::flash('error', 'Small description is required, atleast 10 characters long and not more than 200 characters.');
             return redirect()->back()->withInput();
         }
 
         if ($request->has('description_text') && strlen($request->get('description_text')) > 10) {
             $description_text = $request->get('description_text');
         } else {
-            Session::flash('error', 'Description is required and atleast 10 characters long.');
+            \Session::flash('error', 'Description is required and atleast 10 characters long.');
             return redirect()->back()->withInput();
         }
 
@@ -194,14 +194,14 @@ class ProductController extends Controller
         $existingProduct = Product::where('name', $name)->first();
 
         if (!is_null($existingProduct)) {
-            Session::flash('error', 'Slug name created already exists. Try to change the name.');
+            \Session::flash('error', 'Slug name created already exists. Try to change the name.');
             return redirect()->back()->withInput();
         }
 
         $sub_category = SubCategory::find($sub_category_id);
 
         if (is_null($sub_category)) {
-            Session::flash('error', 'Invalid sub category.');
+            \Session::flash('error', 'Invalid sub category.');
             return redirect()->back()->withInput();
         }
 
@@ -257,7 +257,7 @@ class ProductController extends Controller
             }
         }
 
-        Session::flash('success', 'Product successfully created.');
+        \Session::flash('success', 'Product successfully created.');
         return redirect()->back();
     }
 
@@ -346,7 +346,7 @@ class ProductController extends Controller
         if ($request->has('description_small') && strlen($request->get('description_small')) > 10 && strlen($request->get('description_small')) <= 200) {
             $description_small = $request->get('description_small');
         } else {
-            Session::flash('error', 'Small description is required, atleast 10 characters long and not more than 200 characters.');
+            \Session::flash('error', 'Small description is required, atleast 10 characters long and not more than 200 characters.');
             return redirect()->back()->withInput();
         }
 
@@ -361,7 +361,7 @@ class ProductController extends Controller
         $sub_category = SubCategory::find($input['sub_category_id']);
 
         if (is_null($sub_category)) {
-            Session::flash('error', 'Invalid sub category.');
+            \Session::flash('error', 'Invalid sub category.');
             return redirect()->back()->withInput();
         }
 
@@ -429,7 +429,7 @@ class ProductController extends Controller
             }
         }
 
-        Session::flash('success', 'Product Updated Successfully.');
+        \Session::flash('success', 'Product Updated Successfully.');
 
         return back();
 

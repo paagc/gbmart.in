@@ -181,7 +181,6 @@ return [
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Webup\LaravelSendinBlue\SendinBlueServiceProvider::class,
         PulkitJalan\Google\GoogleServiceProvider::class,
-        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
 
     ],
 
@@ -234,7 +233,6 @@ return [
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Google' => PulkitJalan\Google\Facades\Google::class,
-        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
     ],
 
 ];

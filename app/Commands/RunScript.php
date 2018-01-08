@@ -1,8 +1,8 @@
 <?php
 namespace App\Commands;
+
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
+
 /**
  * This is a custom command for executing scripts from or with respect of root folder.
  * The script should be self executing.
@@ -21,16 +21,18 @@ class RunScript extends Command
      * @var string
      */
     protected $description = 'Runs a script';
+
     /**
      * Create a new command instance.
      *
-     * @param  DripEmailer  $drip
+     * @param  DripEmailer $drip
      * @return void
      */
     public function __construct()
     {
         parent::__construct();
     }
+
     /**
      * Execute the console command.
      *

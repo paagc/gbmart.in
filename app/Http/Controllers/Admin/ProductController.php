@@ -438,7 +438,7 @@ class ProductController extends Controller
     public function updateXmlData()
     {
         GoogleMerchantUpdate::run();
-        \Session::put('showAlert','XML Updated');
+        \Session::put('showAlert', 'XML Updated');
         return back();
     }
 }

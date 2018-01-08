@@ -24,7 +24,6 @@ class TrackOrderController extends Controller
                 return view('store.track-details', compact('order'));
 
 
-
         return back();
     }
 

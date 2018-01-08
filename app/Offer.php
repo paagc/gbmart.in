@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
     protected $fillable = [
-    	'title',
+        'title',
         'image_url',
         'link_url',
         'status',

@@ -161,8 +161,6 @@ class CheckoutController extends Controller
         $orders = Order::where('payment_reference', $payment_reference)->get();
 
 
-
-
         //
 
         // $user->email = "gajubisen6@gmail.com";

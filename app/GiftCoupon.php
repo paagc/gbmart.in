@@ -12,6 +12,6 @@ class GiftCoupon extends Model
      * @var array
      */
     protected $fillable = [
-        'code','value', 'type', 'max_amount', 'end_date', 'status'
+        'code', 'value', 'type', 'max_amount', 'end_date', 'status'
     ];
 }

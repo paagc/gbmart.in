@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Seller;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-	public function getDashboard(Request $request) {
-		return view('seller.dashboard');
-	}
+    public function getDashboard(Request $request)
+    {
+        return view('seller.dashboard');
+    }
 }

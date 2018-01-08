@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-
 use App\GiftCoupon;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class GiftCouponsController extends Controller
 {
@@ -20,15 +19,15 @@ class GiftCouponsController extends Controller
         $page_size = 15;
         $coupons = new GiftCoupon;
 
-        if($request->has('code') && strlen($request->get('code')) > 0) {
+        if ($request->has('code') && strlen($request->get('code')) > 0) {
             $coupons = $coupons->where('code', 'like', '%' . $request->get('code') . '%');
         }
 
-        if($request->has('value') && strlen($request->get('value')) > 0) {
+        if ($request->has('value') && strlen($request->get('value')) > 0) {
             $coupons = $coupons->where('value', 'like', '%' . $request->get('value') . '%');
         }
 
-        if($request->has('max_amount') && strlen($request->get('max_amount')) > 0) {
+        if ($request->has('max_amount') && strlen($request->get('max_amount')) > 0) {
             $coupons = $coupons->where('max_amount', 'like', '%' . $request->get('max_amount') . '%');
         }
 
@@ -53,7 +52,7 @@ class GiftCouponsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -74,7 +73,7 @@ class GiftCouponsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -85,20 +84,20 @@ class GiftCouponsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $coupon = GiftCoupon::find($id);
-        return view('admin.gift_coupons.edit', [ 'coupon' => $coupon ]);
+        return view('admin.gift_coupons.edit', ['coupon' => $coupon]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -119,7 +118,7 @@ class GiftCouponsController extends Controller
     /**
      * Regain the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function active($id)
@@ -133,7 +132,7 @@ class GiftCouponsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

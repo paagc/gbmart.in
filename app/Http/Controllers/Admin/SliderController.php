@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-
 use App\HomeSlide;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class SliderController extends Controller
 {
@@ -19,11 +18,11 @@ class SliderController extends Controller
         $page = 1;
         $page_size = 15;
         $slides = new HomeSlide;
-        if($request->has('title') && strlen($request->get('title')) > 0) {
+        if ($request->has('title') && strlen($request->get('title')) > 0) {
             $slides = $slides->where('title', 'like', '%' . $request->get('title') . '%');
         }
 
-        if($request->has('link_url') && strlen($request->get('link_url')) > 0) {
+        if ($request->has('link_url') && strlen($request->get('link_url')) > 0) {
             $slides = $slides->where('link_url', 'like', '%' . $request->get('link_url') . '%');
         }
         $slides = $slides->paginate($page_size);
@@ -47,7 +46,7 @@ class SliderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -74,7 +73,7 @@ class SliderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -85,20 +84,20 @@ class SliderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $slide = HomeSlide::find($id);
-        return view('admin.home_slides.edit', [ 'slide' => $slide ]);
+        return view('admin.home_slides.edit', ['slide' => $slide]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -116,7 +115,7 @@ class SliderController extends Controller
             $background_image->move(public_path() . '/storage/', $filename);
             $input['image_url'] = $request->root() . '/storage/' . $filename;
         }
-        
+
         $home_slide = HomeSlide::find($id)->update($input);
         return redirect('/admin/home-slide');
     }
@@ -124,7 +123,7 @@ class SliderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -138,7 +137,7 @@ class SliderController extends Controller
     /**
      * Regain the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function active($id)

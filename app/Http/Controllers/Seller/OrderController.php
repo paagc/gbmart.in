@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Seller;
 use App\Http\Controllers\Controller;
 use App\Order;
 use App\OrderLog;
+use App\Traits\SMSTrait;
 use Auth;
 use Illuminate\Http\Request;
 use Session;
 
+
 class OrderController extends Controller
 {
+
     public function getAll(Request $request)
     {
         $orders = Order::whereNotIn('status', ['INITIATED', 'FAILED'])->whereHas('seller_product', function ($query) {
@@ -35,6 +38,7 @@ class OrderController extends Controller
 
     public function updateStatus($order_id, $status, Request $request)
     {
+
 
         $remarks = "- -";
         $expected_delivery = 'not updated';
@@ -62,10 +66,8 @@ class OrderController extends Controller
                 $order->save();
                 $this->updateLog($order, $remarks);
                 $user = $order->customer;
-                \Mail::send('mails.order-status-update', compact('order'), function ($message) use ($user, $order) {
-                    $message->to($user->email, $user->name)->bcc(['sales@gbmart.in',])
-                        ->subject("Order {$order->status} ");
-                });
+
+
             }
             $order->expected_delivery = $expected_delivery;
             $order->save();
@@ -78,10 +80,19 @@ class OrderController extends Controller
 
     public function updateLog($order, $remarks)
     {
-        OrderLog::create([
+        $log = OrderLog::create([
             'order_id' => $order->id,
             'status' => $order->status,
             'remarks' => $remarks
         ]);
+        $user = $order->customer;
+
+        \Mail::send('mails.order-status-update', compact('order', 'log'), function ($message) use ($user, $order) {
+            $message->to($user->email, $user->name)->bcc(['sales@gbmart.in',])
+                ->subject("Order {$order->status} ");
+        });
+        SMSTrait::send(Auth::user()->mobile_number, "{$order->product->name} status update/remarks -  {$log->remarks}");
+
+
     }
 }

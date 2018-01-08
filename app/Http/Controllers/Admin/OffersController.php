@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 use App\Offer;
+use Illuminate\Http\Request;
 
 class OffersController extends Controller
 {
@@ -19,11 +18,11 @@ class OffersController extends Controller
         $page = 1;
         $page_size = 15;
         $offers = new Offer;
-        if($request->has('title') && strlen($request->get('title')) > 0) {
+        if ($request->has('title') && strlen($request->get('title')) > 0) {
             $offers = $offers->where('title', 'like', '%' . $request->get('title') . '%');
         }
 
-        if($request->has('link_url') && strlen($request->get('link_url')) > 0) {
+        if ($request->has('link_url') && strlen($request->get('link_url')) > 0) {
             $offers = $offers->where('link_url', 'like', '%' . $request->get('link_url') . '%');
         }
         $offers = $offers->paginate($page_size);
@@ -47,7 +46,7 @@ class OffersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -78,7 +77,7 @@ class OffersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -89,20 +88,20 @@ class OffersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $offer = Offer::find($id);
-        return view('admin.offers.edit',[ 'offer' => $offer ]);
+        return view('admin.offers.edit', ['offer' => $offer]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -122,7 +121,7 @@ class OffersController extends Controller
             $background_image->move(public_path() . '/storage/', $filename);
             $input['image_url'] = $request->root() . '/storage/' . $filename;
         }
-        
+
         $offer = Offer::find($id)->update($input);
         return redirect('/admin/offers');
     }
@@ -130,7 +129,7 @@ class OffersController extends Controller
     /**
      * Regain the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function active($id)
@@ -144,7 +143,7 @@ class OffersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

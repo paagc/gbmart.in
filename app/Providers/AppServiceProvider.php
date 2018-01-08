@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Order;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,10 +15,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         // For MySQL Error for index key length
         Schema::defaultStringLength(191);
+
+        Order::created(function ($order) {
+            if ($order->payment_method) {
+                $user = \Auth::user();
+                \Mail::send('mails.order-placed', compact('user', 'orders', 'payment_reference'), function ($message) use ($user) {
+                    $message->to($user->email, $user->name)->bcc(['sales@gbmart.in'])
+                        ->subject('Order Placed!');
+                });
+            }
+        });
     }
 
     /**

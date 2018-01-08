@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('store.app')
 
 @section('content')
     <style type="text/css" media="screen">

@@ -40,7 +40,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body class="cnt-home">
-@include('sweet::alert')
+
 <header class="header-style-1">
 
 

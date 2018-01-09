@@ -160,6 +160,7 @@ class CheckoutController extends Controller
 
             }
         }
+        $orders=collect($orders);
         \Mail::send('mails.order-placed', compact('user', 'orders', 'payment_reference'), function ($message) use ($user) {
             $message->to($user->email, $user->name)->bcc(['sales@gbmart.in'])
                 ->subject('Order Placed!');

@@ -31,7 +31,7 @@
 
         <center>
             <h1> Order Confirmed</h1>
-            <h3>Order ID: <span style="color:blue;">{{$order->payment_reference}}</span></h3>
+            <h3>Order ID: <span style="color:blue;">{{$payment_reference}}</span></h3>
         </center>
 
     </div>
@@ -51,7 +51,7 @@
     <div class="col-lg-offset-4 col-lg-4" style="background-color:gray; border-radius:50px; ">
 
 
-        <center><a href="{{url("track/{$order->payment_reference}")}}" target="blank" style="text-decoration:none;"><h3
+        <center><a href="{{url("track/$payment_reference")}}" target="blank" style="text-decoration:none;"><h3
                         style="color:red"> Track Your Order </h3></a>
         </center>
 

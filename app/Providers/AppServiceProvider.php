@@ -19,13 +19,13 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         Order::created(function ($order) {
-            if ($order->payment_method == 'COD') {
+           /* if ($order->payment_method == 'COD') {
                 $user = \Auth::user();
-                \Mail::send('mails.order-placed', compact('user', 'order', 'payment_reference'), function ($message) use ($user) {
+                \Mail::send('mails.order-placed', compact('user', 'orders', 'payment_reference'), function ($message) use ($user) {
                     $message->to($user->email, $user->name)->bcc(['sales@gbmart.in'])
                         ->subject('Order Placed!');
                 });
-            }
+            }*/
         });
     }
 

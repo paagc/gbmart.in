@@ -62,6 +62,7 @@ class CheckoutController extends Controller
 
     public function post(Request $request)
     {
+        $user = auth()->user();
         $validator = Validator::make($request->all(), [
             'address' => 'required',
             'new_address' => 'required_if:address,new|array|size:5',
@@ -119,7 +120,7 @@ class CheckoutController extends Controller
             \Session::flash('payment_type_mismatch_seller_products', $payment_type_mismatch_seller_products);
             return back();
         }
-
+        $orders = [];
         foreach (Cart::content() as $item) {
             $seller_product = SellerProduct::find($item->id);
             if (!is_null($seller_product)) {
@@ -148,6 +149,7 @@ class CheckoutController extends Controller
                     'payment_reference' => $payment_reference,
                     'status' => $status
                 ]);
+                $orders[] = $order;
 
                 OrderLog::create([
                     'order_id' => $order->id,
@@ -155,8 +157,14 @@ class CheckoutController extends Controller
                     'remarks' => 'Order placed'
                 ]);
 
+
             }
         }
+        \Mail::send('mails.order-placed', compact('user', 'orders', 'payment_reference'), function ($message) use ($user) {
+            $message->to($user->email, $user->name)->bcc(['sales@gbmart.in'])
+                ->subject('Order Placed!');
+        });
+
         $user = Auth::user();
         $orders = Order::where('payment_reference', $payment_reference)->get();
 
